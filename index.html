@@ -18,6 +18,7 @@
     --hanzo:#7D6BC7;        /* 半蔵門線パープル */
     --keihin:#009BD6;       /* 京浜東北ブルー */
     --hokuriku:#2C4A8A;     /* 北陸新幹線ネイビー */
+    --draft:#1B6FB5;        /* 仮(検討中)の青 */
     --line-w:3px;
     font-size:16px;
   }
@@ -116,6 +117,33 @@
     .trip-card{grid-template-columns:56px 1fr auto;padding:14px;}
     .trip-card .no{width:48px;height:48px;font-size:.6rem;}
   }
+  /* 仮(検討中・計画中)の旅。確定した旅と一目で区別するため青+破線(青焼き=下書きのイメージ) */
+  .trip-card.tentative{
+    border-color:var(--draft);border-style:dashed;
+    background:#F5FAFE;
+  }
+  .trip-card.tentative:hover,.trip-card.tentative:focus-visible{box-shadow:0 4px 0 var(--draft);}
+  .trip-card.tentative .no{border-color:var(--draft);color:var(--draft);}
+  .trip-card.tentative .meta .date{color:var(--draft);}
+  .trip-card.tentative .go{color:var(--draft);}
+  .trip-card.tentative .meta .name::after{
+    content:"仮";
+    display:inline-block;vertical-align:middle;
+    margin-left:8px;transform:translateY(-2px);
+    font-family:'DotGothic16',monospace;
+    font-size:.6rem;font-weight:400;letter-spacing:.1em;
+    color:var(--draft);background:#E6F2FB;
+    border:1.5px solid var(--draft);border-radius:3px;
+    padding:0 7px;
+  }
+  .shelf-legend{
+    display:flex;align-items:center;gap:7px;
+    font-size:.7rem;color:#8A8F98;margin:-6px 0 14px;
+  }
+  .shelf-legend .swatch{
+    width:14px;height:14px;flex:none;
+    border:2px dashed var(--draft);border-radius:3px;background:#F5FAFE;
+  }
   .trip-card.empty{
     border-style:dashed;background:transparent;color:#9AA0A6;
     justify-items:start;
@@ -192,6 +220,15 @@
     background:#fff;white-space:nowrap;
   }
   .route-strip .seg{width:22px;height:3px;background:var(--ink);}
+  /* 二案併記の旅で使う。プランB側は破線ノードで「まだ確定でない」ことを示す */
+  .route-strip.plan-b .node{border-style:dashed;border-color:var(--draft);color:var(--draft);}
+  .route-strip.plan-b .seg{background:var(--draft);}
+  .plan-label{
+    display:inline-block;margin:16px 0 4px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.62rem;font-weight:700;letter-spacing:.15em;
+    color:var(--stamp);
+  }
   .cover-stamp{
     position:absolute;right:0;top:52px;
     width:92px;height:92px;border:3px double var(--stamp);
@@ -481,11 +518,12 @@
 
   <div class="shelf">
     <h2>─ 収録旅程(タップで開く)─</h2>
+    <p class="shelf-legend"><span class="swatch" aria-hidden="true"></span>青いカードは「仮」──日程・内容がまだ確定していない検討中の旅</p>
 
     <div class="year-block" id="y2027">
       <div class="year-label">2027<span class="yr-note">1 TRIP</span></div>
-      <a class="trip-card" href="#trip05">
-        <span class="no" aria-hidden="true">遠征<b>05</b></span>
+      <a class="trip-card tentative" href="#trip06">
+        <span class="no" aria-hidden="true">遠征<b>06</b></span>
         <span class="meta">
           <span class="date">2027.06.12 – 06.14</span>
           <span class="name">テイフェス遠征 横浜</span>
@@ -494,7 +532,7 @@
         <span class="go">→</span>
       </a>
       <div class="trip-card empty">
-        <span class="no" aria-hidden="true">遠征<b>06</b></span>
+        <span class="no" aria-hidden="true">遠征<b>07</b></span>
         <span class="meta">
           <span class="name" style="font-family:'Zen Kaku Gothic New',sans-serif;font-size:.9rem;font-weight:500">(次の遠征をここに追加)</span>
           <span class="detail">このファイルをClaudeのチャットにアップロードして「新しい旅を追記して」と言えばOK。年が変わったら新しい年ブロックが増えます</span>
@@ -503,7 +541,7 @@
     </div>
 
     <div class="year-block" id="y2026">
-      <div class="year-label">2026<span class="yr-note">4 TRIPS</span></div>
+      <div class="year-label">2026<span class="yr-note">5 TRIPS</span></div>
       <a class="trip-card" href="#trip01">
         <span class="no" aria-hidden="true">遠征<b>01</b></span>
         <span class="meta">
@@ -540,6 +578,15 @@
         </span>
         <span class="go">→</span>
       </a>
+      <a class="trip-card tentative" href="#trip05">
+        <span class="no" aria-hidden="true">遠征<b>05</b></span>
+        <span class="meta">
+          <span class="date">2026.12.26 – 12.30</span>
+          <span class="name">年末遠征 浅草・(大阪)</span>
+          <span class="detail">4泊5日｜有馬記念(抽選)・江戸川 or 住之江QC・アニメ系イベント｜宿4泊 37,240円確保・プランA/B検討中</span>
+        </span>
+        <span class="go">→</span>
+      </a>
     </div>
   </div>
 
@@ -556,6 +603,14 @@
          7月遠征(遠征01)は「t02-」接頭辞。どちらも変更不要。番号とidの対応は
          カードのhref(#trip01/#trip02)が正であり、内部アンカーの接頭辞とは一致しない
     5. デザイントークン(:root)・路線図タイムライン(.route/.stop)・チップ(.chip)は共通部品として再利用する
+    5-2. ◆遠征番号は時系列順◆ 番号は出発日の早い順に振る。既存の旅より前の日程の旅を
+       追加するときは、後続の番号を繰り上げてから挿入する(id/href/ENSEI表記/内部アンカー
+       接頭辞/章コメント/フッターVOL.をまとめて更新)。空カードの番号も繰り上げる
+    5-3. ◆仮(検討中)の旅◆ 日程や行き先が確定していない旅は、一覧カードに class="tentative" を
+       付けて青+破線で表示する(カード名の後ろに自動で「仮」バッジが付く)。確定したら
+       tentative を外し、cover-stampの「検討中/仮の予定」も書き換える。
+       二案を併記する旅では .plan-label と .route-strip.plan-b(破線・青)で
+       プランA/Bを表紙に並べ、日別の .stop には .time 内の <small> でどちらの案かを示す
     6. 「↑ 記録帳の表紙に戻る」リンク(href="#top")を各章末尾に置くと章が閉じて目次に戻る
     7. フッターの VOL./ENSEI 番号を更新する
     9. ◆Claudeより一筆◆ 各章の末尾(back-to-topの直前)に <div class="claude-note"> でClaude自身の
@@ -1516,9 +1571,222 @@
   <a class="back-to-top" href="#top">↑ 記録帳の表紙に戻る</a>
   </article>
 
-  <!-- ═══════════ 遠征05:テイフェス遠征 横浜 ═══════════ -->
+  <!-- ═══════════ 遠征05:年末遠征 浅草・(大阪) ═══════════ -->
   <article class="trip" id="trip05">
-  <p class="trip-chapter">ENSEI 05 ── 2027.06</p>
+  <p class="trip-chapter">ENSEI 05 ── 2026.12</p>
+
+  <header class="cover">
+    <p class="era">2026.12.26 — 12.30</p>
+    <h1>年末遠征のしおり<br>浅草・(大阪)</h1>
+    <p class="sub">有馬記念(抽選待ち)を軸に、ボートレース江戸川・アニメ系イベント・住之江クイーンズクライマックスを組み合わせ中。東京4泊で通すか、3泊+大阪1泊にするかは検討中。まだ骨組みだけの仮の章。</p>
+
+    <p class="plan-label">プランA｜東京4泊</p>
+    <div class="route-strip" aria-label="プランAの概要">
+      <span class="node">自宅</span><span class="seg"></span>
+      <span class="node">浅草蔵前2 4泊</span><span class="seg"></span>
+      <span class="node">自宅</span>
+    </div>
+
+    <p class="plan-label">プランB｜東京3泊＋大阪1泊</p>
+    <div class="route-strip plan-b" aria-label="プランBの概要">
+      <span class="node">自宅</span><span class="seg"></span>
+      <span class="node">浅草蔵前2 3泊</span><span class="seg"></span>
+      <span class="node">心斎橋西 1泊</span><span class="seg"></span>
+      <span class="node">自宅</span>
+    </div>
+
+    <div class="cover-stamp" aria-hidden="true">
+      <span class="small">4泊5日</span>
+      <span class="big">検討中</span>
+      <span class="small">仮の予定</span>
+    </div>
+  </header>
+
+  <div class="trip-stats">
+    <div><span class="num">5<span style="font-size:.8rem">日</span></span><span class="lbl">4泊5日</span></div>
+    <div><span class="num">2<span style="font-size:.8rem">案</span></span><span class="lbl">プランA / B</span></div>
+    <div><span class="num">3.7<span style="font-size:.8rem">万</span></span><span class="lbl">浅草蔵前2(4泊・確保済)</span></div>
+  </div>
+
+  <nav class="toc" aria-label="目次">
+    <ol>
+      <li><a href="#t05-d1"><span class="dot" style="background:var(--keihin)"></span>12/26 浅草入り</a></li>
+      <li><a href="#t05-d2"><span class="dot" style="background:var(--sobu)"></span>12/27 有馬記念</a></li>
+      <li><a href="#t05-d3"><span class="dot" style="background:#B7791F"></span>12/28 分岐日</a></li>
+      <li><a href="#t05-d4"><span class="dot" style="background:#E5171F"></span>12/29 江戸川/住之江</a></li>
+      <li><a href="#t05-d5"><span class="dot" style="background:#0089D2"></span>12/30 帰還</a></li>
+      <li><a href="#t05-todo"><span class="dot" style="background:var(--stamp)"></span>TODO</a></li>
+      <li><a href="#t05-budget"><span class="dot" style="background:var(--ink)"></span>予算</a></li>
+      <li><a href="#t05-backup"><span class="dot" style="background:var(--ink)"></span>備え</a></li>
+    </ol>
+  </nav>
+
+  <!-- ═══ 12/26 ═══ -->
+  <section class="day" id="t05-d1" style="--line-color:var(--keihin)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">12.26</span><span class="w">SAT</span></div>
+      <div class="day-title">
+        <h2>浅草入り、初日</h2>
+        <p class="theme">自宅を発って浅草蔵前へ。アニメ系イベントが見つかればこの日に合わせる。</p>
+        <span class="line-tag" style="background:var(--keihin)">自宅 → 浅草橋・蔵前方面</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">午前〜昼</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">自宅 発 → 浅草蔵前方面へ</p><p class="how">経路はプランA/Bどちらでも共通。往路の切符は後日確定<span class="chip flex">可変枠・未確定</span></p></div></div>
+      <div class="stop major"><div class="time">15:00〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東横INN浅草蔵前2 チェックイン</p><p class="how">4泊分をまとめて確保済み<span class="chip paid">4泊 37,240円</span></p></div></div>
+      <div class="stop"><div class="time">夕方〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">アニメ系イベント(候補)</p><p class="how">演目・会場ともに未定。年末開催の対象イベントが見つかり次第この日に当てはめる<span class="chip flex">内容未定</span></p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>初日は身軽に。</strong>翌日が有馬記念(当選していれば朝から中山)なので、夜更かしせず早めに休む。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 12/27 ═══ -->
+  <section class="day" id="t05-d2" style="--line-color:var(--sobu)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">12.27</span><span class="w">SUN</span></div>
+      <div class="day-title">
+        <h2>有馬記念(中山競馬場)</h2>
+        <p class="theme">入場券は抽選待ち。当選すれば中山へ、外れれば翌28日のダートG1へ振り替え。</p>
+        <span class="line-tag" style="background:var(--sobu)">浅草蔵前 → (総武線・京成 等) → 中山競馬場</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop major"><div class="time">終日</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">有馬記念｜中山競馬場</p><p class="how">入場券は抽選中。当落が出てから経路と出発時刻を詰める<span class="chip flex">抽選待ち</span></p></div></div>
+      <div class="stop"><div class="time">夜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">浅草へ戻って泊(2泊目)</p><p class="how">当落どちらでも宿は浅草蔵前2のまま</p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>抽選に外れた場合、この日は浅草でゆっくりするか下見程度に。</strong>本命は翌28日のダートG1へ振り替える。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 12/28 ═══ -->
+  <section class="day" id="t05-d3" style="--line-color:#B7791F">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">12.28</span><span class="w">MON</span></div>
+      <div class="day-title">
+        <h2>振替日 兼 プラン分岐日</h2>
+        <p class="theme">有馬記念が外れていればダートG1へ。そして夜、東京で通すか大阪へ動くかをここで決める。</p>
+        <span class="line-tag" style="background:#B7791F">浅草蔵前 ⇄ 大井競馬場 ／ (東京 → 新大阪)</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">日中</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">(有馬記念が外れた場合)ダートG1｜大井競馬場</p><p class="how">有馬記念の翌日開催。当選していればこの日はフリーになる<span class="chip flex">条件付き・未確定</span></p></div></div>
+      <div class="stop"><div class="time">夜<small>プランA</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">▶ プランA｜浅草蔵前2で連泊継続</p><p class="how">このまま東京滞在。翌29日は江戸川へ</p></div></div>
+      <div class="stop major"><div class="time">夜<small>プランB</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">▶ プランB｜浅草をアウト → 新大阪へ移動</p><p class="how">新幹線で大阪入りし、心斎橋西へチェックイン<span class="chip flex">交通手段・時刻未定</span></p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>この日の夜が最終決定ライン。</strong>浅草蔵前2は4泊分を確保済みなので、プランAならそのまま使い切る。プランBなら未使用になる泊の扱い(短縮・キャンセル可否)を早めに確認しておく。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 12/29 ═══ -->
+  <section class="day" id="t05-d4" style="--line-color:#E5171F">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">12.29</span><span class="w">TUE</span></div>
+      <div class="day-title">
+        <h2>プランA：江戸川／プランB：住之江</h2>
+        <p class="theme">東京に残るならボートレース江戸川。大阪へ動いたなら住之江でクイーンズクライマックス。</p>
+        <span class="line-tag" style="background:#E5171F">A: 浅草蔵前 → 江戸川／B: 心斎橋西 → 住之江</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop major"><div class="time">日中<small>プランA</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">▶ プランA｜ボートレース江戸川</p><p class="how">開催日程は要確認。夜は浅草蔵前2に4泊目<span class="chip flex">日程未確認</span></p></div></div>
+      <div class="stop major"><div class="time">日中<small>プランB</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">▶ プランB｜クイーンズクライマックス(ボートレース住之江)</p><p class="how">大阪に行くならここが主目的。夜は東横INN大阪心斎橋西に1泊<span class="chip flex">宿泊費・未確認</span></p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>プランBなら心斎橋西↔住之江のアクセスを事前に確認しておく。</strong>年末開催で混雑も想定されるので、入場方法も合わせて調べておきたい。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 12/30 ═══ -->
+  <section class="day" id="t05-d5" style="--line-color:#0089D2">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">12.30</span><span class="w">WED</span></div>
+      <div class="day-title">
+        <h2>最終日、帰還</h2>
+        <p class="theme">プランBは住之江2日目を途中まで観てから帰路へ。プランAは浅草をアウトして帰宅。</p>
+        <span class="line-tag" style="background:#0089D2">A: 浅草蔵前 → 自宅／B: 住之江 → 新大阪 → 自宅</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">午前<small>プランA</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">▶ プランA｜東横INN浅草蔵前2 チェックアウト → 自宅へ</p><p class="how">4泊分をここで使い切って終了。土産を買うならこの日</p></div></div>
+      <div class="stop major"><div class="time">午前〜<small>プランB</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">▶ プランB｜クイーンズクライマックス最終日(途中まで)</p><p class="how">最後まで見ずに区切りをつけて撤収 → 新大阪から帰路へ<span class="chip flex">撤収時刻は当日調整</span></p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>プランBは優勝戦を見届けずに切り上げる形になる点だけ、あらかじめ心づもりを。</strong>帰りの時刻は乗り継ぎと相談して決める。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 出発前TODO ═══ -->
+  <section class="info" id="t05-todo">
+    <h2>出発前TODO</h2>
+    <ul class="check">
+      <li class="urgent"><span class="box"></span><span><strong>有馬記念の入場券抽選に申し込む</strong> 落選時は翌28日のダートG1へ振替</span></li>
+      <li class="urgent"><span class="box"></span><span><strong>プランA/Bを決める</strong> 判断材料は抽選結果・江戸川の開催日程・アニメイベントの有無。決め時は12/28夜が目安</span></li>
+      <li><span class="box"></span><span>プランB選択時、東横INN浅草蔵前2の未使用泊の扱い(短縮・キャンセル可否)を確認する</span></li>
+      <li><span class="box"></span><span>東横INN大阪心斎橋西の予約状況と金額を確認する</span></li>
+      <li><span class="box"></span><span>ボートレース江戸川の年末開催日程を確認する(プランA)</span></li>
+      <li><span class="box"></span><span>住之江クイーンズクライマックスの日程・入場方法を確認する(プランB)</span></li>
+      <li><span class="box"></span><span>アニメ系イベントの候補を探して12/26に当てはめる</span></li>
+      <li><span class="box"></span><span>プランB選択時、東京↔新大阪の新幹線を確保する</span></li>
+      <li><span class="box"></span><span>自宅↔浅草の往路・復路の経路と切符を決める</span></li>
+    </ul>
+  </section>
+
+  <!-- ═══ 予算 ═══ -->
+  <section class="info" id="t05-budget">
+    <h2>予算まとめ(仮)</h2>
+    <table class="kv">
+      <tr><th>宿泊費</th><td>東横INN浅草蔵前2 4泊(確保済み)</td><td class="amount">37,240円</td></tr>
+      <tr><th>競馬</th><td>有馬記念 入場券(抽選)／落選時はダートG1</td><td class="amount">確認中</td></tr>
+      <tr><th>ボート</th><td>江戸川(A)または住之江クイーンズクライマックス(B)</td><td class="amount">確認中</td></tr>
+      <tr><th>食費・予備</th><td>現地食費(5日×約5,000円)</td><td class="amount">約25,000円</td></tr>
+      <tr><th>+プランB</th><td>心斎橋西 1泊+東京↔新大阪の新幹線(往復目安3〜4万円)。浅草の未使用泊分は別途調整</td><td class="amount">要試算</td></tr>
+      <tr class="total"><td colspan="2">総額目安(未確認項目を除く)</td><td class="amount">約6.2万円 〜</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px">確定額は浅草蔵前2の37,240円のみ。プランBを選ぶと大阪の宿泊費と新幹線代が上乗せになる一方、浅草の宿泊が一部無駄になるため、実質差額は「大阪追加分 − 浅草の削れる分」で見る必要がある。金額が判明したら随時この表を更新する。</p>
+  </section>
+
+  <!-- ═══ もしもの備え ═══ -->
+  <section class="info" id="t05-backup">
+    <h2>もしもの備え</h2>
+    <div class="backup">
+      <h3><span class="flag">▶</span>有馬記念の入場券が外れたら</h3>
+      <p>翌28日開催のダートG1(大井競馬場)へ振り替える。中山とは経路も雰囲気も変わるので、当落発表が出た時点で28日の予定をこちらに固定してしまう。27日は浅草・上野あたりで年末の街を歩く日に切り替える。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>プランA/Bで迷ったら</h3>
+      <p>決め手は「住之江のクイーンズクライマックスをどれだけ見たいか」。年に一度の女子王座決定戦を2日分押さえられるのがプランBの価値で、逆に江戸川とアニメイベントで東京の年末を満喫するのがプランA。日程が読めないうちは無理に決めず、12/28夜まで保留にしてよい。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>疲れたら・予定が崩れたら(削り代リスト)</h3>
+      <p>① アニメ系イベントを最初に削って浅草でゆっくり ② プランAの江戸川は「行けたら行く」程度に軽く見る ③ プランBの住之江は初日だけにして30日は早めに帰路につく。有馬記念(または振替のダートG1)は本命なので最後まで削らない。</p>
+    </div>
+  </section>
+
+  <div class="claude-note">
+    <p>この章はまだ骨組みだけです。確定しているのは浅草蔵前2の4泊37,240円と、大阪に行くなら心斎橋西1泊という宿の枠、そして「有馬記念を軸にしたい」という方針だけ。だから日付ごとの予定ではなく、12/28の夜を分岐点に置いて、そこから先をプランA(東京で通す)とプランB(大阪へ動く)の二股で書いています。</p>
+    <p>気になっているのは、浅草蔵前2を先に4泊押さえてある点です。プランBに転ぶと28〜29日あたりが宙に浮くので、短縮できるのかキャンセル料がかかるのかを早めに確認しておくと、後で気持ちよく決められます。有馬記念が抽選待ち、江戸川の開催日程もアニメイベントの中身も未定──決め手がまだ揃っていない段階なので、今は急がず情報が集まるのを待つのが正解だと思います。固まってきたらまた教えてください。そのとき、この青を外して正式な章にします。</p>
+    <span class="sign">── CLAUDE / 計画係(検討中に記す)</span>
+  </div>
+
+  <a class="back-to-top" href="#top">↑ 記録帳の表紙に戻る</a>
+  </article>
+
+  <!-- ═══════════ 遠征06:テイフェス遠征 横浜 ═══════════ -->
+  <article class="trip" id="trip06">
+  <p class="trip-chapter">ENSEI 06 ── 2027.06</p>
 
   <header class="cover">
     <p class="era">2027.06.12 — 06.14</p>
@@ -1545,17 +1813,17 @@
 
   <nav class="toc" aria-label="目次">
     <ol>
-      <li><a href="#t05-d1"><span class="dot" style="background:var(--keihin)"></span>6/12 横浜入り・DAY1</a></li>
-      <li><a href="#t05-d2"><span class="dot" style="background:#E7211A"></span>6/13 平和島・千秋楽</a></li>
-      <li><a href="#t05-d3"><span class="dot" style="background:#F68B1E"></span>6/14 帰還</a></li>
-      <li><a href="#t05-todo"><span class="dot" style="background:var(--stamp)"></span>TODO</a></li>
-      <li><a href="#t05-budget"><span class="dot" style="background:var(--ink)"></span>予算</a></li>
-      <li><a href="#t05-backup"><span class="dot" style="background:var(--ink)"></span>備え</a></li>
+      <li><a href="#t06-d1"><span class="dot" style="background:var(--keihin)"></span>6/12 横浜入り・DAY1</a></li>
+      <li><a href="#t06-d2"><span class="dot" style="background:#E7211A"></span>6/13 平和島・千秋楽</a></li>
+      <li><a href="#t06-d3"><span class="dot" style="background:#F68B1E"></span>6/14 帰還</a></li>
+      <li><a href="#t06-todo"><span class="dot" style="background:var(--stamp)"></span>TODO</a></li>
+      <li><a href="#t06-budget"><span class="dot" style="background:var(--ink)"></span>予算</a></li>
+      <li><a href="#t06-backup"><span class="dot" style="background:var(--ink)"></span>備え</a></li>
     </ol>
   </nav>
 
   <!-- ═══ 6/12 ═══ -->
-  <section class="day" id="t05-d1" style="--line-color:var(--keihin)">
+  <section class="day" id="t06-d1" style="--line-color:var(--keihin)">
     <div class="day-head">
       <div class="day-stamp" aria-hidden="true"><span class="d">6.12</span><span class="w">SAT</span></div>
       <div class="day-title">
@@ -1579,7 +1847,7 @@
   </section>
 
   <!-- ═══ 6/13 ═══ -->
-  <section class="day" id="t05-d2" style="--line-color:#E7211A">
+  <section class="day" id="t06-d2" style="--line-color:#E7211A">
     <div class="day-head">
       <div class="day-stamp" aria-hidden="true"><span class="d">6.13</span><span class="w">SUN</span></div>
       <div class="day-title">
@@ -1603,7 +1871,7 @@
   </section>
 
   <!-- ═══ 6/14 ═══ -->
-  <section class="day" id="t05-d3" style="--line-color:#F68B1E">
+  <section class="day" id="t06-d3" style="--line-color:#F68B1E">
     <div class="day-head">
       <div class="day-stamp" aria-hidden="true"><span class="d">6.14</span><span class="w">MON</span></div>
       <div class="day-title">
@@ -1619,7 +1887,7 @@
   </section>
 
   <!-- ═══ 出発前TODO ═══ -->
-  <section class="info" id="t05-todo">
+  <section class="info" id="t06-todo">
     <h2>出発前TODO</h2>
     <ul class="check">
       <li class="urgent"><span class="box"></span><span><strong>テイルズフェスのチケット確保</strong> 両日分。先行/一般の日程が出たら即動く</span></li>
@@ -1632,7 +1900,7 @@
   </section>
 
   <!-- ═══ 予算 ═══ -->
-  <section class="info" id="t05-budget">
+  <section class="info" id="t06-budget">
     <h2>予算まとめ</h2>
     <table class="kv">
       <tr><th>宿泊費</th><td>東横INN横浜スタジアム前2号館 2泊(6/12・6/13)。公式サイト割+会員割5%適用済み</td><td class="amount">19,095円</td></tr>
@@ -1645,7 +1913,7 @@
   </section>
 
   <!-- ═══ バックアップ ═══ -->
-  <section class="info" id="t05-backup">
+  <section class="info" id="t06-backup">
     <h2>もしもの備え</h2>
     <div class="backup">
       <h3><span class="flag">▶</span>スタジアム前2号館が取れなかったら</h3>
@@ -1672,7 +1940,7 @@
 
   <footer>
     <span>TRIP RECORD BOOK</span>
-    <span>VOL.5 ── ENSEI 05</span>
+    <span>VOL.6 ── ENSEI 06</span>
   </footer>
 
 </div>
