@@ -431,8 +431,10 @@
     padding:6px 6px 0;
     box-shadow:0 1px 3px rgba(26,29,33,.07);
   }
+  .photo a{display:block;border-bottom:none;}
   .photo img{
-    display:block;width:100%;height:auto;
+    display:block;width:100%;height:190px;
+    object-fit:cover;object-position:center;
     border-radius:3px;
     background:#EDEDE6;
   }
@@ -446,6 +448,7 @@
   @media print{
     .photos{grid-template-columns:repeat(4,1fr);}
     .photo{break-inside:avoid;}
+    .photo img{height:120px;}
   }
 
   /* Claudeより一筆(各章末の感想欄) */
@@ -1244,11 +1247,11 @@
       <div class="stop"><div class="time">20:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテルチェックイン → 宿で完結</p><p class="how">台風の夜は出歩かず部屋で。まつり湯は見送り</p></div></div>
     </div>
     <div class="photos">
-      <figure class="photo"><img src="images/t03/d1-01-ichikatsu.jpg" alt="いちかつのロースカツ定食"><figcaption>いちかつ／ロースカツ定食 900円。予定を繰り上げて昼に</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d1-02-dome-lineup.jpg" alt="東京ドームのスタメン表示"><figcaption>初戦スタメン。先発 村上 対 山﨑伊織</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d1-03-dome-9-1.jpg" alt="東京ドームのスコアボード 9-1"><figcaption>9-1。11安打・無失策で初戦快勝</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d1-04-paupau-shinjuku.jpg" alt="パウパウアクアガーデン新宿店の看板"><figcaption>新宿パウパウ。祝日は19:00閉店だった</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d1-05-rikishi-hamburg.jpg" alt="RIKISHIのハンバーグの店頭メニュー"><figcaption>両国で見つけたRIKISHIのハンバーグ。今回は見送り</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d1-01-ichikatsu.jpg" target="_blank" rel="noopener"><img src="images/t03/d1-01-ichikatsu.jpg" alt="いちかつのロースカツ定食" loading="lazy"></a><figcaption>いちかつ／ロースカツ定食 900円。予定を繰り上げて昼に</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d1-02-dome-lineup.jpg" target="_blank" rel="noopener"><img src="images/t03/d1-02-dome-lineup.jpg" alt="東京ドームのスタメン表示" loading="lazy"></a><figcaption>初戦スタメン。先発 村上 対 山﨑伊織</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d1-03-dome-9-1.jpg" target="_blank" rel="noopener"><img src="images/t03/d1-03-dome-9-1.jpg" alt="東京ドームのスコアボード 9-1" loading="lazy"></a><figcaption>9-1。11安打・無失策で初戦快勝</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d1-04-paupau-shinjuku.jpg" target="_blank" rel="noopener"><img src="images/t03/d1-04-paupau-shinjuku.jpg" alt="パウパウアクアガーデン新宿店の看板" loading="lazy"></a><figcaption>新宿パウパウ。祝日は19:00閉店だった</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d1-05-rikishi-hamburg.jpg" target="_blank" rel="noopener"><img src="images/t03/d1-05-rikishi-hamburg.jpg" alt="RIKISHIのハンバーグの店頭メニュー" loading="lazy"></a><figcaption>両国で見つけたRIKISHIのハンバーグ。今回は見送り</figcaption></figure>
     </div>
     <div class="day-note">
       <ul>
@@ -1291,14 +1294,14 @@
       <div class="stop skipped"><div class="time">試合後<br>22時前後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">横浜家系ラーメン 匠(両国)</p><p class="how">現地で確認したところ<strong>すでに別のラーメン店に変わっていた</strong>。この遠征の家系欲は8/14に渋谷で回収することになる</p></div></div>
     </div>
     <div class="photos">
-      <figure class="photo"><img src="images/t03/d2-01-edogawa-ramen.jpg" alt="ボートレース江戸川の場内ラーメン"><figcaption>場内グルメの醤油ラーメン。支払いはポイントで完結</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d2-02-edogawa-race.jpg" alt="快晴のボートレース江戸川"><figcaption>台風一過。首都高の高架下、荒川の難水面</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d2-03-edogawa-nice.jpg" alt="江戸川ナイスの屋外収録"><figcaption>本命の屋外収録。8Rまで粘った甲斐があった</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d2-04-edogawa-rain.jpg" alt="土砂降りの観客席"><figcaption>そして急な土砂降り。座席が水浸しに</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d2-05-dome-lineup.jpg" alt="東京ドームのスタメン"><figcaption>2戦目。先発 髙橋、捕手 伏見、遊撃 熊谷</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d2-06-chargespot.jpg" alt="ChargeSpotのモバイルバッテリー"><figcaption>電池切れ。ドームでChargeSpotを借りる</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d2-07-dome-5-1.jpg" alt="スコアボード 5-1"><figcaption>7回で5-1。このまま連勝</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d2-08-dome-view.jpg" alt="3塁側から見た東京ドーム"><figcaption>3塁側・内野後方。ズームなしでこの距離</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-01-edogawa-ramen.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-01-edogawa-ramen.jpg" alt="ボートレース江戸川の場内ラーメン" loading="lazy"></a><figcaption>場内グルメの醤油ラーメン。支払いはポイントで完結</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-02-edogawa-race.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-02-edogawa-race.jpg" alt="快晴のボートレース江戸川" loading="lazy"></a><figcaption>台風一過。首都高の高架下、荒川の難水面</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-03-edogawa-nice.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-03-edogawa-nice.jpg" alt="江戸川ナイスの屋外収録" loading="lazy"></a><figcaption>本命の屋外収録。8Rまで粘った甲斐があった</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-04-edogawa-rain.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-04-edogawa-rain.jpg" alt="土砂降りの観客席" loading="lazy"></a><figcaption>そして急な土砂降り。座席が水浸しに</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-05-dome-lineup.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-05-dome-lineup.jpg" alt="東京ドームのスタメン" loading="lazy"></a><figcaption>2戦目。先発 髙橋、捕手 伏見、遊撃 熊谷</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-06-chargespot.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-06-chargespot.jpg" alt="ChargeSpotのモバイルバッテリー" loading="lazy"></a><figcaption>電池切れ。ドームでChargeSpotを借りる</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-07-dome-5-1.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-07-dome-5-1.jpg" alt="スコアボード 5-1" loading="lazy"></a><figcaption>7回で5-1。このまま連勝</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-08-dome-view.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-08-dome-view.jpg" alt="3塁側から見た東京ドーム" loading="lazy"></a><figcaption>3塁側・内野後方。ズームなしでこの距離</figcaption></figure>
     </div>
     <div class="day-note actual">
       <ul>
@@ -1334,13 +1337,13 @@
       <div class="stop skipped"><div class="time">21:45頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">スシロー 秋葉原</p><p class="how">水道橋→秋葉原 約8分 → <strong>秋葉原→両国は総武線各停で直通2駅・約6分</strong>と一直線。試合終了21:10以内ならアキバプレイス8F店(評価4.6・徒歩8〜10分)、押していたらBiTO AKIBA B1F店(徒歩2〜3分)。どちらも23:00まで<span class="chip meal">飯⑨・夜</span><span class="chip flex">押したら中止</span></p></div></div>
     </div>
     <div class="photos">
-      <figure class="photo"><img src="images/t03/d3-01-hasegawa-tonkatsu.jpg" alt="とんかつはせがわのロース&amp;半ひれ"><figcaption>はせがわ／ロース&amp;半ひれ 2,200円。この遠征の主役</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d3-02-hasegawa-menu.jpg" alt="はせがわの店頭メニュー"><figcaption>看板は栃木県産「平牧バーク三元豚」</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d3-03-hasegawa-lunch.jpg" alt="はせがわの平日ランチメニュー"><figcaption>平日ランチ。ロース単品1,600円は破格</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d3-04-dq40-logo.jpg" alt="ドラゴンクエスト40周年のロゴ"><figcaption>DQ40th the DIVE。since 1986</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d3-05-dq40-statue.jpg" alt="ドラクエのモンスタースタチュー"><figcaption>スタチュー展示。撮影OK</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d3-06-dome-lineup.jpg" alt="千秋楽のスタメン"><figcaption>千秋楽スタメン。先発 下村 対 西舘</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d3-07-dome-3-2.jpg" alt="スコアボード 3-2"><figcaption>3-2。1点差を締めて3タテ達成</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-01-hasegawa-tonkatsu.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-01-hasegawa-tonkatsu.jpg" alt="とんかつはせがわのロース&amp;半ひれ" loading="lazy"></a><figcaption>はせがわ／ロース&amp;半ひれ 2,200円。この遠征の主役</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-02-hasegawa-menu.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-02-hasegawa-menu.jpg" alt="はせがわの店頭メニュー" loading="lazy"></a><figcaption>看板は栃木県産「平牧バーク三元豚」</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-03-hasegawa-lunch.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-03-hasegawa-lunch.jpg" alt="はせがわの平日ランチメニュー" loading="lazy"></a><figcaption>平日ランチ。ロース単品1,600円は破格</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-04-dq40-logo.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-04-dq40-logo.jpg" alt="ドラゴンクエスト40周年のロゴ" loading="lazy"></a><figcaption>DQ40th the DIVE。since 1986</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-05-dq40-statue.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-05-dq40-statue.jpg" alt="ドラクエのモンスタースタチュー" loading="lazy"></a><figcaption>スタチュー展示。撮影OK</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-06-dome-lineup.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-06-dome-lineup.jpg" alt="千秋楽のスタメン" loading="lazy"></a><figcaption>千秋楽スタメン。先発 下村 対 西舘</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-07-dome-3-2.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-07-dome-3-2.jpg" alt="スコアボード 3-2" loading="lazy"></a><figcaption>3-2。1点差を締めて3タテ達成</figcaption></figure>
     </div>
     <div class="day-note actual">
       <ul>
@@ -1375,7 +1378,7 @@
       <div class="stop"><div class="time">17:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新宿経由で両国へ → 休養</p><p class="how">暑さと寝不足で消耗。宿で2時間ほど眠ると回復した。夜は焼き鳥とペッパーランチ等で軽く済ませ、深夜に液キャベコーワA＋キューピーコーワヒーリングを調達<span class="chip meal">飯⑫・夜</span></p></div></div>
     </div>
     <div class="photos">
-      <figure class="photo"><img src="images/t03/d4-01-samurai-ramen.jpg" alt="渋谷Samuraiの家系ラーメン"><figcaption>Samurai(渋谷)／家系 1,150円。匠の代わりに</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d4-01-samurai-ramen.jpg" target="_blank" rel="noopener"><img src="images/t03/d4-01-samurai-ramen.jpg" alt="渋谷Samuraiの家系ラーメン" loading="lazy"></a><figcaption>Samurai(渋谷)／家系 1,150円。匠の代わりに</figcaption></figure>
     </div>
     <div class="day-note actual">
       <ul>
@@ -1413,10 +1416,10 @@
       <div class="stop"><div class="time">23時台</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">富山 着 → あいの風とやま鉄道 → 高岡</p><p class="how">深夜高岡着、車で帰宅。おつかれさまでした</p></div></div>
     </div>
     <div class="photos">
-      <figure class="photo"><img src="images/t03/d5-01-bigsight.jpg" alt="東京ビッグサイトへ向かう人の流れ"><figcaption>曇天のビッグサイト。12時入りで待機列は回避</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d5-02-yamamoto-hamburg.jpg" alt="山本のハンバーグ"><figcaption>山本のハンバーグ(新橋)1,300円。ライスおかわり自由</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d5-03-nigiwaiza-nezucchi.jpg" alt="ねづっち特別公演のチラシ"><figcaption>横浜にぎわい座 八月興行／ねづっち 60分</figcaption></figure>
-      <figure class="photo"><img src="images/t03/d5-04-comike-loot.jpg" alt="コミケの戦利品"><figcaption>戦利品。帰宅後に机で広げるまでが遠征</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d5-01-bigsight.jpg" target="_blank" rel="noopener"><img src="images/t03/d5-01-bigsight.jpg" alt="東京ビッグサイトへ向かう人の流れ" loading="lazy"></a><figcaption>曇天のビッグサイト。12時入りで待機列は回避</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d5-02-yamamoto-hamburg.jpg" target="_blank" rel="noopener"><img src="images/t03/d5-02-yamamoto-hamburg.jpg" alt="山本のハンバーグ" loading="lazy"></a><figcaption>山本のハンバーグ(新橋)1,300円。ライスおかわり自由</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d5-03-nigiwaiza-nezucchi.jpg" target="_blank" rel="noopener"><img src="images/t03/d5-03-nigiwaiza-nezucchi.jpg" alt="ねづっち特別公演のチラシ" loading="lazy"></a><figcaption>横浜にぎわい座 八月興行／ねづっち 60分</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d5-04-comike-loot.jpg" target="_blank" rel="noopener"><img src="images/t03/d5-04-comike-loot.jpg" alt="コミケの戦利品" loading="lazy"></a><figcaption>戦利品。帰宅後に机で広げるまでが遠征</figcaption></figure>
     </div>
     <div class="day-note actual">
       <ul>
