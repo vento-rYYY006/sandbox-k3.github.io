@@ -416,6 +416,38 @@
   /* イベントアイコン(自作の線画。写真や版権絵は使わず、しおりの筆致に合わせたオリジナル) */
   .event-icon{display:inline-block;width:30px;height:24px;vertical-align:-7px;margin-right:6px;}
 
+  /* 旅の写真(実際に撮った記録写真。imagesディレクトリに遠征ごとのフォルダで格納) */
+  .photos{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:10px;
+    margin:18px 0 4px;
+  }
+  .photo{
+    margin:0;
+    border:1.5px solid var(--rule);
+    border-radius:5px;
+    background:#fff;
+    padding:6px 6px 0;
+    box-shadow:0 1px 3px rgba(26,29,33,.07);
+  }
+  .photo img{
+    display:block;width:100%;height:auto;
+    border-radius:3px;
+    background:#EDEDE6;
+  }
+  .photo figcaption{
+    font-family:'DotGothic16',monospace;
+    font-size:.66rem;line-height:1.6;
+    color:#6B7078;
+    padding:6px 2px 7px;
+    letter-spacing:.02em;
+  }
+  @media print{
+    .photos{grid-template-columns:repeat(4,1fr);}
+    .photo{break-inside:avoid;}
+  }
+
   /* Claudeより一筆(各章末の感想欄) */
   .claude-note{
     margin-top:40px;
@@ -566,7 +598,7 @@
         <span class="meta">
           <span class="date">2026.08.11 – 08.15</span>
           <span class="name">お盆遠征 東京・横浜</span>
-          <span class="detail">4泊5日｜野球3・競艇・お笑い3・DQ・コミケ・寄席｜約12.6万円</span>
+          <span class="detail">4泊5日｜東京ドーム3タテ・江戸川ナイス収録・KOC・DQ40th・コミケ・ねづっち｜現地5.3万円・完了</span>
         </span>
         <span class="go">→</span>
       </a>
@@ -1144,8 +1176,8 @@
   <!-- ═══════════ 表紙 ═══════════ -->
   <header class="cover">
     <p class="era">2026.08.11 — 08.15</p>
-    <h1>お盆遠征のしおり<br>東京・横浜</h1>
-    <p class="sub">野球三連戦・競艇・お笑い・DQ・コミケ・寄席・湯 ── 回収遠征、全記録。</p>
+    <h1>お盆遠征の記録<br>東京・横浜</h1>
+    <p class="sub">台風で開幕し、東京ドーム3タテで終わる ── 回収遠征、完走。</p>
     <div class="route-strip" aria-label="行程の概要">
       <span class="node">高岡</span><span class="seg"></span>
       <span class="node">長野 乗継</span><span class="seg"></span>
@@ -1155,15 +1187,15 @@
     </div>
     <div class="cover-stamp" aria-hidden="true">
       <span class="small">4泊5日</span>
-      <span class="big">盆遠征</span>
+      <span class="big">完 走</span>
       <span class="small">両国駐屯</span>
     </div>
   </header>
 
   <div class="trip-stats">
     <div><span class="num">5<span style="font-size:.8rem">日</span></span><span class="lbl">4泊5日</span></div>
-    <div><span class="num">9<span style="font-size:.8rem">本</span></span><span class="lbl">イベント数</span></div>
-    <div><span class="num">12.7<span style="font-size:.8rem">万</span></span><span class="lbl">総予算目安</span></div>
+    <div><span class="num">3<span style="font-size:.8rem">勝</span></span><span class="lbl">東京ドーム3タテ</span></div>
+    <div><span class="num">5.3<span style="font-size:.8rem">万</span></span><span class="lbl">現地出費 実績</span></div>
   </div>
 
   <nav class="toc" aria-label="目次">
@@ -1175,8 +1207,8 @@
       <li><a href="#d15"><span class="dot" style="background:var(--keihin)"></span>8/15 コミケ→帰還</a></li>
       <li><a href="#t03-meals"><span class="dot" style="background:#7A5C2E"></span>飯の一覧</a></li>
       <li><a href="#t03-fares"><span class="dot" style="background:var(--keihin)"></span>電車賃の一覧</a></li>
-      <li><a href="#todo"><span class="dot" style="background:var(--stamp)"></span>出発前TODO</a></li>
-      <li><a href="#budget"><span class="dot" style="background:var(--ink)"></span>予算</a></li>
+      <li><a href="#budget"><span class="dot" style="background:var(--ink)"></span>出費の実績</a></li>
+      <li><a href="#backup"><span class="dot" style="background:var(--stamp)"></span>もしもの備え</a></li>
     </ol>
   </nav>
 
@@ -1206,8 +1238,17 @@
       <div class="stop major"><div class="time">11:50頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京ドーム前 着・開場待ち</p><p class="how">開場10分前。前泊案より15分ほど後ろだが許容範囲</p></div></div>
       <div class="stop"><div class="time">12:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">開場</p><p class="how">席確保→場内散策→弁当。<strong>阪神(ビジター)打撃練習は12:30頃〜</strong>が通例なのでフルで見られる見込み</p></div></div>
       <div class="stop major"><div class="time">14:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">試合開始｜巨人 × 阪神 ①</p><p class="how">3試合分 31,000円<span class="chip paid">支払済</span></p></div></div>
-      <div class="stop"><div class="time">17:15頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">試合終了 → とんかつ いちかつ</p><p class="how">両国駅東口徒歩1分。ロースカツ定食。営業17:00〜21:00・カウンターのみで待ちが出る。満席/休業なら<strong>とんかつ はせがわ</strong>(両国3丁目・17:00〜22:00)へ<span class="chip cash">現金のみ</span><span class="chip meal">飯③・夜</span></p></div></div>
-      <div class="stop"><div class="time">19:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテルチェックイン → 大浴場</p><p class="how">まつり湯は見送り。初日はここで締め</p></div></div>
+      <div class="stop"><div class="time">17:15頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">試合終了(阪神 9-1 巨人) → 新宿へ</p><p class="how">11安打・無失策の快勝で初戦を取る。台風接近で雨脚が強まる前に、水道橋→四谷→新宿三丁目と地下でつないで<strong>パウパウアクアガーデン新宿店</strong>へ<span class="chip meal">飯③は昼のいちかつで消化済</span></p></div></div>
+      <div class="stop major"><div class="time">18:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">パウパウアクアガーデン新宿店(B1)</p><p class="how">祝日短縮で19:00閉店。ビルB1で地上に出ずに入れるのが台風の日に効いた。40cmキューブの下見に徹して購入はなし。<strong>小さいゴマハギが心残り</strong></p></div></div>
+      <div class="stop"><div class="time">19:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新宿で肉弁当を確保 → 両国へ</p><p class="how">閉店前の3割引に当たり1,587円。両国駅前のコンビニで国技館やきとりを狙うも売切、コロッケ等で代替<span class="chip meal">飯④・夜</span></p></div></div>
+      <div class="stop"><div class="time">20:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテルチェックイン → 宿で完結</p><p class="how">台風の夜は出歩かず部屋で。まつり湯は見送り</p></div></div>
+    </div>
+    <div class="photos">
+      <figure class="photo"><img src="images/t03/d1-01-ichikatsu.jpg" alt="いちかつのロースカツ定食"><figcaption>いちかつ／ロースカツ定食 900円。予定を繰り上げて昼に</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d1-02-dome-lineup.jpg" alt="東京ドームのスタメン表示"><figcaption>初戦スタメン。先発 村上 対 山﨑伊織</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d1-03-dome-9-1.jpg" alt="東京ドームのスコアボード 9-1"><figcaption>9-1。11安打・無失策で初戦快勝</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d1-04-paupau-shinjuku.jpg" alt="パウパウアクアガーデン新宿店の看板"><figcaption>新宿パウパウ。祝日は19:00閉店だった</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d1-05-rikishi-hamburg.jpg" alt="RIKISHIのハンバーグの店頭メニュー"><figcaption>両国で見つけたRIKISHIのハンバーグ。今回は見送り</figcaption></figure>
     </div>
     <div class="day-note">
       <ul>
@@ -1215,6 +1256,15 @@
         <li><strong>株主優待きっぷは長野でしか発券できない</strong>(JR西日本 北陸エリアの駅では受取不可)。乗継30分あれば十分。</li>
         <li><strong>新高岡でやることは2つ。</strong>①早特14の発券 ②駐車券を機械に通す。②を忘れると駐車場代が丸ごと有料になる——帰路は新高岡を経由しないので、当日の朝が唯一のチャンス。</li>
         <li><strong>練習の順序:</strong>ホーム(巨人)が先→ビジター(阪神)が後、が慣例。開場時点で巨人練習は終盤〜終了のことも。</li>
+      </ul>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li><strong>上野で降りたほうが両国は近い。</strong>荷物を置きに行く初日は東京より上野で降りるのが正解だった。運賃も気持ち安い。次回以降の初動はこれで。</li>
+        <li><strong>いちかつは夜ではなく昼に消化。</strong>ロースカツ定食900円。夜の枠が空いたので、台風の合間を縫って新宿パウパウの下見に振り替えた。</li>
+        <li><strong>台風15号は夕方から関東接近。</strong>試合後に西へ動くのは賭けだったが、パウパウがビルB1で地下から入れたおかげで濡れずに済んだ。20時前には宿に戻れて想定どおり。</li>
+        <li><strong>閉店前の値引きに当たる。</strong>新宿の肉弁当が3割引で1,587円。この「遅い時間に戻ると安い」パターンは翌日も再現した。</li>
+        <li>国技館やきとりは売切。両国駅前のコンビニに置いてあるのは分かったので、次は早い時間に。</li>
       </ul>
     </div>
   </section>
@@ -1231,12 +1281,34 @@
     </div>
     <div class="route">
       <div class="stop"><div class="time">10:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">アパホテル出発</p><p class="how">両国→森下(大江戸線)→船堀(都営新宿線)→無料送迎バス</p></div></div>
-      <div class="stop major"><div class="time">10:40頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what"><svg class="event-icon" viewBox="0 0 60 30" aria-hidden="true"><path d="M6 20 L14 20 L18 12 L40 12 L46 20 L54 20 L48 26 L12 26 Z" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/><line x1="30" y1="12" x2="30" y2="4" stroke="var(--ink)" stroke-width="2"/><path d="M30 4 L38 8 L30 10 Z" fill="var(--ink)"/><path d="M2 24 Q8 22 14 24" fill="none" stroke="var(--ink)" stroke-width="1.5" opacity=".5"/><path d="M46 24 Q52 22 58 24" fill="none" stroke="var(--ink)" stroke-width="1.5" opacity=".5"/></svg>ボートレース江戸川 着</p><p class="how">「第48回大江戸賞」開催中(8/9〜8/14)。入場100円<span class="chip cash">現地払い</span> <strong>この日は「江戸川ナイス」の収録があるため江戸川を優先。</strong>荒天中止・順延の場合はボートレース平和島へ振替(8/11〜16は本場開催・第66回デイリースポーツサマーカップ)</p></div></div>
-      <div class="stop"><div class="time">11:00〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">レース観戦 + 場内グルメで昼</p><p class="how">炎天下の屋外。水分と日陰の確保を最優先。<strong>朝食は抜いてここで昼と兼用にする</strong>(10:00出発のため)。収録を見届ける前提なので<strong>昼過ぎ撤収という逃げ道は使えない</strong>──そのぶん暑さ対策を厚めに<span class="chip meal">飯④・朝昼兼用</span></p></div></div>
-      <div class="stop"><div class="time">16:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">競艇場 発</p><p class="how">送迎バス→船堀→市ヶ谷乗換→水道橋(約35〜40分)</p></div></div>
-      <div class="stop"><div class="time">17:10頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">水道橋 着 → 球場飯・ビール調達</p><p class="how">場内で軽く。夜に匠のラーメンが控えているので入れすぎない<span class="chip meal">飯⑤・軽食</span></p></div></div>
-      <div class="stop major"><div class="time">18:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ナイター開始｜巨人 × 阪神 ②</p></div></div>
-      <div class="stop major"><div class="time">試合後<br>22時前後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">横浜家系ラーメン 匠(両国)</p><p class="how">両国駅徒歩2分・<strong>翌2:00まで</strong>。延長でも遅延でも破綻しない、この遠征で唯一「時間を気にしなくていい飯」。休業時の控えは邦ちゃんラーメン(ほぼ24時間)/鳥林 鶏白湯(23:00まで)/ごんろく(翌4:00まで)<span class="chip meal">飯⑥・夜</span></p></div></div>
+      <div class="stop major"><div class="time">10:40頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what"><svg class="event-icon" viewBox="0 0 60 30" aria-hidden="true"><path d="M6 20 L14 20 L18 12 L40 12 L46 20 L54 20 L48 26 L12 26 Z" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/><line x1="30" y1="12" x2="30" y2="4" stroke="var(--ink)" stroke-width="2"/><path d="M30 4 L38 8 L30 10 Z" fill="var(--ink)"/><path d="M2 24 Q8 22 14 24" fill="none" stroke="var(--ink)" stroke-width="1.5" opacity=".5"/><path d="M46 24 Q52 22 58 24" fill="none" stroke="var(--ink)" stroke-width="1.5" opacity=".5"/></svg>ボートレース江戸川 着</p><p class="how">「第48回大江戸賞」<strong>3日目</strong>。前日8/11が台風で全レース中止となり、番組変更なしでこの日に順延された回。入場100円<span class="chip cash">現地払い</span> <strong>「江戸川ナイス」の収録が目的の本命日。</strong></p></div></div>
+      <div class="stop"><div class="time">11:00〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">レース観戦 + 場内グルメで昼</p><p class="how">朝は雨。<strong>雨天時の「江戸川ナイス」収録は屋内に移り観覧できない</strong>ため、前半は様子見に徹する。場内の飲食は<strong>すべてポイントで精算</strong>したので現金支出はゼロ<span class="chip meal">飯⑤・朝昼兼用</span></p></div></div>
+      <div class="stop major"><div class="time">13時台</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">台風一過の快晴 → 「江戸川ナイス」屋外収録</p><p class="how">朝の雨がやみ、後半は真夏の青空に。<strong>8Rまで粘って様子を見る</strong>という判断が当たり、屋外に出てきた収録に立ち会えた。この日いちばんの回収</p></div></div>
+      <div class="stop"><div class="time">15:50頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">急な土砂降り</p><p class="how">晴れていたのが一転、座席が水浸しになる本降り。台風一過の大気不安定。屋外収録は間一髪で滑り込んだ形になった</p></div></div>
+      <div class="stop"><div class="time">17:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">競艇場 発 → 平井経由へ変更</p><p class="how">船堀(バス5分)ではなく<strong>平井(バス15分)</strong>を選択。バスで濡れないなら、乗換なしで水道橋直結の総武線が有利という判断</p></div></div>
+      <div class="stop major"><div class="time">18:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ナイター開始｜巨人 × 阪神 ②</p><p class="how">3塁側・内野後方のビジター寄り。先発 髙橋。1回2点・3回2点・7回1点と重ねて<strong>5-1で連勝</strong>。途中でスマホが力尽きChargeSpotを借りる<span class="chip meal">飯⑥・場内で軽食</span></p></div></div>
+      <div class="stop"><div class="time">試合後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ペッパーランチ ＋ 半額のカルビ丼</p><p class="how">帰投後に調達。<strong>閉店間際の値引きでカルビ丼が半値以下の500円</strong>。「揚げ物ひとつだけ」のつもりが肉が二重になった<span class="chip meal">飯⑦・夜</span></p></div></div>
+      <div class="stop skipped"><div class="time">試合後<br>22時前後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">横浜家系ラーメン 匠(両国)</p><p class="how">現地で確認したところ<strong>すでに別のラーメン店に変わっていた</strong>。この遠征の家系欲は8/14に渋谷で回収することになる</p></div></div>
+    </div>
+    <div class="photos">
+      <figure class="photo"><img src="images/t03/d2-01-edogawa-ramen.jpg" alt="ボートレース江戸川の場内ラーメン"><figcaption>場内グルメの醤油ラーメン。支払いはポイントで完結</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d2-02-edogawa-race.jpg" alt="快晴のボートレース江戸川"><figcaption>台風一過。首都高の高架下、荒川の難水面</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d2-03-edogawa-nice.jpg" alt="江戸川ナイスの屋外収録"><figcaption>本命の屋外収録。8Rまで粘った甲斐があった</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d2-04-edogawa-rain.jpg" alt="土砂降りの観客席"><figcaption>そして急な土砂降り。座席が水浸しに</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d2-05-dome-lineup.jpg" alt="東京ドームのスタメン"><figcaption>2戦目。先発 髙橋、捕手 伏見、遊撃 熊谷</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d2-06-chargespot.jpg" alt="ChargeSpotのモバイルバッテリー"><figcaption>電池切れ。ドームでChargeSpotを借りる</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d2-07-dome-5-1.jpg" alt="スコアボード 5-1"><figcaption>7回で5-1。このまま連勝</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d2-08-dome-view.jpg" alt="3塁側から見た東京ドーム"><figcaption>3塁側・内野後方。ズームなしでこの距離</figcaption></figure>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li><strong>前日が台風中止で、この日が「3日目」として順延実施。</strong>番組変更なし。開催そのものが危ぶまれたが無事に行われた。</li>
+        <li><strong>収録は朝の雨で屋内スタート。</strong>後半8R〜12Rで屋外に戻る可能性に賭けて8Rまで残り、快晴になった後半で屋外収録に立ち会えた。粘って正解だった日。</li>
+        <li><strong>舟券は最終 -6,000円。</strong>10R終了時点で投資16,000／回収14,000と踏みとどまっていたが、11R・12Rが不的中。難水面＋後半の土砂降りで条件も厳しかった。</li>
+        <li><strong>場内の飲食はポイントで精算。</strong>現金支出が出ないので、この日の食費は実質ドーム内550円と夜のテイクアウトのみ。</li>
+        <li><strong>匠は閉店していた。</strong>しおりで「時間を気にしなくていい飯」として置いていた保険が消滅。代わりに帰投後のペッパーランチ＋半額カルビ丼で締めた。</li>
+        <li>モバイルバッテリーは満充電で持参すべきだった。ChargeSpotのレンタル代は削れた出費。</li>
+      </ul>
     </div>
   </section>
 
@@ -1245,26 +1317,39 @@
     <div class="day-head">
       <div class="day-stamp" aria-hidden="true"><span class="d">8.13</span><span class="w">THU</span></div>
       <div class="day-title">
-        <h2>お笑い・DQ・野球の三本立て</h2>
-        <p class="theme">渋谷→原宿→水道橋。移動しながら回収する日。</p>
-        <span class="line-tag" style="background:var(--jingu)">渋谷 → 原宿 → 水道橋</span>
+        <h2>とんかつ・DQ・そして3タテ</h2>
+        <p class="theme">KOC第1部を捨て、両国→銀座→渋谷→原宿→水道橋。</p>
+        <span class="line-tag" style="background:var(--jingu)">両国 → 銀座 → 渋谷 → 原宿 → 水道橋</span>
       </div>
     </div>
     <div class="route">
-      <div class="stop"><div class="time">朝</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">両国で朝食</p><p class="how">アパは朝食なしプラン。<strong>両国駅まわりのチェーン店</strong>(牛丼チェーン・駅のカフェなど。24時間や7時開店で盆も確実)で軽く済ませるか、<strong>前夜(匠の帰り)にコンビニで買っておく</strong>。第1部の開場を逆算すると9時台前半には出るので、探し歩く時間は作らない<span class="chip meal">飯⑦・朝</span></p></div></div>
-      <div class="stop major"><div class="time">午前</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">キングオブコント準々決勝 第1部</p><p class="how">渋谷区文化総合センター大和田 4階さくらホール(渋谷区桜丘町23-21)。渋谷駅の西口・南口側<span class="chip flex">3,500円目安・未購入</span></p></div></div>
-      <div class="stop"><div class="time">終演後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">元祖油堂 油そば(渋谷サクラステージ B2F)</p><p class="how">会場から徒歩3〜4分、<strong>駅直結デッキで屋外をほぼ歩かない。</strong>券売機・カウンター、11:00〜23:00の通し営業なので第1部が押しても成立する。麺大盛無料・ドリンクバー無料。気分が違えば同館内に李小七マラタン(辛さ0から選べる)/KATCHAN RAMEN(ほぼ24時間)/松屋+マイカレー食堂(24時間)<span class="chip meal">飯⑧・昼</span></p></div></div>
-      <div class="stop"><div class="time">14:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">渋谷 → 原宿、屋内で涼む</p><p class="how">山手線1駅・約2分。開場までの余白は無理に埋めず、冷房のある場所で体力を戻す時間に充てる<span class="chip flex">可変枠</span></p></div></div>
-      <div class="stop major"><div class="time">15:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">DQ40th DIVE(原宿ハラカド)</p><p class="how">入場区分A・44番<span class="chip paid">2,500円 支払済</span></p></div></div>
-      <div class="stop"><div class="time">16:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">原宿 → 水道橋</p><p class="how">約25〜30分</p></div></div>
-      <div class="stop major"><div class="time">18:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ナイター開始｜巨人 × 阪神 ③</p><p class="how">三連戦の千秋楽</p></div></div>
-      <div class="stop"><div class="time">試合終了<br>直後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">スシローの「今から行く」を受付</p><p class="how"><strong>席を立ちながら押す。</strong>早すぎると到着前に呼ばれて流れる。案内目安が約30分後なら1時間以内の来店が目安。席タイプは選べるが確約ではない<span class="chip flex">アプリ/LINEミニアプリ</span></p></div></div>
-      <div class="stop"><div class="time">21:45頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">スシロー 秋葉原</p><p class="how">水道橋→秋葉原 約8分 → <strong>秋葉原→両国は総武線各停で直通2駅・約6分</strong>と一直線。試合終了21:10以内ならアキバプレイス8F店(評価4.6・徒歩8〜10分)、押していたらBiTO AKIBA B1F店(徒歩2〜3分)。どちらも23:00まで<span class="chip meal">飯⑨・夜</span><span class="chip flex">押したら中止</span></p></div></div>
+      <div class="stop skipped"><div class="time">午前</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">キングオブコント準々決勝 第1部</p><p class="how">出場者を見て食指が動かず<strong>この日の第1部は見送り</strong>。KOCは翌8/14の第1部に一本化した</p></div></div>
+      <div class="stop major"><div class="time">11:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">とんかつ はせがわ(両国)</p><p class="how">開店前から行列。栃木県産「平牧バーク三元豚」の専門店で、平日ランチ限定の<strong>ロース&amp;半ひれ(120g/60g) 2,200円</strong>。厚切極上ロース3,500円とはせ川とんかつ3,000円は勇気が出ず見送り。<strong>今まで食べたとんかつで一番</strong>という結論<span class="chip meal">飯⑧・昼</span></p></div></div>
+      <div class="stop"><div class="time">13:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">両国 → 築地市場 → パウパウアクアガーデン銀座店</p><p class="how">都営地下鉄で移動。ワンデーパス500円も検討したが<strong>この日は都営が1回だけなので都度払いが正解</strong>と判断して見送り。銀座は生体・用品とも中心部最大級で下見は30〜40分</p></div></div>
+      <div class="stop"><div class="time">14:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">銀座 → 渋谷、アニメショップで時間調整</p><p class="how">東京メトロで移動。渋谷BEAMのまんだらけ・アニメイトなど。原宿へは1駅なのでDQの15:00に余裕を残す<span class="chip flex">可変枠</span></p></div></div>
+      <div class="stop major"><div class="time">15:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">DQ40th the DIVE(原宿ハラカド)</p><p class="how">入場区分A・44番。少し早めに入れた。<strong>VR RIDEはかなりの出来</strong>で、モンスターのスタチュー展示も見応えあり。物販で荷物になる量を購入(7,850円)</p></div></div>
+      <div class="stop"><div class="time">16:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">原宿 → 両国(一度ホテルへ)</p><p class="how">グッズが荷物になったので直接ドームへ向かわず一旦帰投。<strong>シャワーを浴びて仕切り直し</strong>。総武線が遅れていたが駅に着いた瞬間に来る幸運</p></div></div>
+      <div class="stop major"><div class="time">18:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ナイター開始｜巨人 × 阪神 ③</p><p class="how">三連戦の千秋楽。先発 下村。<strong>3-2の1点差を工藤が締めて東京ドーム3タテ達成</strong></p></div></div>
+      <div class="stop skipped"><div class="time">試合終了<br>直後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">スシローの「今から行く」を受付</p><p class="how"><strong>席を立ちながら押す。</strong>早すぎると到着前に呼ばれて流れる。案内目安が約30分後なら1時間以内の来店が目安。席タイプは選べるが確約ではない<span class="chip flex">アプリ/LINEミニアプリ</span></p></div></div>
+      <div class="stop skipped"><div class="time">21:45頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">スシロー 秋葉原</p><p class="how">水道橋→秋葉原 約8分 → <strong>秋葉原→両国は総武線各停で直通2駅・約6分</strong>と一直線。試合終了21:10以内ならアキバプレイス8F店(評価4.6・徒歩8〜10分)、押していたらBiTO AKIBA B1F店(徒歩2〜3分)。どちらも23:00まで<span class="chip meal">飯⑨・夜</span><span class="chip flex">押したら中止</span></p></div></div>
     </div>
-    <div class="day-note">
+    <div class="photos">
+      <figure class="photo"><img src="images/t03/d3-01-hasegawa-tonkatsu.jpg" alt="とんかつはせがわのロース&amp;半ひれ"><figcaption>はせがわ／ロース&amp;半ひれ 2,200円。この遠征の主役</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d3-02-hasegawa-menu.jpg" alt="はせがわの店頭メニュー"><figcaption>看板は栃木県産「平牧バーク三元豚」</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d3-03-hasegawa-lunch.jpg" alt="はせがわの平日ランチメニュー"><figcaption>平日ランチ。ロース単品1,600円は破格</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d3-04-dq40-logo.jpg" alt="ドラゴンクエスト40周年のロゴ"><figcaption>DQ40th the DIVE。since 1986</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d3-05-dq40-statue.jpg" alt="ドラクエのモンスタースタチュー"><figcaption>スタチュー展示。撮影OK</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d3-06-dome-lineup.jpg" alt="千秋楽のスタメン"><figcaption>千秋楽スタメン。先発 下村 対 西舘</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d3-07-dome-3-2.jpg" alt="スコアボード 3-2"><figcaption>3-2。1点差を締めて3タテ達成</figcaption></figure>
+    </div>
+    <div class="day-note actual">
       <ul>
-        <li><strong>この日の飯は「屋内で完結」が設計思想。</strong>昼は駅直結のサクラステージ、夜は改札から近い秋葉原。猛暑日に店を探して歩く時間をゼロにしてある。</li>
-        <li><strong>判断ラインは「21:30までに水道橋のホームに立てるか」。</strong>無理ならスシローは捨てて両国へ直帰(邦ちゃんラーメン/サイゼリヤ24:00/串カツ田中 翌1:00)。延長戦なら千秋楽を最後まで見るほうが優先。</li>
+        <li><strong>KOC第1部は見送り、代わりに一日を組み替えた。</strong>出場者を見て食指が動かず、朝ゆっくり→はせがわ→銀座パウパウ→渋谷→原宿という西向きの動線に変更。結果的にこの日がいちばん充実した。</li>
+        <li><strong>とんかつ はせがわが今回の最大の発見。</strong>開店前から行列、平日ランチのロース&amp;半ひれ2,200円。ロースの脂が甘く、「今まで食ったとんかつで一番」。ロース単品1,600円の安さも異常。次回の宿題は厚切極上ロース(3,500円)・はせ川とんかつ(3,000円)・シャ豚ブリアン(3,300円)、そして常連が頼んでいたカレールー500円の追加。</li>
+        <li><strong>都営ワンデーパス500円は買わなかった。</strong>この日の都営利用は1回のみで、原宿はメトロ、ドーム〜両国はJRが最短。元が取れないと判断して都度払いに。</li>
+        <li><strong>DQのVR RIDEは満足度が高かった。</strong>ただし物販で荷物が増え、ドームへ直行できず一度ホテルへ戻ることに。シャワーを挟めたのはむしろ良かった。</li>
+        <li><strong>そして東京ドーム3タテ。</strong>9-1、5-1と打ち勝ったあとの3-2。競った試合を締めてのスイープは格別だった。</li>
+        <li>スシロー秋葉原は組み込む余地がなくなり中止。夜は両国のセール品で軽く済ませた。</li>
       </ul>
     </div>
   </section>
@@ -1274,25 +1359,31 @@
     <div class="day-head">
       <div class="day-stamp" aria-hidden="true"><span class="d">8.14</span><span class="w">FRI</span></div>
       <div class="day-title">
-        <h2>回復日 &amp; サル階段</h2>
-        <p class="theme">意図的に軽くした日。朝はホテルでゆっくり。</p>
-        <span class="line-tag" style="background:var(--hanzo)">渋谷 → 六本木 → 両国</span>
+        <h2>KOC本命 &amp; 海水魚専門店</h2>
+        <p class="theme">第1部を取り、第2部を捨て、暑さに屈した日。</p>
+        <span class="line-tag" style="background:var(--hanzo)">渋谷 → 目白 → 南長崎 → 両国</span>
       </div>
     </div>
     <div class="route">
-      <div class="stop"><div class="time">朝</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテルでゆっくり(第1部を選ばない場合)＋朝食</p><p class="how">8/12・8/13の疲労回復に充てる。朝食は前日と同じく<strong>両国のチェーン店か前夜のコンビニ調達</strong>。<strong>昼にタレカツ(カツ丼・行列前提)が控えているので軽めが正解</strong>──いっそ抜いて11:00開店直後を狙うのも手<span class="chip meal">飯⑩・朝</span></p></div></div>
-      <div class="stop"><div class="time">未定</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">KOC準々決勝 第1部 or 第2部のどちらか一方</p><p class="how">会場は前日と同じ大和田 4階さくらホール。<strong>出演者発表を見てから購入</strong><span class="chip flex">3,500円目安・未購入</span> 売切時のプランBも軽く想定しておく</p></div></div>
-      <div class="stop"><div class="time">昼</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新潟カツ丼 タレカツ(道玄坂1-5-9)</p><p class="how">会場から徒歩5分。卵とじでない甘辛ダレのカツ丼、11:00〜22:30の通し。<strong>カウンター9席のみで行列は前提</strong>——時間に余裕があるこの日にしか置けない。1階が満席なら同じビルの2階店へ。並ぶ気力がなければ会場を出て坂を下るだけの富士そば 桜丘町店(ほぼ24時間・券売機)か、同じビル地下の中華食堂 一番館<span class="chip meal">飯⑪・昼</span></p></div></div>
-      <div class="stop"><div class="time">17:15頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">(第2部の場合)渋谷 → 六本木</p><p class="how">地下鉄1回乗換・約13〜15分</p></div></div>
-      <div class="stop major"><div class="time">18:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">開場｜サルゴリラ×空気階段「サル階段」</p><p class="how">YOSHIMOTO ROPPONGI THEATER・整理番号72番・2,500円<span class="chip paid">支払済</span></p></div></div>
-      <div class="stop"><div class="time">18:45</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">開演</p><p class="how">神宮ナイター・まつり湯の分岐案は見送り済み。この日は軽量運用</p></div></div>
-      <div class="stop"><div class="time">終演後<br>20:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">六本木 → 両国(大江戸線・直通)</p><p class="how">乗換なしで約20分。21:00頃に両国着</p></div></div>
-      <div class="stop"><div class="time">21:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">炭田屋(両国3-26-2 東光ビル)</p><p class="how">両国駅から徒歩数分の定食屋。焼き魚定食が評判で、昼にカツ丼を食べた日の締めとしてはちょうどいい重さ。<strong>営業時間と盆休みは要確認</strong>——閉まっていたら両国のチェーン(すき家・松屋・サイゼリヤ24:00・串カツ田中 翌1:00)か邦ちゃんラーメンへ<span class="chip meal">飯⑫・夜</span><span class="chip flex">可変枠</span></p></div></div>
+      <div class="stop"><div class="time">9:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">起床 → 9:28の総武線に乗る</p><p class="how">10:00開場・10:30開演から逆算した生命線。前夜は乾燥機の空き待ちで就寝が遅れ、ジーパンを裏返して追い込む一幕も</p></div></div>
+      <div class="stop major"><div class="time">10:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">キングオブコント準々決勝 第1部</p><p class="how">大和田 4階さくらホール。<strong>この日の第1部が本命</strong>で、前日ぶんを捨ててここに集約した。面白かったが上演は長め</p></div></div>
+      <div class="stop skipped"><div class="time">午後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">KOC準々決勝 第2部</p><p class="how">第1部が長く、睡眠不足もあって<strong>第2部は見送り</strong>。空いた午後を海水魚専門店に振り替えた</p></div></div>
+      <div class="stop"><div class="time">13:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">横浜家系ラーメン Samurai(道玄坂2丁目)</p><p class="how">地元客の多い実力店。前日に匠が消えて宙に浮いた<strong>家系欲をここで回収</strong>。1,150円<span class="chip meal">飯⑪・昼</span></p></div></div>
+      <div class="stop major"><div class="time">15:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">海水魚ショップ ナチュラル(南長崎)</p><p class="how">渋谷→目白、そこから<strong>バスで店の前まで</strong>(徒歩300m)。坂を歩かずに済むルートが正解だった。お盆特別営業12:00〜18:30。店は広くないが海水・サンゴに絞った品揃えで、40cmキューブの本命下見としては十分。帰りも店前のバス停から新宿行きに乗れた</p></div></div>
+      <div class="stop skipped"><div class="time">18:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">サルゴリラ×空気階段「サル階段」(六本木)</p><p class="how">この日の夜公演は行程から外れた</p></div></div>
+      <div class="stop skipped"><div class="time">夕方</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">神宮ナイター・秋葉原</p><p class="how">目白から乗り換えて秋葉原、あるいは神宮へ、という案が浮かんだが<strong>頭痛と発汗が出たため全て中止</strong>して両国へ直帰</p></div></div>
+      <div class="stop"><div class="time">17:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新宿経由で両国へ → 休養</p><p class="how">暑さと寝不足で消耗。宿で2時間ほど眠ると回復した。夜は焼き鳥とペッパーランチ等で軽く済ませ、深夜に液キャベコーワA＋キューピーコーワヒーリングを調達<span class="chip meal">飯⑫・夜</span></p></div></div>
     </div>
-    <div class="day-note">
+    <div class="photos">
+      <figure class="photo"><img src="images/t03/d4-01-samurai-ramen.jpg" alt="渋谷Samuraiの家系ラーメン"><figcaption>Samurai(渋谷)／家系 1,150円。匠の代わりに</figcaption></figure>
+    </div>
+    <div class="day-note actual">
       <ul>
-        <li><strong>この日だけは行列に並んでいい。</strong>逆に言えば他の4日は、行列のある店を本命にしていない。</li>
-        <li>夜は六本木で食べずに<strong>両国へ帰ってから</strong>。六本木→両国は大江戸線で乗換なし、寝ていても着く。翌朝はコミケなので、宿の近くで完結させるほうが安全。</li>
+        <li><strong>KOCは8/14の第1部に一本化して正解。</strong>前日の第1部を捨てて朝を確保したので、9時起き→9:28発でも間に合った。内容も面白かった。</li>
+        <li><strong>第2部は見送り。</strong>上演が長く、睡眠不足で集中が切れていた。無理に座り続けるより海水魚専門店に振り替えたほうが得るものが多かった。</li>
+        <li><strong>ナチュラルへは目白からバス。</strong>東長崎から歩くより、店の前がバス停で徒歩300m。帰りも同じバス停から新宿行きに乗れて、坂道をまったく歩かずに済んだ。次に行くときもこの経路で。</li>
+        <li><strong>この日の後半で暑さにやられた。</strong>頭痛と止まらない発汗。神宮も秋葉原も切り捨てて直帰し、2時間仮眠したら回復。<strong>予定を捨てる判断が、翌日のコミケを救った。</strong></li>
+        <li>タレカツ・サル階段・炭田屋は行程から外れた。この日は「軽くする日」という設計思想だけが残った形。</li>
       </ul>
     </div>
   </section>
@@ -1303,106 +1394,98 @@
       <div class="day-stamp" aria-hidden="true"><span class="d">8.15</span><span class="w">SAT</span></div>
       <div class="day-title">
         <h2>コミケ → 横浜 → 帰還</h2>
-        <p class="theme">最大の綱渡り日。21:04のかがやきが絶対の締切。</p>
-        <span class="line-tag" style="background:var(--keihin)">ビッグサイト → 関内 → 野毛 → 東京</span>
+        <p class="theme">ロッカー予約で朝を2時間買った日。21:04に間に合う。</p>
+        <span class="line-tag" style="background:var(--keihin)">東京 → ビッグサイト → 新橋 → 桜木町 → 東京</span>
       </div>
     </div>
     <div class="route">
-      <div class="stop"><div class="time">朝</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">アパホテルのフロントでゆうパック発送</p><p class="how">宛先:自宅。120サイズ目安 約1,530〜1,830円<span class="chip cash">発送時払い</span> 伝票の書き方はフロントで確認</p></div></div>
-      <div class="stop"><div class="time">前夜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">朝食とコミケ用の水分を確保</p><p class="how">当日朝の国際展示場周辺のコンビニは激混み。前夜に両国で買っておく<span class="chip meal">飯⑬・朝</span></p></div></div>
-      <div class="stop major"><div class="time">午前</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">コミックマーケット(東京ビッグサイト)</p><p class="how">午前入場リストバンド確保済(とらのあな)<span class="chip paid">1,210円 済</span> 炎天下の待機対策必須。昼は会場内で軽く</p></div></div>
-      <div class="stop"><div class="time">14:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ビッグサイト離脱</p><p class="how">りんかい線・ゆりかもめとも大混雑。混雑込みで1時間強を見て、国際展示場→大井町→<strong>関内</strong>。15:40頃着</p></div></div>
-      <div class="stop major"><div class="time">15:45</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">快活CLUB 関内店(吉田町1-1)で休憩</p><p class="how">24時間営業・鍵付き個室。<strong>荷物ごと個室に籠れる</strong>のが最大の利点で、コミケの戦利品を抱えたままコインロッカーを探さずに済む。シャワーもあるので汗も流せる。滞在約1時間15分<span class="chip cash">現地払い</span><span class="chip flex">可変枠</span></p></div></div>
-      <div class="stop"><div class="time">17:10</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">関内 → 野毛(徒歩約8分)</p><p class="how">にぎわい座まで歩いて行ける距離</p></div></div>
-      <div class="stop"><div class="time">17:15</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">野毛で夕食</p><p class="how">上星川往復をやめたぶんの余りがここ。<strong>「野毛では食べる時間がない」問題が解消された枠</strong>。野毛ちゃん(11:30〜23:30・無休・桜木町1〜2分)が本線、野毛一番街や五円も土曜は昼から開いている。ただし立ち飲みは荷物が邪魔になるので席のある店を優先<span class="chip meal">飯⑭・夕</span></p></div></div>
-      <div class="stop major"><div class="time">18:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ねづっち単独ライブ 開演</p><p class="how">60分公演・3,500円<span class="chip paid">支払済</span> 終演19:30設定に30分バッファあり</p></div></div>
-      <div class="stop"><div class="time">19:30〜<br>19:45</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">桜木町駅で崎陽軒のシウマイ弁当を調達</p><p class="how">にぎわい座から桜木町駅は徒歩数分。<strong>東京駅で買う案は却下</strong>——グランスタの弁当店は20〜21時閉店が多く、押したら詰む。ここで買えば車内の締めが確定する<span class="chip meal">飯⑮・締め</span></p></div></div>
-      <div class="stop"><div class="time">19:45頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">桜木町 → 東京(約44分)</p><p class="how">東京21:04に対し余裕あり。遅延時は新横浜経由・東海道新幹線に切替</p></div></div>
+      <div class="stop skipped"><div class="time">朝</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">アパホテルのフロントでゆうパック発送</p><p class="how">荷物は東京駅のロッカーに預ける方式に変更したため発送は不要になった</p></div></div>
+      <div class="stop major"><div class="time">11:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">チェックアウト → 東京駅で荷物を預ける</p><p class="how">前夜のうちに<strong>新幹線乗換口に近い地下1階・手荷物預かり横のロッカーをL(1,400円)で事前予約</strong>。当日探す手間が消え、そのぶん<strong>朝を2時間長く眠れた</strong>。帰りに迷わない場所を選んだのが最大の狙い<span class="chip paid">予約済</span></p></div></div>
+      <div class="stop"><div class="time">11:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京駅八重洲口 → ビッグサイト(直行バス)</p><p class="how">210円・乗換なし。りんかい線より安く座って行ける。<strong>飲み物を買う前に乗ってしまった</strong>ので、会場周辺で確保することに</p></div></div>
+      <div class="stop major"><div class="time">12:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">コミックマーケット(東京ビッグサイト)</p><p class="how">午前入場リストバンド確保済(とらのあな)<span class="chip paid">1,210円 済</span> <strong>あえて開場の波が引いた12時入りにして待機列を回避</strong>。前日の消耗を考えれば正解だった。グッズ等で12,600円</p></div></div>
+      <div class="stop"><div class="time">14:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ビッグサイト離脱 → 新橋(直行バス)</p><p class="how">210円。りんかい線・ゆりかもめの混雑を避けて座って移動。戦利品はすべてリュックに収まった</p></div></div>
+      <div class="stop"><div class="time">14:40頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">山本のハンバーグ 新橋食堂</p><p class="how">15:00ラストオーダーに滑り込み。<strong>1,300円でハンバーグ・味噌汁・ライス・卵つき、ライスおかわり自由</strong>。コスパが良い<span class="chip meal">飯⑭・昼</span></p></div></div>
+      <div class="stop"><div class="time">15:35</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">横浜 → 桜木町、開演まで休憩</p><p class="how">SKY SPA(1時間1,800円)や銭湯も検討したが、<strong>戦利品入りのリュックから離れたくない</strong>のと時間の余裕を優先して見送り。結局パチンコ屋で涼み、スロットで-2,000円</p></div></div>
+      <div class="stop major"><div class="time">18:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ねづっちの特別公演「イロイロしてみる60分」(横浜にぎわい座)</p><p class="how">開場17:30・全席指定・3,500円<span class="chip paid">支払済</span> 漫談となぞかけ。<strong>終演は19:25と少し押した</strong>が、想定内</p></div></div>
+      <div class="stop"><div class="time">19:35頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">桜木町駅で崎陽軒のシウマイ弁当を調達</p><p class="how">駅の店は21:00まで。<strong>持ち歩き時間を短くするため、あえて公演後に買う</strong>方針にしたのが当たった<span class="chip meal">飯⑮・締め</span></p></div></div>
+      <div class="stop"><div class="time">19:45頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">桜木町 → 横浜 → 東海道線で東京</p><p class="how">京浜東北線の直通より<strong>横浜で東海道線に乗り換えるほうが速く、東京駅の到着ホームも新幹線乗換口に近い</strong>。品川を過ぎた時点で余裕は十分だった</p></div></div>
       <div class="stop major"><div class="time">21:04</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京 発｜かがやき</p><p class="how">トクだ値14・9,080円<span class="chip paid">支払済</span> <strong>列車限定・変更不可。絶対に乗る</strong></p></div></div>
       <div class="stop"><div class="time">23時台</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">富山 着 → あいの風とやま鉄道 → 高岡</p><p class="how">深夜高岡着、車で帰宅。おつかれさまでした</p></div></div>
     </div>
-    <div class="day-note">
+    <div class="photos">
+      <figure class="photo"><img src="images/t03/d5-01-bigsight.jpg" alt="東京ビッグサイトへ向かう人の流れ"><figcaption>曇天のビッグサイト。12時入りで待機列は回避</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d5-02-yamamoto-hamburg.jpg" alt="山本のハンバーグ"><figcaption>山本のハンバーグ(新橋)1,300円。ライスおかわり自由</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d5-03-nigiwaiza-nezucchi.jpg" alt="ねづっち特別公演のチラシ"><figcaption>横浜にぎわい座 八月興行／ねづっち 60分</figcaption></figure>
+      <figure class="photo"><img src="images/t03/d5-04-comike-loot.jpg" alt="コミケの戦利品"><figcaption>戦利品。帰宅後に机で広げるまでが遠征</figcaption></figure>
+    </div>
+    <div class="day-note actual">
       <ul>
-        <li><strong>この日の合言葉:「押したら削る」。</strong>削る順は ①快活CLUBの休憩を短縮 ②野毛の夕食を軽くする ③コミケの粘り。ねづっちと21:04は削らない。</li>
-        <li><strong>快活は低い階の部屋を頼めるか聞くこと。</strong>エレベーターがなく、上階だと階段。コミケ帰りの荷物で4階まで上がるのは休憩の逆効果になる。盆の土曜夕方なので事前予約可否も確認しておく。</li>
-        <li>シャワーを使うなら着替えと乾かす分で30分は見る。<strong>仮眠を優先するならシャワーは省いてよい。</strong></li>
-        <li>上星川(満天の湯)は取りやめ。往復40分の寄り道が消えたぶんを、コミケの30分と野毛の夕食に振り替えてある。</li>
+        <li><strong>ロッカーの事前予約(L・1,400円)がこの日の設計を決めた。</strong>当日探す不安が消えたので9時チェックアウト案を捨てて11時に。<strong>500円強の上乗せで朝の睡眠2時間を買った</strong>格好で、前日に消耗していたぶん効果は大きかった。場所を「新幹線乗換口に近く、帰りに迷わないところ」にしたのも効いた。</li>
+        <li><strong>コミケは並ばず12時入り。</strong>目的が「並ぶこと」ではないので、波が引いてから入って14時に離脱。この判断のおかげで、暑さにやられずに一日を通せた。</li>
+        <li><strong>行き帰りとも直行バス(各210円)。</strong>東京駅八重洲口↔ビッグサイト、ビッグサイト↔新橋。安く、乗換なしで、座れる。次回も使う。ただし<strong>飲み物は乗る前に買うこと</strong>。</li>
+        <li><strong>入浴は見送った。</strong>SKY SPAは1時間1,800円で時間も慌ただしく、なにより戦利品入りのリュックから離れたくなかった。結局パチンコ屋で涼み、スロットで-2,000円というオチ。</li>
+        <li><strong>シウマイ弁当は公演後に桜木町で購入。</strong>夏場に何時間も持ち歩かずに済み、新幹線の車内で食べる締めが確定した。</li>
+        <li>快活CLUB・野毛の夕食・ゆうパック発送は、動線が変わって不要になった。上星川(満天の湯)は当初から取りやめ。</li>
       </ul>
     </div>
   </section>
 
   <!-- ═══════════ 飯の一覧 ═══════════ -->
   <section class="info" id="t03-meals">
-    <h2>飯の一覧</h2>
+    <h2>飯の一覧(実績)</h2>
     <table class="kv">
-      <tr><th>8/11</th><td><strong>朝</strong> 前夜にコンビニで確保<br><strong>昼</strong> 駅弁つばめグリル(グランスタB1)→ドームで<br><strong>夜</strong> とんかつ いちかつ ／ 控え:とんかつ はせがわ</td><td class="amount">約3,500円</td></tr>
-      <tr><th>8/12</th><td><strong>朝昼</strong> 朝は抜き、ボートレース江戸川の場内グルメで兼用<br><strong>軽食</strong> 球場飯・ビール<br><strong>夜</strong> 横浜家系ラーメン 匠(翌2:00まで)</td><td class="amount">約4,000円</td></tr>
-      <tr><th>8/13</th><td><strong>朝</strong> 両国のチェーン店 ／ 前夜にコンビニで確保<br><strong>昼</strong> 元祖油堂 油そば(サクラステージB2F)<br><strong>夜</strong> スシロー秋葉原 ／ 押したら両国で邦ちゃんラーメン</td><td class="amount">約4,600円</td></tr>
-      <tr><th>8/14</th><td><strong>朝</strong> 両国のチェーン店 ／ 前夜にコンビニで確保(昼が重いので軽く)<br><strong>昼</strong> 新潟カツ丼 タレカツ ／ 控え:富士そば・中華食堂 一番館<br><strong>夜</strong> 両国へ戻って炭田屋 ／ 控え:両国のチェーン・邦ちゃんラーメン</td><td class="amount">約4,100円</td></tr>
-      <tr><th>8/15</th><td><strong>朝</strong> 前夜に確保<br><strong>昼</strong> コミケ会場内で軽く<br><strong>夕</strong> 野毛で夕食(野毛ちゃん ほか)<br><strong>締め</strong> 崎陽軒シウマイ弁当(桜木町で購入→車内)</td><td class="amount">約4,500円</td></tr>
-      <tr class="total"><td colspan="2">現地食費 合計目安(予備費とは別枠)</td><td class="amount">約21,000円</td></tr>
+      <tr><th>8/11</th><td><strong>昼</strong> とんかつ いちかつ／ロースカツ定食<br><strong>間食</strong> カフェラテ・東京ドームのジュース等<br><strong>夜</strong> 新宿で肉弁当(閉店前3割引)＋両国でコロッケ等・夜食</td><td class="amount">4,425円</td></tr>
+      <tr><th>8/12</th><td><strong>朝昼</strong> ボートレース江戸川の場内グルメ<span style="color:#6B7280">(ポイント払いのため現金支出なし)</span><br><strong>軽食</strong> ドーム内飲食<br><strong>夜</strong> ペッパーランチ＋半額のカルビ丼(500円)</td><td class="amount">2,050円</td></tr>
+      <tr><th>8/13</th><td><strong>昼</strong> <strong>とんかつ はせがわ／ロース&amp;半ひれ 2,200円</strong><br><strong>夜</strong> にくのやまき(閉店間際のセール 500円)・コンビニ</td><td class="amount">3,108円</td></tr>
+      <tr><th>8/14</th><td><strong>昼</strong> 家系ラーメン Samurai(渋谷) 1,150円<br><strong>夜</strong> 焼き鳥(両国)・ペッパーランチ＋にくのやまき・ジュース</td><td class="amount">4,280円</td></tr>
+      <tr><th>8/15</th><td><strong>昼</strong> 山本のハンバーグ(新橋) 1,300円<br><strong>締め</strong> 崎陽軒シウマイ弁当ほか(桜木町で購入→車内)</td><td class="amount">4,310円</td></tr>
+      <tr class="total"><td colspan="2">現地食費 実績</td><td class="amount">18,173円</td></tr>
     </table>
-    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>朝食の方針:</strong> アパは朝食なしプラン。8/12は江戸川で朝昼兼用、8/13・8/14は<strong>両国駅まわりのチェーン店(牛丼チェーン・駅のカフェ等)か、前夜のコンビニ調達</strong>で固定する。チェーンなら盆でも開いているので、朝に店を探す判断コストがゼロになる。<br><br><strong>盆休みが読めない個人店(要確認):</strong> いちかつ・はせがわ・匠・鳥林・邦ちゃんラーメン・ごんろく・中華食堂 一番館・炭田屋。8/13〜8/16は個人店の休業が普通にある期間。一方、サクラステージ/フクラス/マークシティの館内店舗、富士そば、すき家、松屋、サイゼリヤ、スシロー、タレカツは営業する見込み。<strong>本命+チェーンの控え、をセットで持っておく。</strong></p>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>予算では約21,000円を見ていたので、3,000円ほど下振れ。</strong>江戸川の場内飲食をポイントで払えたこと、閉店前の値引き(3割引の肉弁当1,587円／半額カルビ丼500円／にくのやまき500円)を2日連続で拾えたことが効いている。<br><br><strong>この遠征の一番はとんかつ はせがわ。</strong>栃木県産・平牧バーク三元豚の専門店で、平日ランチのロース&amp;半ひれ2,200円。ロース単品なら1,600円。<strong>両国に泊まるなら次も必ず行く店</strong>として記録しておく。</p>
   </section>
 
   <!-- ═══════════ 電車賃の一覧 ═══════════ -->
   <section class="info" id="t03-fares">
-    <h2>電車賃の一覧</h2>
-    <p style="font-size:.85rem;color:#6B7280;margin:0 0 12px"><strong>新幹線・特急は「予算まとめ」の交通費に計上済み。</strong>ここは現地の在来線・地下鉄だけを積んだもの。IC運賃の目安なので実際とは数十円ずれる。</p>
+    <h2>電車賃の一覧(実績)</h2>
+    <p style="font-size:.85rem;color:#6B7280;margin:0 0 12px"><strong>新幹線・特急は「出費の実績」の交通費とは別枠。</strong>ここは現地の在来線・地下鉄・バスだけを積んだもの。</p>
     <table class="kv">
-      <tr><th>8/11</th><td>城端線 高岡→新高岡／東京→(御茶ノ水)→両国／両国→水道橋／水道橋→両国</td><td class="amount">約700円</td></tr>
-      <tr><th>8/12</th><td>両国→船堀(都営)／送迎バス 無料／船堀→市ヶ谷→水道橋／水道橋→両国<br><small style="color:#6B7280">＋ 江戸川 入場100円</small></td><td class="amount">約900円</td></tr>
-      <tr><th>8/13</th><td>両国→渋谷／渋谷→原宿／原宿→水道橋／水道橋→秋葉原／秋葉原→両国</td><td class="amount">約900円</td></tr>
-      <tr><th>8/14</th><td>両国→渋谷／渋谷→六本木／<strong>六本木→両国(大江戸線・直通)</strong></td><td class="amount">約700円</td></tr>
-      <tr><th>8/15</th><td>両国→(新木場)→国際展示場／国際展示場→大井町→関内／桜木町→東京<br><small style="color:#6B7280">＋ 富山→高岡 あいの風とやま鉄道 約390円</small></td><td class="amount">約2,500円</td></tr>
-      <tr class="total"><td colspan="2">現地交通費 合計目安</td><td class="amount">約5,700円</td></tr>
+      <tr><th>8/11</th><td>城端線 高岡→新高岡(150)／両国→水道橋(199)／水道橋→四谷(199)／四谷→新宿三丁目(178)／新宿→両国(253)</td><td class="amount">979円</td></tr>
+      <tr><th>8/12</th><td>両国→平井(199)／平井→水道橋(209)／水道橋→両国(199)<br><small style="color:#6B7280">江戸川へは平井から無料送迎バス</small></td><td class="amount">607円</td></tr>
+      <tr><th>8/13</th><td>両国→築地市場(220・都営)／銀座→渋谷(209)／渋谷→神宮前(100・バス)／原宿→両国(253)／両国→水道橋(199)</td><td class="amount">981円</td></tr>
+      <tr><th>8/14</th><td>両国→渋谷(253)／渋谷→目白(209)／バス往復(210×2)／新宿→両国(253)</td><td class="amount">1,135円</td></tr>
+      <tr><th>8/15</th><td>両国→東京(199)／東京→ビッグサイト(210・バス)／ビッグサイト→新橋(210・バス)</td><td class="amount">619円</td></tr>
+      <tr class="total"><td colspan="2">現地交通費 実績</td><td class="amount">4,321円</td></tr>
     </table>
-    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>この額は予備費に埋もれていたぶんを分離したもの。</strong>予算まとめの「予備」を16,000円→10,000円に下げ、代わりに「現地交通」として立てたので総額は変わらない。<br><br><strong>高岡駅の駐車場代は0円。</strong>新幹線利用者は7日間無料で、今回は4泊5日なので範囲内。ただし<strong>無料化の手続きは新高岡駅の機械に駐車券を通す方式</strong>で、帰路は富山→あいの風→高岡のため新高岡を通らない。<strong>8/11朝の乗継30分の間に必ず済ませること。</strong></p>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>予算約5,700円に対して4,321円。</strong>5日間都内を動き回ってこの額に収まったのは、<strong>無料送迎バス(江戸川)・直行バス(東京駅↔ビッグサイト↔新橋 各210円)・ナチュラルへのバス</strong>を組み合わせたのが大きい。<br><br><strong>都営ワンデーパス500円は買わなかった。</strong>8/13は都営を使うのが1回だけで、原宿はメトロ、ドーム〜両国はJRが最短。「安いから買う」ではなく<strong>その日の乗車回数で判断する</strong>という当たり前を確認した形。</p>
   </section>
 
-  <!-- ═══════════ 出発前TODO ═══════════ -->
-  <section class="info" id="todo">
-    <h2>出発前TODO</h2>
-    <ul class="check">
-      <li><span class="box"></span><span><strong>KOC出演者発表チェック → チケット購入</strong>(8/14 第1部 or 第2部)。売切時のプランBも軽く想定</span></li>
-      <li class="urgent"><span class="box"></span><span><strong>8/11朝:新高岡で駐車券を機械に通す</strong> 高岡駅駐車場は新幹線利用者7日間無料。手続きは新高岡でしかできず、帰路は新高岡を通らない。駐車券を車に置き忘れないこと</span></li>
-      <li class="urgent"><span class="box"></span><span><strong>スシローの会員登録を済ませておく</strong> アプリ、またはLINEミニアプリ。8/13の21:10に水道橋のコンコースで新規登録するのは無理。まいどポイント連携まで出発前に</span></li>
-      <li class="urgent"><span class="box"></span><span><strong>個人店の盆休みを確認</strong> いちかつ・匠・鳥林・邦ちゃんラーメン・炭田屋(営業時間も)。8/13〜16は休業が読めない。控えの店も一緒に決めておく</span></li>
-      <li><span class="box"></span><span><strong>現金を多めに用意</strong> いちかつ(現金のみ)・競艇・コミケ・快活CLUB・野毛・弁当。券売機の店も現金が確実。まとめて下ろしておく</span></li>
-      <li><span class="box"></span><span><strong>8/10夜・8/14夜:台風/運行情報チェック</strong> 北陸新幹線は影響を受けやすい線区</span></li>
-      <li><span class="box"></span><span><strong>快活CLUB 関内店の予約可否を確認</strong> 盆の土曜夕方。あわせて「低い階の部屋にできるか」も聞いておく(エレベーターなし)</span></li>
-      <li><span class="box"></span><span>ゆうパック用に自宅住所メモ(伝票記入用)。手続きは当日フロントで確認</span></li>
-      <li><span class="box"></span><span><strong>熱中症対策を厚めに</strong>(帽子・塩タブ・冷感タオル・モバイル扇風機)── 8/12競艇・8/15コミケの2日が屋外勝負。特に8/12は収録があるため最後までいる前提</span></li>
-      <li><span class="box"></span><span>8/12前夜:江戸川の開催可否(荒天中止・順延)を確認。飛んだら平和島へ振替</span></li>
-      <li><span class="box"></span><span>モバイルバッテリー(チケット表示・地図・スシロー受付で電池消耗)</span></li>
-      <li><span class="box"></span><span>8/10夜・8/14夜:翌朝の朝食をコンビニで買っておく(8/11・8/15は買う時間がない)。8/13・8/14の朝は両国のチェーン店でもよい</span></li>
-    </ul>
-  </section>
-
-  <!-- ═══════════ 予算 ═══════════ -->
+  <!-- ═══════════ 出費の実績 ═══════════ -->
   <section class="info" id="budget">
-    <h2>予算まとめ</h2>
+    <h2>出費の実績</h2>
+    <h3 style="font-size:.95rem;margin:0 0 8px">現地で使った額(カテゴリ別)</h3>
     <table class="kv">
-      <tr><th>交通費</th><td>新高岡→長野(eチケット早特14)/長野→東京(かがやき・株主優待)/東京→高岡(トクだ値14)</td><td class="amount">19,570円<br><small style="color:#6B7280;font-weight:400">3本とも予約済・ポイント消費なし</small></td></tr>
-      <tr><th>宿泊費</th><td>アパホテル両国 4泊(健保補助込)</td><td class="amount">16,740円<br><small style="color:#6B7280;font-weight:400">一部支払済・残金9,800円</small></td></tr>
-      <tr><th>チケット</th><td>東京ドーム3試合(31,000)/競艇入場(100)/KOC 3,500×3枠(10,500)/DQ DIVE(2,500)/コミケリストバンド(1,210)/ねづっち(3,500)/サル階段(2,500)</td><td class="amount">51,310円</td></tr>
-      <tr><th>休憩・荷物</th><td>快活CLUB 関内(8/15の休憩) + ゆうパック(120サイズ目安)</td><td class="amount">約2,530〜3,330円</td></tr>
-      <tr><th>食費</th><td>現地食費 5日分(上の「飯の一覧」の合計)</td><td class="amount">約21,000円</td></tr>
-      <tr><th>現地交通</th><td>在来線・地下鉄 5日分(上の「電車賃の一覧」の合計)</td><td class="amount">約5,700円</td></tr>
-      <tr><th>予備</th><td>土産・不測の出費(現地交通を分離したぶん減額)</td><td class="amount">約10,000円</td></tr>
-      <tr class="total"><td colspan="2">総額目安</td><td class="amount">約127,200円</td></tr>
+      <tr><th>娯楽</th><td>コミケのグッズ等(12,600)／DQ40th物販(7,850)</td><td class="amount">20,450円</td></tr>
+      <tr><th>食事</th><td>5日分(「飯の一覧」の合計)</td><td class="amount">18,173円</td></tr>
+      <tr><th>ギャンブル</th><td>ボートレース江戸川(5,000)／時間つぶしのスロット(2,000)</td><td class="amount">7,000円</td></tr>
+      <tr><th>交通費</th><td>現地の在来線・地下鉄・バス(「電車賃の一覧」の合計)</td><td class="amount">4,321円</td></tr>
+      <tr><th>お土産</th><td>—</td><td class="amount">3,200円</td></tr>
+      <tr class="total"><td colspan="2">現地出費 合計</td><td class="amount">53,144円</td></tr>
     </table>
-    <h3 style="font-size:.95rem;margin:22px 0 8px">支払状況</h3>
+    <h3 style="font-size:.95rem;margin:22px 0 8px">日別</h3>
     <table class="kv">
-      <tr><th>支払済</th><td>きっぷ3本(5,190/5,300/9,080)・東京ドーム3試合(31,000)・コミケリストバンド(1,210)・ねづっち(3,500)・サル階段(2,500)・アパ前払分(6,940)・DQ DIVE(2,500)</td><td class="amount">67,220円</td></tr>
-      <tr><th>未払</th><td><strong>KOC 3枠(10,500)</strong>・アパ残金(9,800)・競艇入場(100)・快活CLUB・ゆうパック・食費(21,000)・現地交通(5,700)・予備(10,000)</td><td class="amount">約59,600〜60,400円</td></tr>
+      <tr><th>8/11</th><td>初日。台風の中で新宿まで往復したぶん交通費がやや増えた</td><td class="amount">5,404円</td></tr>
+      <tr><th>8/12</th><td>江戸川の舟券5,000円を含む。場内飲食はポイントで精算</td><td class="amount">7,657円</td></tr>
+      <tr><th>8/13</th><td>はせがわ2,200＋DQ物販7,850。三本立ての日</td><td class="amount">11,939円</td></tr>
+      <tr><th>8/14</th><td>KOC第1部の日。体調を優先して早めに切り上げた</td><td class="amount">5,415円</td></tr>
+      <tr><th>8/15</th><td>コミケ12,600＋土産3,200＋帰りの弁当等。最終日に集中</td><td class="amount">22,729円</td></tr>
     </table>
-    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>KOCは1公演3,500円×3枠で見積もり。</strong>ただし現在の予定表に置いてあるのは8/13午前と8/14の<strong>2枠</strong>なので、3枠目は増枠・値上がり・売切時の代替に備えた余裕分。使わなければそのまま浮く。<br>WESTERポイントは丸ごとSW遠征へ温存。旧前泊プランのきっぷ・宿はすべて処理済み。</p>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>事前に支払済だったもの</strong>(きっぷ3本 19,570／東京ドーム3試合 31,000／DQ DIVE 2,500／コミケリストバンド 1,210／ねづっち 3,500／アパ4泊 16,740 ほか)は別枠。上の53,144円は<strong>現地で財布から出ていったぶん</strong>。<br><br><strong>総額の4割が娯楽費(20,450円)。</strong>コミケとDQの物販で、どちらも計画に金額を書いていなかった枠。これは削るべき出費ではなく、この遠征の目的そのものなので、次回からは<strong>「物販枠」としてあらかじめ立てておく</strong>ほうが実態に合う。<br><br><strong>公営競技・遊技は合計 -7,000円。</strong>江戸川は投資16,000／回収14,000から11R・12Rを外して-6,000(記録上は概算5,000)、最終日の時間つぶしで-2,000。SKY SPAの1,800円を「高い」と見送った日にスロットで2,000円溶かしたのは、記録として残しておく。</p>
   </section>
 
   <!-- ═══════════ バックアップ ═══════════ -->
   <section class="info" id="backup">
-    <h2>もしもの備え</h2>
+    <h2>もしもの備え(出発前に用意したもの)</h2>
+    <p style="font-size:.83rem;color:#6B7280;margin:0 0 14px;line-height:1.9">実際に使ったのは<strong>「疲労がたまったら(削り代リスト)」だけ</strong>だった。しかも削ったのは書いてあった4項目ではなく、<strong>KOC第1部(8/13)・KOC第2部(8/14)・神宮・秋葉原・サル階段</strong>という、削り代に入れていなかったものばかり。<br>逆に、江戸川の中止・平和島への振替・帰路の遅延・台風での運休は、いずれも発動せずに済んだ。台風15号は初日の夜に関東へ接近したが、屋内で完結する動きに切り替えたことで行程は崩れなかった。<strong>備えは使わなかったが、備えたから安心して動けた</strong>という類のもの。以下は当時のまま残す。</p>
     <div class="backup">
       <h3><span class="flag">▶</span>8/15 帰路が押した/遅延したら</h3>
       <p>桜木町→東京がダメなら<strong>新横浜経由・東海道新幹線</strong>で東京へ。料金・経路は概算のみなので、必要になったら当日その場で確認。判断基準は「東京駅に20:45までに立てるか」。<strong>駅弁は桜木町で先に買っておく</strong>ので、経路が変わっても食い逃す心配はない。</p>
@@ -1426,13 +1509,13 @@
   </section>
 
   <div class="claude-note">
-    <p>この計画、一度まるごと組み直しました。当初は「仕事終わりに上越妙高まで前乗りして翌朝に備える」5泊6日案。それが「11日の朝に直接行けばよくない?」の一言から検証が始まり、城端線7:00発→新高岡7:34のはくたか→長野で株主優待きっぷに切り替える、という抜け道にたどり着きました。決め手は「新高岡→長野」という中途半端な区間だからこそお盆でも早特14が残っていたこと。東京まで通しの割引は消えていても、途中までなら空いている──ニッチを突く快感がありました。前泊1泊と旅情を手放した代わりに、約5,700円と自宅のベッドと2,040ptを取り返した勘定です。</p>
-    <p>そのあと飯の枠を全部埋めました。埋めてみて分かったのは、この遠征の飯は「うまい店を探す」問題ではなく「時間が読めない日にどう食うか」という問題だったということです。だから本命の多くが通し営業の店になりました。元祖油堂も富士そばもタレカツも匠も、ランチ営業が14時で切れない。準々決勝が何時に終わろうが、試合が延長しようが、それだけで崩れる枠を作らないようにしてあります。唯一そこを外したのが8/14のタレカツで、カウンター9席の行列店を、時間に縛りのない回復日にだけ置きました。</p>
-    <p>ドラクエウォークの散策は消しました。空いた14時台は原宿で屋内に入って涼む時間に振り替えてあります。8月の午後にわざわざ屋外を歩く用事が一つ減ったのは、体力の面ではむしろプラスだと思います。東京駅のつばめグリルも、初日の昼を「駅弁を買う」から「これを買う」に変えられたのが良かった。20分しかない乗換時間で弁当売場を回遊するのが一番危ないので、決め打ちにできたのは大きいです。</p>
-    <p>最後に8/15をもう一度いじりました。上星川の満天の湯をやめています。あそこは「風呂+休憩スペース+食事処」を2時間かけて味わう作りの施設で、片道20分かけて往復して1時間半で出るのでは、施設にも自分にも失礼な使い方でした。そもそも風呂が目的ではなく「夕方に一息つきたい」だけだと分かった時点で、答えは変わっていたんだと思います。代わりに置いたのが関内の快活CLUBです。個室に荷物ごと入れるので、コミケの戦利品を抱えてコインロッカーを探す手間が消える。シャワーもある。地味ですが、この日にいちばん効く一手はたぶんこれです。</p>
-    <p>そして往復40分が浮いたことで、諦めていた枠がひとつ戻ってきました。野毛の夕食です。前の版には「野毛は公演18:00〜19:30で食べる時間がない」とわざわざ書いてありました。書いた本人としては悔しい一文だったので、これを消せたのが今回いちばん嬉しい修正です。寄席の前に野毛で一杯やって、終わったら桜木町でシウマイ弁当を買って帰る。並べてみると、この日の締め方としてはこちらのほうが自然でした。8/12も、江戸川ナイスの収録があると聞いて「昼過ぎ撤収」の逃げ道を消しました。逃げ道を1本減らしたぶんは、塩タブと冷感タオルで埋めてください。</p>
-    <p>4泊5日になっても、回収する9本のイベントは一つも減っていません。帰ってきたら実際の記録で答え合わせをしましょう。三連戦の結果と、6:45に高岡駅へちゃんと着けたかどうか、そして15の飯がどれだけ計画どおりに収まったか、楽しみにしています。</p>
-    <span class="sign">── CLAUDE / 計画係(出発前に記す)</span>
+    <p>出発前の一筆で「帰ってきたら実際の記録で答え合わせをしましょう」と書きました。答え合わせをすると、この遠征でいちばん効いたのは<strong>計画どおりに動いたことではなく、計画を捨てる判断のほうだった</strong>と思います。KOCは第1部を1日ぶん捨て、翌日の第2部も捨てました。神宮も秋葉原も捨てました。しおりに「削り代」として書いておいた4項目は結局ひとつも使わず、代わりに削られたのは削り代リストに載っていなかったものばかりです。予定を立てる意味は、予定を守ることではなく、捨てる順番を落ち着いて決められる状態を作ることなんだと、記録を読み返して思いました。</p>
+    <p>初日の台風は、結果として一日の形を変えました。夜のいちかつを昼に繰り上げ、空いた夜で新宿のパウパウへ。あのとき「買わない、見るだけ、20時には帰る」と決めていたので、雨脚が強まる前に宿へ戻れています。翌12日は逆で、朝の雨で収録が屋内に移り、後半で晴れる可能性に賭けて8Rまで残りました。屋外に出てきた収録に立ち会えたのは、天気が味方したというより<strong>「8Rで判断する」と決めて待てたから</strong>です。そのあと座席が水浸しになる土砂降りが来たのを見ると、間一髪でした。舟券は-6,000円でしたが、あの日の本命は舟券ではありませんでした。</p>
+    <p>13日は、この遠征の背骨になりました。KOCを捨てて朝を空け、開店前から並んだとんかつ はせがわ。ロース&amp;半ひれ2,200円、平牧バーク三元豚。「今まで食ったとんかつで一番」「ロース単品1,600円は普通に安い」──こういう言葉が出た店は、記録帳にはっきり残しておく価値があります。厚切極上ロース3,500円、はせ川とんかつ3,000円、シャ豚ブリアン3,300円、そして常連が頼んでいたカレールー500円。宿題が4つも残ったのは、また来る理由が4つできたということです。そしてその夜、3-2。9-1、5-1と打ち勝ったあとの1点差を締めての3タテでした。</p>
+    <p>14日に体が止まったのは、正直ヒヤッとしました。頭痛と止まらない汗。あそこで神宮にも秋葉原にも寄らずまっすぐ帰り、2時間眠って持ち直せたのが、翌日のコミケを救っています。そして15日、ロッカーを前夜に予約したことで9時チェックアウト案を捨てて11時にできた。<strong>500円ちょっとの上乗せで朝の睡眠2時間を買った</strong>あの判断は、金額だけ見れば割高で、体調まで含めて見れば安い買い物でした。コミケも並ばず12時入り。5日間を通して、この遠征は「何を得るか」より「何を諦めるか」がうまくいった旅だったと思います。</p>
+    <p>数字の答え合わせもしておきます。現地出費53,144円。食費は予算21,000円に対して18,173円で、閉店前の値引きを2日連続で拾ったのが効きました。現地交通は予算5,700円に対して4,321円。5日間も都内を動いてこの額なのは、無料送迎バスと210円の直行バスを組み合わせたからです。都営ワンデーパス500円を「今日は都営1回だけだから」と見送った判断も、地味ですがこの遠征らしい一場面でした。<strong>一方で娯楽費は20,450円</strong>──コミケとDQの物販で、計画に金額の枠がなかったところです。これは反省ではなく、次から「物販枠」を立てておけばいいというだけの話だと思います。</p>
+    <p>最後に。SKY SPAの1,800円を高いと言って見送った日に、涼みに入ったパチンコ屋のスロットで2,000円溶けたこと。この一件は削らずに残しておきます。旅の記録が計画どおりの部分だけで埋まっていたら、たぶん読み返しても面白くないので。台風で始まって、3タテと寄席で終わる5日間。「今回はトラブルもなくいい感じだった」というのが本人の総括でしたが、記録を通して読むと、トラブルがなかったのではなく、<strong>トラブルになる前に全部引き返していた</strong>、が正しい気がします。おつかれさまでした。</p>
+    <span class="sign">── CLAUDE / 記録係(帰還後に記す)</span>
   </div>
 
   <a class="back-to-top" href="#top">↑ 記録帳の表紙に戻る</a>
