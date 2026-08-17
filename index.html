@@ -627,6 +627,16 @@
         <span class="go">→</span>
       </a>
     </div>
+
+    <a class="trip-card" href="#ledger" style="margin-top:18px;border-style:solid;border-color:var(--ink)">
+      <span class="no" aria-hidden="true">台<b>帳</b></span>
+      <span class="meta">
+        <span class="date">2026.05 —</span>
+        <span class="name">横断台帳</span>
+        <span class="detail">宿・店・アクアショップ・催事を遠征をまたいでまとめたもの｜費用の目安つき</span>
+      </span>
+      <span class="go">→</span>
+    </a>
   </div>
 
   <!--
@@ -670,6 +680,19 @@
              メモを追加(例:「雨天中断で終了20時」「満天の湯はスキップし直接野毛へ」)
            ・旅全体の振り返りがあれば章末に「後日談」ブロック(.day-note.actual流用可)を置く
            ・聞き取りは日ごとに簡潔に。ユーザーが語らない日は無理に埋めず予定のまま残してよい
+       (g) ◆写真◆ 実際に撮った写真があれば images/tNN/ に置き、各日の末尾に
+           <div class="photos"> のグリッドで並べる。ファイル名は dX-NN-内容.jpg(例: d3-01-hasegawa-tonkatsu.jpg)。
+           Web用に長辺1600px・quality82程度へ圧縮し、EXIFの回転はImageOps.exif_transposeで
+           実データに反映してから保存する(これを忘れると縦写真が横倒しになる)。
+           サムネは高さ固定+object-fit:coverで揃え、リンクで原寸を開けるようにする
+    10. ◆横断台帳(article#ledger)◆ 巻末に「宿・店・アクアショップ・催事」を遠征をまたいで
+       まとめたページがある。旅を1本締めたら、その旅で得た知見をここにも反映する
+       ・宿:  施設名/遠征番号/泊数/料金と、次に効く実感(乗換回数・周辺の飯・大浴場の有無など)
+       ・店:  「また行く」「未訪」「消えた店」の3分類。再訪時の宿題(頼まなかったメニュー)も残す
+       ・ショップ: 定休日・営業時間・アクセスの知見を優先して書く(生体は持ち帰れないため下見が主目的)
+       ・催事: 会場の観やすさ、チケットの買い方、混雑を避ける時間帯など「次回の立ち回り」を書く
+       ・費用: 遠征ごとの総額と、1日あたりの基礎コスト(物販・ギャンブルを除いた額)を更新する
+       章と違って時系列ではなく「次に使えるか」で並べる。重複を恐れず、章側にも台帳側にも書いてよい
   -->
   <!-- ═══════════ 遠征01:GW遠征 大阪・東京 ═══════════ -->
   <article class="trip" id="trip01">
@@ -2155,9 +2178,146 @@
   <a class="back-to-top" href="#top">↑ 記録帳の表紙に戻る</a>
   </article>
 
+
+  <!-- ═══════════════════════════════════════════════
+       横断台帳 ── 遠征をまたいで蓄積する記録
+       ※各遠征の章とは別に、宿・店・ショップ・催事を
+         「次に使える形」でまとめる。遠征が終わるたびに追記する。
+       ═══════════════════════════════════════════════ -->
+  <article class="trip" id="ledger">
+  <p class="trip-chapter">LEDGER ── 横断台帳</p>
+
+  <header class="cover" style="margin-bottom:26px">
+    <p class="era">2026.05 — </p>
+    <h1>横断台帳<br>宿・店・ショップ・催事</h1>
+    <p class="sub">遠征をまたいで積み上がる、次に使うための記録。</p>
+    <div class="cover-stamp" aria-hidden="true">
+      <span class="small">遠征01〜</span>
+      <span class="big">台 帳</span>
+      <span class="small">随時追記</span>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <h2>この台帳の中身</h2>
+    <ul>
+      <li><a href="#ledger-hotel"><span class="dot" style="background:var(--sobu)"></span>泊まった宿</a></li>
+      <li><a href="#ledger-food"><span class="dot" style="background:var(--stamp)"></span>入った店</a></li>
+      <li><a href="#ledger-aqua"><span class="dot" style="background:var(--keihin)"></span>アクアショップ</a></li>
+      <li><a href="#ledger-event"><span class="dot" style="background:var(--jingu)"></span>行った催事</a></li>
+      <li><a href="#ledger-cost"><span class="dot" style="background:var(--ink)"></span>費用の目安</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ 宿 ═══ -->
+  <section class="info" id="ledger-hotel">
+    <h2>泊まった宿</h2>
+    <table class="kv">
+      <tr><th>アパホテル<br>〈両国駅前〉</th><td><strong>遠征03 / 4泊</strong>｜大浴場あり・朝食なしプラン<br>総武線で秋葉原・新宿・水道橋のいずれにも直通。<strong>東京ドーム(水道橋)まで乗換なし15分</strong>が効いた。<strong>初日に荷物を置きに行くなら東京駅より上野で降りるほうが近く、運賃も安い。</strong>とんかつ はせがわ・いちかつ・国技館やきとりが徒歩圏。乾燥機は盆の夜だと空き待ちが出る<br><span style="color:var(--stamp);font-weight:700">→ 再訪あり。東京東側を軸にするなら第一候補</span></td><td class="amount">16,740円<br><small style="color:#6B7280">4泊/1泊4,185円</small></td></tr>
+      <tr><th>アパホテル<br>〈浅草 蔵前〉</th><td><strong>遠征02 / 1泊</strong>｜初日の宿として使用<br>浅草線で都心に出やすい。年末遠征(遠征05)の拠点候補としても挙がっているエリア</td><td class="amount">—</td></tr>
+      <tr><th>東横イン<br>蒲田東口</th><td><strong>遠征02 / 1泊</strong>｜当初のR&amp;Bホテル蒲田東口(12,100円)から出発前に変更<br>翌日の宿(アパ大森)に朝のうちに荷物を預けて手ぶら化する動線を取った</td><td class="amount">—</td></tr>
+      <tr><th>アパホテル<br>〈大森〉</th><td><strong>遠征02 / 1泊</strong>｜当初のアパホテル〈蒲田駅前〉(7,450円)から変更。蒲田から京浜東北線1駅<br><small style="color:#6B7280">遠征02の宿泊費は3泊合計22,750円(クーポン込み)。出発前の組み替えで当初計画から4,100円圧縮した</small></td><td class="amount">—</td></tr>
+      <tr><th>東横イン<br>阪神尼崎駅前</th><td><strong>遠征01 / 2泊</strong>｜甲子園2連戦の拠点<br>阪神沿線で球場アクセス優先の配置</td><td class="amount">—</td></tr>
+      <tr><th>東横INN<br>日本橋人形町</th><td><strong>遠征01 / 1泊</strong>｜大阪から東京へ移った初日<br><small style="color:#6B7280">遠征04(9月)では「東横INN日本橋浜町明治座前」を予定。人形町・浜町エリアは総武線/都営新宿線が使え、八重洲北口から無料の「メトロリンク日本橋Eライン」でも入れる</small></td><td class="amount">—</td></tr>
+      <tr><th>アパホテル<br>〈神田駅東〉</th><td><strong>遠征01 / 2泊</strong>｜人形町からチェックアウト後、歩いて荷物を預けられる距離だった<br><small style="color:#6B7280">遠征01の宿泊費は5泊合計43,684円</small></td><td class="amount">—</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>アパと東横インの2枚看板で回している。</strong>アパは会員特典のチェックアウトが使え、大浴場つきの館も多い。東横インはチェックイン15時から(16時ではない)。<br><strong>宿選びで毎回効いているのは「翌日の会場までの乗換回数」。</strong>両国→水道橋、尼崎→甲子園のように、乗換なしで着けるかどうかで当日の疲労がはっきり変わる。<br><strong>連泊しない遠征では、次の宿に朝のうちに荷物を預けて手ぶらにする</strong>動線が遠征01・02で機能している。連泊でも最終日は<strong>宿ではなく東京駅のロッカーに預けるほうが、帰りに戻らずに済む</strong>(遠征03で確立、遠征04でも踏襲)。</p>
+  </section>
+
+  <!-- ═══ 店 ═══ -->
+  <section class="info" id="ledger-food">
+    <h2>入った店</h2>
+    <h3 style="font-size:.95rem;margin:0 0 8px">また行く</h3>
+    <table class="kv">
+      <tr><th>とんかつ<br>はせがわ</th><td><strong>両国 / 遠征03</strong>｜栃木県産「平牧バーク三元豚」<br>平日ランチ限定の<strong>ロース&amp;半ひれ(120g/60g) 2,200円</strong>。<strong>「今まで食ったとんかつで一番」。</strong>ロースの脂が甘い。ロース単品なら1,600円で、この内容だと破格。開店前から並ぶ<br><span style="color:var(--stamp);font-weight:700">→ 次回の宿題：厚切極上ロース220g(3,500円)／はせ川とんかつ(3,000円)／シャ豚ブリアン(3,300円)／一品のカレールー(500円)を追加する常連の食べ方</span></td><td class="amount">2,200円</td></tr>
+      <tr><th>山本の<br>ハンバーグ</th><td><strong>新橋 / 遠征03</strong>｜11:00〜15:00<br>1,300円でハンバーグ・味噌汁・ライス・卵つき、<strong>ライスおかわり自由</strong>。コスパが良い。15時ラストなので昼を外すと入れない</td><td class="amount">1,300円</td></tr>
+      <tr><th>とんかつ<br>いちかつ</th><td><strong>両国 / 遠征03</strong>｜ロースカツ定食900円。カウンターのみ<br>両国駅東口徒歩1分。はせがわより手軽な価格帯で、こちらも満足度は高い</td><td class="amount">900円</td></tr>
+      <tr><th>家系ラーメン<br>Samurai</th><td><strong>渋谷・道玄坂 / 遠征03</strong>｜1,150円<br>地元客の多い実力店。渋谷で家系を食べるならここ</td><td class="amount">1,150円</td></tr>
+    </table>
+    <h3 style="font-size:.95rem;margin:22px 0 8px">気になっているが未訪</h3>
+    <table class="kv">
+      <tr><th>RIKISHIの<br>ハンバーグ</th><td><strong>両国 / 遠征03で発見</strong>｜北海道直送牛肉100%<br>力士シングル180g(1,650円)／大関ダブル(1,980円)／横綱トリプル(2,310円)。ライス・サラダ・スープ付き。番付が上がるほど枚数が増える。<strong>口コミを見て見送った</strong>が、両国で肉が欲しい日の控えとしては残しておく</td><td class="amount">—</td></tr>
+      <tr><th>国技館<br>やきとり</th><td><strong>両国 / 遠征03で売切</strong>｜相撲協会の関連会社が国技館地下で製造<br>冷めた状態がいちばん美味しくなるよう作られた土産用。<strong>両国駅前のコンビニで買える</strong>が、夜遅いと売り切れる</td><td class="amount">—</td></tr>
+    </table>
+    <h3 style="font-size:.95rem;margin:22px 0 8px">消えた店</h3>
+    <table class="kv">
+      <tr><th>横浜家系<br>ラーメン 匠</th><td><strong>両国 / 遠征03の計画時点では営業</strong>｜翌2:00までの営業で「時間を気にしなくていい飯」として計画に置いていたが、<strong>現地で確認したら別のラーメン店に変わっていた</strong>。深夜営業の店は計画から実行までの間に入れ替わることがある</td><td class="amount">—</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>飯で失敗しないための型。</strong>①行列のある店は「時間に余裕のある日」にだけ置く ②深夜まで営業している店を1軒だけ保険に持つ(ただし閉店リスクあり) ③<strong>14:00〜17:00は中休みに入る店が多いので、この時間帯に食べるなら通し営業が必須条件</strong>。<br>閉店間際の値引きは遠征03で2日連続で拾えた(肉弁当3割引1,587円／カルビ丼半額500円)。<strong>宿に戻るのが遅い日はむしろ食費が下がる。</strong></p>
+  </section>
+
+  <!-- ═══ アクアショップ ═══ -->
+  <section class="info" id="ledger-aqua">
+    <h2>アクアショップ</h2>
+    <p style="font-size:.85rem;color:#6B7280;margin:0 0 12px">遠征のたびに下見しているが、<strong>生体は持ち帰れないので基本は「見るだけ」。</strong>相場とストックの確認、水槽レイアウトの参考が目的。40cmキューブの導入順(デバスズメダイ→カクレクマノミペア→クダゴンベ→ハンマーコーラル)は崩さず、年末に向けた判断材料集めと割り切る。</p>
+    <table class="kv">
+      <tr><th>海水魚ショップ<br>ナチュラル</th><td><strong>豊島区南長崎 / 遠征03で訪問</strong>｜火曜定休・通常13:00〜／お盆等の特別営業あり<br>店は広くないが<strong>海水とサンゴに絞った専門店</strong>で、ハード・ソフト珊瑚の品揃えがよい。展示水槽の管理が行き届いている。<strong>目白駅からバスで店の前まで行ける(下車後 徒歩300m)</strong>のが最大の知見──東長崎から歩くと坂で15分ほどかかる。帰りも店前のバス停から新宿行きに乗れる<br><span style="color:var(--stamp);font-weight:700">→ 40cmキューブの本命下見はここ。次も目白からバスで</span></td><td class="amount">—</td></tr>
+      <tr><th>パウパウ<br>アクアガーデン<br>銀座店</th><td><strong>銀座・松岡銀七ビル / 遠征03で訪問</strong>｜木曜11:00〜19:00<br>生体・用品とも中心部では最大級。<strong>動線がよく、他の予定と組み合わせやすい</strong>のが強み。下見は30〜40分あれば足りる</td><td class="amount">—</td></tr>
+      <tr><th>パウパウ<br>アクアガーデン<br>新宿店</th><td><strong>新宿5丁目・ビルB1 / 遠征03で訪問</strong>｜平日13:00〜20:30／<strong>土日祝は11:00〜19:00</strong>(祝日は短縮に注意)<br>年中無休。淡水がメインだが海水・サンゴも扱う。<strong>ビルB1で地上に出ずに入れる</strong>ので雨天・台風の日でも寄れる。小さいゴマハギが心残り</td><td class="amount">—</td></tr>
+    </table>
+    <h3 style="font-size:.95rem;margin:22px 0 8px">検討したが行かなかった</h3>
+    <table class="kv">
+      <tr><th>SENSUOUS</th><td><strong>渋谷・神山町</strong>｜ハードスケープ(岩組み素材)の品揃えが評価されている。ただし<strong>イメージと違った</strong>ため見送り</td><td class="amount">—</td></tr>
+      <tr><th>モアアクア<br>ガーデン</th><td><strong>足立区西伊興</strong>｜水曜定休・11:00〜20:00。海水と淡水がほぼ半々で規模も広め。<strong>ただし両国からも都心からも直通で行けず</strong>、動線に組み込みにくい</td><td class="amount">—</td></tr>
+      <tr><th>東京サンマリン<br>江戸川店</th><td><strong>江戸川区西篠崎</strong>｜ボートレース江戸川と同じ区内だが対角線に近く、公共交通だと乗り継ぎで40分〜1時間。<strong>車向き</strong></td><td class="amount">—</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>ショップ選びで毎回引っかかるのが「駅から遠い」。</strong>海水の専門店は郊外や住宅街にあることが多く、駅から15分歩くか、バスを使うかになる。<strong>バス便があるなら必ず調べる</strong>(ナチュラル＝目白からバスで店の前)。逆に、動線を歪めてまで2軒回るより、1軒でじっくり見たほうが下見としては濃い。</p>
+  </section>
+
+  <!-- ═══ 催事 ═══ -->
+  <section class="info" id="ledger-event">
+    <h2>行った催事</h2>
+    <h3 style="font-size:.95rem;margin:0 0 8px">野球</h3>
+    <table class="kv">
+      <tr><th>東京ドーム</th><td><strong>遠征03 / 巨人×阪神 3連戦</strong>｜<strong>9-1・5-1・3-2で3タテ</strong><br>3塁側・内野後方がビジター寄りで観やすかった。水道橋駅から徒歩すぐ。両国から総武線直通15分</td><td class="amount">31,000円<br><small style="color:#6B7280">3試合</small></td></tr>
+      <tr><th>甲子園</th><td><strong>遠征01 / 阪神2連戦</strong>｜10安打の接戦。宿は阪神尼崎で球場アクセス優先</td><td class="amount">—</td></tr>
+    </table>
+    <h3 style="font-size:.95rem;margin:22px 0 8px">公営競技</h3>
+    <table class="kv">
+      <tr><th>ボートレース<br>江戸川</th><td><strong>遠征03 / 大江戸賞</strong>｜入場100円<br><strong>「江戸川ナイス」の収録は雨天だと屋内に移り観覧できない</strong>のが最大の知見。この日は朝が雨で屋内スタート、後半の晴れ間で屋外に出てきた。<strong>平井・船堀のどちらからも無料送迎バスがある</strong>(平井15分/船堀5分)。難水面で舟券は難しい<br><span style="color:var(--stamp);font-weight:700">→ 収録を狙うなら天気予報を見てから日を選ぶ</span></td><td class="amount">▲5,000円</td></tr>
+      <tr><th>ボートレース<br>びわこ</th><td><strong>遠征01</strong>｜家計簿上▲2,950円(＝2,950円の<strong>勝ち</strong>)</td><td class="amount">+2,950円</td></tr>
+      <tr><th>ボートレース<br>平和島</th><td><strong>遠征02</strong>｜ボート＆スロット</td><td class="amount">—</td></tr>
+    </table>
+    <h3 style="font-size:.95rem;margin:22px 0 8px">お笑い・演芸</h3>
+    <table class="kv">
+      <tr><th>キングオブコント<br>準々決勝</th><td><strong>遠征03 / 渋谷・文化総合センター大和田 4階さくらホール</strong>｜1枠3,500円<br>渋谷駅の西口・南口側から徒歩5分。<strong>1公演が長く、2部まで続けて観るのは体力を使う。</strong>出場者は事前に発表されるので、<strong>発表を見てから買えば無駄が出ない</strong>(遠征03では3枠買って1枠しか使わなかった)</td><td class="amount">3,500円<br><small style="color:#6B7280">1枠あたり</small></td></tr>
+      <tr><th>横浜にぎわい座</th><td><strong>遠征03 / ねづっち特別公演「イロイロしてみる60分」</strong>｜全席指定3,500円<br>桜木町駅から徒歩3分、野毛の入口。<strong>60分公演でも押して19:25終演。</strong>終演後に桜木町駅で崎陽軒(21時まで)を買って東京駅へ、という締め方が成立する</td><td class="amount">3,500円</td></tr>
+      <tr><th>お笑い各種</th><td><strong>遠征01</strong>：神田・六本木でダブルヘッダー／<strong>遠征02</strong>：空気階段、六本木コント</td><td class="amount">—</td></tr>
+    </table>
+    <h3 style="font-size:.95rem;margin:22px 0 8px">同人・展示・ライブ</h3>
+    <table class="kv">
+      <tr><th>コミックマーケット</th><td><strong>遠征03 / 東京ビッグサイト</strong>｜午前入場リストバンド1,210円(とらのあな)<br><strong>並びたくないなら開場の波が引いた12時入りで十分。</strong>東京駅八重洲口から<strong>直行バス210円</strong>が安くて座れる(ただし飲み物は乗る前に買う)。帰りはビッグサイト→新橋の直行バスも210円<br><span style="color:var(--stamp);font-weight:700">→ 荷物は東京駅のロッカーを事前予約しておくと朝が楽</span></td><td class="amount">1,210円</td></tr>
+      <tr><th>DQ40th<br>the DIVE</th><td><strong>遠征03 / 原宿ハラカド</strong>｜日時指定2,500円<br>明治神宮前駅から徒歩1分。<strong>VR RIDEの出来がよかった。</strong>物販が充実していて荷物が増えるので、この後の予定は身軽さを前提にしないほうがいい</td><td class="amount">2,500円</td></tr>
+      <tr><th>スパコミ／<br>ミリオンライブ</th><td><strong>遠征01</strong>｜声優イベント(築地)も含む</td><td class="amount">—</td></tr>
+      <tr><th>テイフェス</th><td><strong>遠征02 / 2days</strong></td><td class="amount">—</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>チケットは「買ってから捨てる」より「発表を見てから買う」。</strong>遠征03では使わなかったチケットが3枚・9,500円ぶん出た(KOC2枠・サル階段)。捨てた判断自体は正しかったが、<strong>同じ日に2公演を入れない</strong>だけでも減らせる。<br><strong>物販がある催事(コミケ・展示会)は荷物が増える前提で後の予定を組む。</strong>遠征03ではDQ物販の量でドーム直行を諦め、一度ホテルへ戻っている。</p>
+  </section>
+
+  <!-- ═══ 費用の目安 ═══ -->
+  <section class="info" id="ledger-cost">
+    <h2>費用の目安</h2>
+    <table class="kv">
+      <tr><th>遠征01</th><td>5泊6日｜大阪・東京｜事前116,684円＋現地</td><td class="amount">約16.1万円</td></tr>
+      <tr><th>遠征02</th><td>3泊4日｜東京｜事前66,910円＋現地35,450円</td><td class="amount">約10.2万円</td></tr>
+      <tr><th>遠征03</th><td>4泊5日｜東京・横浜｜事前87,520円＋現地53,144円</td><td class="amount">約14.1万円</td></tr>
+    </table>
+    <h3 style="font-size:.95rem;margin:22px 0 8px">1日あたりの基礎コスト</h3>
+    <p style="font-size:.85rem;line-height:1.95;margin:0 0 10px">遠征03の現地出費53,144円から<strong>物販(コミケ12,600＋DQ7,850＝20,450円)を除くと32,694円</strong>、1日あたり約6,500円。さらに<strong>ギャンブル7,000円も除くと1日あたり約5,100円</strong>。<br>食事・現地交通・雑費という「動くだけでかかる分」は、<strong>1日5,000〜6,500円</strong>が目安になる。</p>
+    <table class="kv">
+      <tr><th>基礎コスト</th><td>食事・現地交通・雑費</td><td class="amount">5,000〜6,500円/日</td></tr>
+      <tr><th>物販枠</th><td>コミケ・展示会の物販。<strong>計画に枠がないと後で驚く</strong></td><td class="amount">別立てで確保</td></tr>
+      <tr><th>公営競技</th><td>勝ち負けがあるので予算とは別管理</td><td class="amount">別枠</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>次の遠征の組み方：</strong>①宿・きっぷ・チケットの固定費を先に確定 → ②日数×5,000〜6,500円を基礎コストとして置く → ③物販枠を別立てで見積もる。この3層で組めば、遠征03のように「現地で使いすぎたのでは」と後から不安にならずに済む。<br><br><strong>数百円で時間と体力を買う判断は、だいたい正しい。</strong>遠征03では東京駅ロッカーを事前予約(+500円ほど)してチェックアウトを2時間遅らせ、そのぶん眠れた。遠征04でも同じ方式を最終日に採っている。逆に、<strong>元が取れない一日乗車券は買わない</strong>(遠征03の都営ワンデーパス500円=その日の都営利用が1回だけだったので見送り)。</p>
+  </section>
+
+  <a class="back-to-top" href="#top">↑ 記録帳の表紙に戻る</a>
+  </article>
+
   <footer>
     <span>TRIP RECORD BOOK</span>
-    <span>VOL.6 ── ENSEI 06</span>
+    <span>VOL.6 ── ENSEI 06 ＋ LEDGER</span>
   </footer>
 
 </div>
