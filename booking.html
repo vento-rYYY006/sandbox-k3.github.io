@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>宿泊予約控</title>
+<style>
+:root{
+  --paper:#EAEEF0;
+  --card:#FFFFFF;
+  --ink:#1B2127;
+  --ink-mute:#5C6B75;
+  --rule:#C6CFD4;
+  --board:#14181C;
+  --led:#FFA733;
+  --led-ok:#57C77E;
+  --led-warn:#FFC24B;
+  --led-alert:#FF6B60;
+  --led-dim:#6E7A82;
+  --mono:ui-monospace,"SFMono-Regular","Menlo","Consolas","BIZ UDGothic","MS Gothic",monospace;
+  --sans:system-ui,-apple-system,"Hiragino Sans","Noto Sans JP","Yu Gothic UI","Meiryo",sans-serif;
+  --mincho:"Yu Mincho","YuMincho","Hiragino Mincho ProN","BIZ UDMincho","MS PMincho",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:15px;line-height:1.7;
+  padding:0 0 64px;-webkit-text-size-adjust:100%;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 18px}
+a{color:inherit}
+
+.backlink{
+  display:inline-block;font-family:var(--mono);font-size:11px;
+  letter-spacing:.12em;color:var(--ink-mute);text-decoration:none;padding:18px 0 0;
+}
+.backlink:hover,.backlink:focus{color:var(--ink);text-decoration:underline}
+
+.masthead{padding:14px 0 20px;border-bottom:2px solid var(--ink)}
+.masthead h1{font-family:var(--mincho);font-size:30px;font-weight:600;letter-spacing:.22em;margin:0 0 6px}
+.masthead .sub{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--ink-mute)}
+
+.summary{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--rule)}
+.summary div{flex:1 1 128px;padding:14px 4px 16px;border-right:1px solid var(--rule)}
+.summary div:last-child{border-right:0}
+.summary .k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-mute);display:block}
+.summary .v{font-family:var(--mono);font-size:22px;font-weight:600;line-height:1.3}
+.summary .v small{font-size:12px;font-weight:400;color:var(--ink-mute)}
+
+.board{background:var(--board);border-radius:3px;margin:26px 0 8px;padding:16px 0 6px;overflow:hidden;position:relative}
+.board::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(to bottom,rgba(255,255,255,.028) 0 1px,transparent 1px 3px)}
+.board h2{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--led-dim);margin:0 18px 12px;font-weight:400}
+.brow{display:grid;grid-template-columns:70px 1fr 92px 62px;align-items:baseline;gap:10px;
+  padding:9px 18px;font-family:var(--mono);border-top:1px solid rgba(255,255,255,.07)}
+.brow .bdate{font-size:12px;color:var(--led);letter-spacing:.04em}
+.brow .bname{font-size:13px;color:#E8EDF0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.brow .bstat{font-size:11px;letter-spacing:.1em;text-align:right}
+.brow .bday{font-size:17px;text-align:right;font-weight:600}
+.brow .bday span{font-size:10px;font-weight:400;opacity:.6;margin-left:1px}
+.s-ok{color:var(--led-ok)}.s-warn{color:var(--led-warn)}
+.s-alert{color:var(--led-alert)}.s-dim{color:var(--led-dim)}
+.board .empty{font-family:var(--mono);font-size:12px;color:var(--led-dim);padding:6px 18px 14px}
+
+.trip{margin:30px 0 0}
+.trip-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;border-bottom:1px solid var(--ink);padding-bottom:7px}
+.trip-head .no{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:#fff;background:var(--ink);padding:2px 7px;border-radius:2px;white-space:nowrap}
+.trip-head h3{font-family:var(--mincho);font-size:19px;font-weight:600;letter-spacing:.08em;margin:0}
+.trip-head .span{font-family:var(--mono);font-size:12px;color:var(--ink-mute)}
+.trip-head .tot{margin-left:auto;font-family:var(--mono);font-size:14px;font-weight:600}
+.trip-head .tot small{font-size:11px;font-weight:400;color:var(--ink-mute);margin-left:6px}
+
+.stay{background:var(--card);border:1px solid var(--rule);border-top:none;padding:14px 16px 12px}
+.trip .stay:first-of-type{border-top:1px solid var(--rule)}
+.stay-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.stay-top .nights{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-mute);
+  border:1px solid var(--rule);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.stay-top .hotel{font-weight:600;font-size:16px;letter-spacing:.02em}
+.stay-top .money{margin-left:auto;font-family:var(--mono);font-size:15px;font-weight:600;text-align:right}
+.stay-top .money small{display:block;font-size:10px;font-weight:400;color:var(--ink-mute)}
+.stay-dates{font-family:var(--mono);font-size:12px;color:var(--ink-mute);margin-top:2px;letter-spacing:.03em}
+
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;padding:2px 7px;border-radius:2px;
+  border:1px solid var(--rule);color:var(--ink-mute);white-space:nowrap}
+.chip.done{background:#EAF6EE;color:#25683F;border-color:#B3DCC2}
+.chip.fixed{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip.hold{background:#FFF8E6;color:#8A6410;border-color:#E8D08A}
+.chip.todo{background:#FFF1F0;color:#B3352C;border-color:#F0BDB8}
+
+.gauge{margin-top:11px}
+.gauge-lab{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  font-family:var(--mono);font-size:11px;color:var(--ink-mute);letter-spacing:.03em;margin-bottom:4px}
+.gauge-lab b{font-weight:600;font-size:12px;white-space:nowrap}
+.g-ok b{color:#25683F}.g-warn b{color:#8A6410}.g-alert b{color:#B3352C}
+.track{height:3px;background:var(--rule);border-radius:2px;overflow:hidden}
+.fill{height:100%;width:0;transition:width .5s ease}
+.g-ok .fill{background:#57A377}.g-warn .fill{background:#D9A62E}
+.g-alert .fill{background:#C9483C}.g-none .fill{background:var(--rule)}
+
+.note{font-size:13px;color:var(--ink-mute);margin-top:9px;padding-left:11px;border-left:2px solid var(--rule)}
+
+.err{background:#FFF1F0;border:1px solid #F0BDB8;color:#B3352C;padding:16px;margin:22px 0;border-radius:3px}
+.err b{display:block;margin-bottom:6px}
+.err code{font-family:var(--mono);font-size:12px;display:block;white-space:pre-wrap;margin-top:8px;color:#7A2620}
+
+.foot{margin-top:44px;border-top:1px solid var(--rule);padding-top:16px}
+.foot h4{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ink-mute);font-weight:400;margin:0 0 8px}
+.foot p{font-size:13px;color:var(--ink-mute);margin:0 0 7px}
+.foot code{font-family:var(--mono);font-size:12px;background:#DDE3E6;padding:1px 5px;border-radius:2px}
+
+@media (max-width:560px){
+  .masthead h1{font-size:23px;letter-spacing:.14em}
+  .brow{grid-template-columns:58px 1fr 54px;gap:8px;padding:8px 14px}
+  .brow .bstat{display:none}
+  .stay-top .money{margin-left:0;width:100%;text-align:left}
+  .trip-head .tot{margin-left:0;width:100%}
+}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+@media print{
+  body{background:#fff;font-size:11px;padding:0}
+  .backlink,.foot{display:none}
+  .board{background:#fff;border:1px solid #000;padding-top:10px}
+  .board::after{display:none}
+  .board h2,.brow .bname,.brow .bdate,.s-ok,.s-warn,.s-alert,.s-dim{color:#000}
+  .brow{border-top:1px solid #999}
+  .trip{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================================================================
+     宿泊予約控 / booking.html
+     遠征記録帳(index.html)から分離した「これから」の宿だけを管理する。
+     終わった遠征の宿は記録帳の横断台帳(#ledger-hotel)へ転記し、ここからは消す。
+
+     ◆ 編集するのは下の TRIPS 配列だけ。以降のHTMLは触らない ◆
+
+     status     "done"  予約済(無料キャンセル期限が生きている)
+                "fixed" 確定・キャンセル不可
+                "hold"  仮押さえ・方針だけ決めた
+                "todo"  未予約
+     free_until 無料キャンセル期限 "YYYY-MM-DD"。不明なら null
+     open_on    予約開放日 "YYYY-MM-DD"。todo のときだけ効く。不要なら null
+     price      総額。数字のみ(カンマ・円記号は入れない)。不明なら null
+     ================================================================== -->
+<script>
+const TRIPS = [
+
+  {
+    no: "04",
+    name: "SW遠征 大阪・東京",
+    stays: [
+      {
+        hotel: "アパホテル〈淀屋橋駅前〉",
+        area: "大阪・淀屋橋",
+        in: "2026-09-18", out: "2026-09-19",
+        price: 6000,
+        site: "アパ直",
+        pay: "現地精算",
+        status: "done",
+        free_until: "2026-09-17",
+        open_on: null,
+        note: "素泊まり・会員/ポイント適用後。大浴場サウナあり、11時アウト。御堂筋線淀屋橋11番出口から徒歩2分。東横INN大阪JR野田駅前の重複予約はキャンセル処理済み。"
+      },
+      {
+        hotel: "東横INN日本橋浜町明治座前",
+        area: "東京・浜町",
+        in: "2026-09-19", out: "2026-09-23",
+        price: 37400,
+        site: "東横INN公式",
+        pay: "現地決済",
+        status: "done",
+        free_until: "2026-09-18",
+        open_on: null,
+        note: "予約は 9/19-20 / 9/20-21 / 9/21-23 の3件に意図的に分割(短縮の可能性を残すため)。金額は予算の約43,400円からアパ淀屋橋分を引いた概算なので確定額に直すこと。数日前に事前決済へ切り替えて10月引落しに回す方針。"
+      }
+    ]
+  },
+
+  {
+    no: "05",
+    name: "年末遠征 浅草蔵前",
+    stays: [
+      {
+        hotel: "東横INN浅草蔵前2",
+        area: "蔵前",
+        in: "2026-12-26", out: "2026-12-27",
+        price: 10000,
+        site: "東横INN公式",
+        pay: "現地精算",
+        status: "hold",
+        free_until: "2026-12-25",
+        open_on: null,
+        note: "削り代の本命。1泊だけ1万円と最も高いのに、土曜でイベント確率も最も高い。判断材料が揃うのは10月下旬から。12月中旬までに4泊か3泊かを確定する。"
+      },
+      {
+        hotel: "東横INN浅草蔵前2",
+        area: "蔵前",
+        in: "2026-12-27", out: "2026-12-30",
+        price: 26505,
+        site: "東横INN公式",
+        pay: "現地精算",
+        status: "done",
+        free_until: "2026-12-26",
+        open_on: null,
+        note: "1泊8,835円×3。蔵前駅(浅草線・大江戸線)直上で、以降の動線は浅草線が背骨。最終日は東京駅八重洲方面へのシャトルバスが使えるか確認。"
+      }
+    ]
+  },
+
+  {
+    no: "未採番",
+    name: "GW遠征 東京",
+    stays: [
+      {
+        hotel: "アパホテル〈人形町駅北〉",
+        area: "日本橋・人形町",
+        in: "2027-04-29", out: "2027-05-01",
+        price: 13000,
+        site: "アパ直",
+        pay: "現地精算",
+        status: "done",
+        free_until: null,
+        open_on: null,
+        note: "予約済み。日比谷線・浅草線が同一駅。水天宮前(半蔵門線)まで徒歩7分、馬喰横山(新宿線)まで徒歩6分。江戸川ボートレース・神宮・六本木に強い配置。アパ直はプランごとにキャンセル規定が違うので、予約確認メールを見て free_until を埋める。◆記録帳へこの旅を追記すると遠征06になり、テイフェス遠征が06→07へ繰り上がる(時系列採番のため)。"
+      },
+      {
+        hotel: "東横INN浅草蔵前2",
+        area: "蔵前",
+        in: "2027-05-01", out: "2027-05-04",
+        price: 29830,
+        site: "東横INN公式",
+        pay: "現地精算",
+        status: "done",
+        free_until: "2027-04-30",
+        open_on: null,
+        note: "予約済み。人形町から浅草線4駅・約8分。大江戸線で東京ドーム(春日)・神宮(青山一丁目)・六本木・新宿西口がすべて直通。東横INNは前日まで無料キャンセル。年末遠征でも同じ宿を使う。"
+      }
+    ]
+  },
+
+  {
+    no: "06",
+    name: "テイフェス遠征 横浜",
+    stays: [
+      {
+        hotel: "東横INN横浜スタジアム前2号館",
+        area: "関内",
+        in: "2027-06-12", out: "2027-06-14",
+        price: 19095,
+        site: "東横INN公式",
+        pay: "現地精算",
+        status: "done",
+        free_until: "2027-06-11",
+        open_on: null,
+        note: "予約済み。公式サイト割+会員割5%適用後。横浜BUNTAIまで徒歩8分、中華街が隣。会場まで歩ける関内側に着地した経緯は記録帳の遠征06を参照。"
+      }
+    ]
+  }
+
+];
+
+/* ── 発車標の点灯条件 ──
+   下の日数以内に入った案件だけがパネルに出る。該当なしならパネルごと消える。
+   数字を大きくすると早めに出る。0 にするとその種類は出さない。 */
+const ALERT = {
+  free_until:  30,   // 無料キャンセル期限まで何日以内で出すか
+  open_on:     14,   // 予約開放日まで何日以内で出すか
+  todo_before: 60    // 未予約の宿を出発何日前から出すか
+};
+</script>
+
+<div class="wrap">
+
+  <a class="backlink" href="index.html">&larr; 遠征記録帳</a>
+
+  <div class="masthead">
+    <h1>宿泊予約控</h1>
+    <div class="sub" id="stamp"></div>
+  </div>
+
+  <noscript>
+    <div class="err">
+      <b>この控えはJavaScriptで組み上がります</b>
+      スクリプトが無効な環境では表示されません。記録帳(index.html)の本体はJavaScriptなしで動くので、そちらは通常どおり読めます。
+    </div>
+  </noscript>
+
+  <div id="app"></div>
+
+  <div class="foot">
+    <h4>使い方</h4>
+    <p>編集するのは <code>&lt;script&gt;</code> 内の <code>TRIPS</code> 配列だけ。表示部分は自動で組み直されます。</p>
+    <p><code>status</code> は <code>done</code>(予約済) / <code>fixed</code>(確定・取消不可) / <code>hold</code>(仮押さえ) / <code>todo</code>(未予約)。</p>
+    <p><code>free_until</code> に無料キャンセル期限を <code>"2026-12-25"</code> の形式で入れると残日数ゲージが動きます。<code>todo</code> の宿に <code>open_on</code>(予約開放日)を入れると、そこまでのカウントダウンに切り替わります。</p>
+    <p>並び順はチェックイン日の昇順に自動でソートされます。配列に書く順番は気にしなくて構いません。</p>
+    <p>カンマの打ち忘れなどで配列が壊れると赤いエラー枠が出ます。表示された内容をそのまま直せば復旧します。</p>
+    <p>遠征が終わったら、その宿の知見を記録帳の横断台帳(<code>#ledger-hotel</code>)へ転記して、この控えからは削除します。</p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var app = document.getElementById("app");
+  try {
+    if (typeof TRIPS === "undefined") throw new Error("TRIPS 配列が読み込まれていません");
+
+    const W = ["日","月","火","水","木","金","土"];
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    const d = s => {
+      if (typeof s !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(s))
+        throw new Error('日付は "YYYY-MM-DD" 形式で書いてください: ' + JSON.stringify(s));
+      const p = s.split("-").map(Number);
+      return new Date(p[0], p[1]-1, p[2]);
+    };
+    const md = s => { const t=d(s); return String(t.getMonth()+1).padStart(2,"0")+"/"+String(t.getDate()).padStart(2,"0"); };
+    const wd = s => W[d(s).getDay()];
+    const nights = (a,b) => Math.round((d(b)-d(a))/86400000);
+    const until = s => Math.round((d(s)-today)/86400000);
+    const yen = n => "\u00A5" + n.toLocaleString("ja-JP");
+    const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+    const LABEL = { done:"予約済", fixed:"確定", hold:"仮押さえ", todo:"未予約" };
+
+    function urgency(s){
+      if (s.status === "fixed") return { cls:"none", key:9999 };
+      if (s.status === "todo"){
+        if (s.open_on){
+          const n = until(s.open_on);
+          if (n > 0) return { cls:"ok", key:n, days:n, mode:"open" };
+        }
+        return { cls:"alert", key:-1, mode:"todo" };
+      }
+      if (!s.free_until) return { cls:"none", key:9998 };
+      const n = until(s.free_until);
+      if (n < 0)   return { cls:"none",  key:9997, days:n };
+      if (n <= 7)  return { cls:"alert", key:n, days:n };
+      if (n <= 30) return { cls:"warn",  key:n, days:n };
+      return         { cls:"ok",    key:n, days:n };
+    }
+
+    TRIPS.forEach(t => t.stays.sort((a,b) => d(a.in) - d(b.in)));
+    TRIPS.sort((a,b) => d(a.stays[0].in) - d(b.stays[0].in));
+
+    const all = [];
+    TRIPS.forEach(t => t.stays.forEach(s => all.push(s)));
+
+    const total   = all.reduce((n,s) => n + (s.price||0), 0);
+    const nightsN = all.reduce((n,s) => n + nights(s.in,s.out), 0);
+    const todoN   = all.filter(s => s.status === "todo").length;
+    const noDl    = all.filter(s => (s.status==="done"||s.status==="hold") && !s.free_until).length;
+
+    const ts = new Date();
+    document.getElementById("stamp").textContent =
+      "UPDATED " + ts.getFullYear() + "-" + String(ts.getMonth()+1).padStart(2,"0") + "-" + String(ts.getDate()).padStart(2,"0");
+
+    let html = '<div class="summary">'
+      + '<div><span class="k">遠征</span><span class="v">' + TRIPS.length + '<small> 件</small></span></div>'
+      + '<div><span class="k">宿泊</span><span class="v">' + nightsN + '<small> 泊 / ' + all.length + '件</small></span></div>'
+      + '<div><span class="k">宿泊費 合計</span><span class="v">' + yen(total) + '</span></div>'
+      + '<div><span class="k">未予約</span><span class="v">' + todoN + '<small> 件</small></span></div>'
+      + '<div><span class="k">期限未記入</span><span class="v">' + noDl + '<small> 件</small></span></div>'
+      + '</div>';
+
+    const TH = (typeof ALERT !== "undefined") ? ALERT : { free_until:30, open_on:14, todo_before:60 };
+
+    const urgent = all.map(s => ({ s:s, u:urgency(s) })).filter(function(x){
+      const s = x.s, u = x.u;
+      if (s.status === "fixed") return false;
+      if (u.mode === "open")  return u.days <= TH.open_on;
+      if (u.mode === "todo")  return until(s.in) <= TH.todo_before;
+      if (!s.free_until) return false;
+      const n = until(s.free_until);
+      return n >= 0 && n <= TH.free_until;
+    }).sort((a,b) => a.u.key - b.u.key).slice(0,6);
+
+    if (urgent.length){
+      html += '<div class="board"><h2>次に手を打つもの</h2>';
+      html += urgent.map(function(x){
+        const s = x.s, u = x.u;
+        const cls = { alert:"s-alert", warn:"s-warn", ok:"s-ok", none:"s-dim" }[u.cls];
+        let left, stat, right;
+        if (u.mode === "todo"){
+          left = md(s.in); stat = "未手配"; right = until(s.in) + '<span>日</span>';
+        } else if (u.mode === "open"){
+          left = md(s.open_on); stat = "開放待ち"; right = u.days + '<span>日</span>';
+        } else {
+          left = md(s.free_until);
+          stat = u.cls === "alert" ? "期限接近" : u.cls === "warn" ? "期限あり" : "確保";
+          right = u.days + '<span>日</span>';
+        }
+        return '<div class="brow"><div class="bdate">' + left + '</div>'
+             + '<div class="bname">' + esc(s.hotel) + '</div>'
+             + '<div class="bstat ' + cls + '">' + stat + '</div>'
+             + '<div class="bday ' + cls + '">' + right + '</div></div>';
+      }).join("");
+      html += '</div>';
+    }
+
+    html += TRIPS.map(function(t){
+      const tot = t.stays.reduce((n,s) => n + (s.price||0), 0);
+      const nn  = t.stays.reduce((n,s) => n + nights(s.in,s.out), 0);
+      const first = t.stays[0], last = t.stays[t.stays.length-1];
+      const avg = (tot && nn) ? ' <small>平均 ' + yen(Math.round(tot/nn)) + '/泊</small>' : '';
+
+      const rows = t.stays.map(function(s){
+        const n = nights(s.in, s.out);
+        const u = urgency(s);
+        let gauge;
+        if (s.status === "fixed"){
+          gauge = '<div class="gauge g-none"><div class="gauge-lab"><span>キャンセル不可</span></div>'
+                + '<div class="track"><div class="fill" data-w="100"></div></div></div>';
+        } else if (u.mode === "open"){
+          const pct = Math.max(0, Math.min(100, u.days/180*100));
+          gauge = '<div class="gauge g-ok"><div class="gauge-lab"><span>予約開放 ' + md(s.open_on) + '</span><b>あと ' + u.days + ' 日</b></div>'
+                + '<div class="track"><div class="fill" data-w="' + pct + '"></div></div></div>';
+        } else if (s.status === "todo"){
+          gauge = '<div class="gauge g-alert"><div class="gauge-lab"><span>未予約</span><b>出発まで ' + until(s.in) + ' 日</b></div>'
+                + '<div class="track"><div class="fill" data-w="100"></div></div></div>';
+        } else if (!s.free_until){
+          gauge = '<div class="gauge g-none"><div class="gauge-lab"><span>無料キャンセル期限</span><b>期限未記入</b></div>'
+                + '<div class="track"><div class="fill" data-w="100"></div></div></div>';
+        } else {
+          const days = until(s.free_until);
+          const pct = Math.max(0, Math.min(100, days/60*100));
+          gauge = '<div class="gauge g-' + u.cls + '"><div class="gauge-lab"><span>無料キャンセル期限 ' + md(s.free_until) + '</span>'
+                + '<b>' + (days < 0 ? "期限切れ" : "残り " + days + " 日") + '</b></div>'
+                + '<div class="track"><div class="fill" data-w="' + pct + '"></div></div></div>';
+        }
+        const money = s.price
+          ? '<div class="money">' + yen(s.price) + '<small>' + yen(Math.round(s.price/n)) + ' / 泊</small></div>'
+          : '<div class="money" style="color:var(--ink-mute)">—<small>料金未記入</small></div>';
+        return '<div class="stay"><div class="stay-top">'
+             + '<span class="nights">' + n + '泊</span>'
+             + '<span class="hotel">' + esc(s.hotel) + '</span>' + money + '</div>'
+             + '<div class="stay-dates">' + md(s.in) + '(' + wd(s.in) + ') → ' + md(s.out) + '(' + wd(s.out) + ')　' + esc(s.area) + '</div>'
+             + '<div class="chips"><span class="chip ' + s.status + '">' + (LABEL[s.status] || esc(s.status)) + '</span>'
+             + '<span class="chip">' + esc(s.site) + '</span>'
+             + '<span class="chip">' + esc(s.pay) + '</span></div>'
+             + gauge
+             + (s.note ? '<div class="note">' + esc(s.note) + '</div>' : '')
+             + '</div>';
+      }).join("");
+
+      return '<div class="trip"><div class="trip-head">'
+           + '<span class="no">遠征 ' + esc(t.no) + '</span>'
+           + '<h3>' + esc(t.name) + '</h3>'
+           + '<span class="span">' + md(first.in) + ' → ' + md(last.out) + '　' + nn + '泊</span>'
+           + '<span class="tot">' + (tot ? yen(tot) : "—") + avg + '</span>'
+           + '</div>' + rows + '</div>';
+    }).join("");
+
+    app.innerHTML = html;
+    requestAnimationFrame(function(){
+      app.querySelectorAll(".fill[data-w]").forEach(function(el){ el.style.width = el.dataset.w + "%"; });
+    });
+
+  } catch (e) {
+    app.innerHTML = '<div class="err"><b>TRIPS 配列の書式にエラーがあります</b>'
+      + 'カンマの打ち忘れ、括弧の閉じ忘れ、日付の書式あたりを確認してください。'
+      + '<code>' + String((e && e.message) || e).replace(/[&<>]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]; }) + '</code></div>';
+  }
+})();
+</script>
+
+</body>
+</html>
