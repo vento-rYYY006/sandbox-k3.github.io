@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>遠征記録帳 2027｜遠征06〜</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DotGothic16&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17223B;          /* 濃紺インク */
+    --paper:#FBFBF8;        /* 白紙 */
+    --paper-2:#F2F2EC;      /* 罫紙 */
+    --stamp:#D8362A;        /* 判子の朱 */
+    --sobu:#F5B316;         /* 総武線イエロー */
+    --oedo:#B6007A;         /* 大江戸線マゼンタ */
+    --jingu:#00A97A;        /* 明治神宮前グリーン */
+    --hanzo:#7D6BC7;        /* 半蔵門線パープル */
+    --keihin:#009BD6;       /* 京浜東北ブルー */
+    --hokuriku:#2C4A8A;     /* 北陸新幹線ネイビー */
+    --draft:#1B6FB5;        /* 仮(検討中)の青 */
+    --line-w:3px;
+    font-size:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none!important;transition:none!important;} }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Zen Kaku Gothic New',sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;font-weight:600;letter-spacing:.02em;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ───────── 記録帳の表紙(本棚) ───────── */
+  header.book{
+    padding:64px 0 30px;
+    text-align:center;
+    border-bottom:var(--line-w) double var(--ink);
+    border-bottom-width:5px;
+    border-bottom-style:double;
+  }
+  header.book .era{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.75rem;letter-spacing:.4em;
+    color:var(--stamp);font-weight:600;margin-bottom:12px;
+  }
+  header.book h1{
+    font-family:'Shippori Mincho B1',serif;
+    font-weight:800;
+    font-size:clamp(2.4rem,10vw,3.6rem);
+    letter-spacing:.18em;
+  }
+  header.book .tagline{
+    margin-top:10px;font-size:.85rem;color:#4A5568;letter-spacing:.06em;
+  }
+  .shelf{padding:28px 0 10px;}
+  .shelf h2{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;font-weight:600;letter-spacing:.3em;
+    color:#8A8F98;margin-bottom:14px;
+  }
+  .trip-card{
+    display:grid;
+    grid-template-columns:70px 1fr auto;
+    gap:14px;align-items:center;
+    border:2px solid var(--ink);border-radius:10px;
+    background:#fff;
+    padding:16px 18px;
+    margin-bottom:12px;
+    text-decoration:none;color:var(--ink);
+    transition:transform .12s ease,box-shadow .12s ease;
+  }
+  .trip-card:hover,.trip-card:focus-visible{
+    transform:translateY(-2px);
+    box-shadow:0 4px 0 var(--ink);
+  }
+  .trip-card:focus-visible{outline:3px solid var(--stamp);outline-offset:3px;}
+  .trip-card .no{
+    font-family:'DotGothic16',monospace;
+    color:var(--stamp);
+    border:2px solid var(--stamp);border-radius:50%;
+    width:56px;height:56px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transform:rotate(-6deg);line-height:1.1;
+    font-size:.68rem;
+  }
+  .trip-card .no b{font-size:1.05rem;}
+  .trip-card .meta .date{
+    display:block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;font-weight:600;
+    color:var(--stamp);letter-spacing:.08em;
+    font-variant-numeric:tabular-nums;
+  }
+  .trip-card .meta .date{
+    display:block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;font-weight:600;letter-spacing:.08em;
+    color:var(--stamp);
+    font-variant-numeric:tabular-nums;
+    margin-bottom:1px;
+  }
+  .trip-card .meta .name{
+    font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:1.1rem;line-height:1.4;
+  }
+  .trip-card .meta .detail{
+    font-size:.75rem;color:#5A6472;margin-top:2px;
+  }
+  .trip-card .go{
+    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.9rem;
+  }
+  @media(max-width:440px){
+    .trip-card{grid-template-columns:56px 1fr auto;padding:14px;}
+    .trip-card .no{width:48px;height:48px;font-size:.6rem;}
+  }
+  /* 仮(検討中・計画中)の旅。確定した旅と一目で区別するため青+破線(青焼き=下書きのイメージ) */
+  .trip-card.tentative{
+    border-color:var(--draft);border-style:dashed;
+    background:#F5FAFE;
+  }
+  .trip-card.tentative:hover,.trip-card.tentative:focus-visible{box-shadow:0 4px 0 var(--draft);}
+  .trip-card.tentative .no{border-color:var(--draft);color:var(--draft);}
+  .trip-card.tentative .meta .date{color:var(--draft);}
+  .trip-card.tentative .go{color:var(--draft);}
+  .trip-card.tentative .meta .name::after{
+    content:"仮";
+    display:inline-block;vertical-align:middle;
+    margin-left:8px;transform:translateY(-2px);
+    font-family:'DotGothic16',monospace;
+    font-size:.6rem;font-weight:400;letter-spacing:.1em;
+    color:var(--draft);background:#E6F2FB;
+    border:1.5px solid var(--draft);border-radius:3px;
+    padding:0 7px;
+  }
+  .shelf-legend{
+    display:flex;align-items:center;gap:7px;
+    font-size:.7rem;color:#8A8F98;margin:-6px 0 14px;
+  }
+  .shelf-legend .swatch{
+    width:14px;height:14px;flex:none;
+    border:2px dashed var(--draft);border-radius:3px;background:#F5FAFE;
+  }
+  .trip-card.empty{
+    border-style:dashed;background:transparent;color:#9AA0A6;
+    justify-items:start;
+  }
+  .trip-card.empty:hover{transform:none;box-shadow:none;}
+  .trip-card.empty .no{border-color:#C9C9BE;color:#C9C9BE;}
+  .year-block{margin-bottom:26px;}
+  .year-label{
+    display:flex;align-items:center;gap:14px;
+    font-family:'Shippori Mincho B1',serif;font-weight:800;
+    font-size:1.5rem;letter-spacing:.15em;
+    margin-bottom:14px;
+  }
+  .year-label::after{
+    content:"";flex:1;height:2px;background:var(--ink);opacity:.25;
+  }
+  .year-label .yr-note{
+    font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:600;
+    letter-spacing:.2em;color:#8A8F98;
+  }
+  /* 初期表示は目次(本棚)だけ。カードをタップした章のみ開く */
+  article.trip{display:none;}
+  article.trip:target{display:block;}
+  @media print{ article.trip{display:block;} }
+  article.trip{
+    margin-top:56px;
+    border-top:5px double var(--ink);
+  }
+  .trip-chapter{
+    display:flex;align-items:center;gap:10px;
+    padding:20px 0 0;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.7rem;font-weight:600;letter-spacing:.25em;color:#8A8F98;
+  }
+  .back-to-top{
+    display:inline-block;margin-top:28px;
+    font-size:.8rem;font-weight:700;color:var(--ink);
+    text-decoration:none;border-bottom:2px solid var(--stamp);
+  }
+
+  /* ───────── 表紙 ───────── */
+  header.cover{
+    padding:56px 0 36px;
+    border-bottom:var(--line-w) solid var(--ink);
+    position:relative;
+  }
+  .cover .era{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.8rem;letter-spacing:.35em;
+    color:var(--stamp);font-weight:600;
+    margin-bottom:10px;
+  }
+  .cover h1{
+    font-family:'Shippori Mincho B1',serif;
+    font-weight:800;
+    font-size:clamp(2.1rem,8vw,3.2rem);
+    line-height:1.25;
+    letter-spacing:.06em;
+  }
+  .cover .sub{
+    margin-top:14px;
+    font-size:.95rem;
+    color:#4A5568;
+  }
+  .cover .route-strip{
+    margin-top:26px;
+    display:flex;align-items:center;gap:0;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;font-weight:600;
+    flex-wrap:wrap;row-gap:8px;
+  }
+  .route-strip .node{
+    padding:3px 10px;border:2px solid var(--ink);border-radius:99px;
+    background:#fff;white-space:nowrap;
+  }
+  .route-strip .seg{width:22px;height:3px;background:var(--ink);}
+  /* 二案併記の旅で使う。プランB側は破線ノードで「まだ確定でない」ことを示す */
+  .route-strip.plan-b .node{border-style:dashed;border-color:var(--draft);color:var(--draft);}
+  .route-strip.plan-b .seg{background:var(--draft);}
+  .plan-label{
+    display:inline-block;margin:16px 0 4px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.62rem;font-weight:700;letter-spacing:.15em;
+    color:var(--stamp);
+  }
+  .cover-stamp{
+    position:absolute;right:0;top:52px;
+    width:92px;height:92px;border:3px double var(--stamp);
+    border-radius:50%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    color:var(--stamp);
+    transform:rotate(-8deg);
+    font-family:'DotGothic16',monospace;
+    line-height:1.2;text-align:center;
+    opacity:.92;
+  }
+  .cover-stamp .big{font-size:1.5rem;}
+  .cover-stamp .small{font-size:.62rem;letter-spacing:.1em;}
+  @media(max-width:480px){ .cover-stamp{width:76px;height:76px;top:44px;} .cover-stamp .big{font-size:1.2rem;} }
+
+  .trip-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    border-bottom:1px solid #D6D6CC;
+  }
+  .trip-stats div{
+    padding:16px 4px;text-align:center;
+    border-right:1px solid #D6D6CC;
+  }
+  .trip-stats div:last-child{border-right:none;}
+  .trip-stats .num{
+    font-family:'Shippori Mincho B1',serif;font-weight:800;
+    font-size:1.5rem;display:block;line-height:1.2;
+  }
+  .trip-stats .lbl{font-size:.72rem;color:#6B7280;letter-spacing:.08em;}
+
+  /* ───────── 目次 ───────── */
+  nav.toc{padding:22px 0 6px;}
+  nav.toc ol{
+    list-style:none;
+    display:flex;flex-wrap:wrap;gap:8px;
+  }
+  nav.toc a{
+    display:inline-flex;align-items:center;gap:7px;
+    text-decoration:none;color:var(--ink);
+    border:1.5px solid var(--ink);
+    padding:5px 12px;border-radius:99px;
+    font-size:.8rem;font-weight:700;
+    background:#fff;
+    transition:transform .12s ease;
+  }
+  nav.toc a:hover,nav.toc a:focus-visible{transform:translateY(-2px);}
+  nav.toc a:focus-visible{outline:3px solid var(--stamp);outline-offset:2px;}
+  nav.toc .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+  /* ───────── 日別カード ───────── */
+  section.day{padding:44px 0 8px;}
+  .day-head{
+    display:flex;align-items:flex-start;gap:16px;
+    margin-bottom:8px;
+  }
+  .day-stamp{
+    flex:none;
+    width:64px;height:64px;
+    border:2.5px solid var(--stamp);
+    border-radius:50%;
+    color:var(--stamp);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-family:'DotGothic16',monospace;
+    line-height:1.05;
+    transform:rotate(-6deg);
+  }
+  .day-stamp .d{font-size:1.35rem;}
+  .day-stamp .w{font-size:.6rem;letter-spacing:.15em;}
+  .day-title h2{
+    font-family:'Shippori Mincho B1',serif;
+    font-weight:800;font-size:1.45rem;letter-spacing:.04em;line-height:1.35;
+  }
+  .day-title .theme{
+    font-size:.82rem;color:#4A5568;margin-top:2px;
+  }
+  .line-tag{
+    display:inline-block;margin-top:8px;
+    font-family:'IBM Plex Mono',monospace;font-size:.66rem;font-weight:600;
+    letter-spacing:.12em;color:#fff;
+    padding:2px 10px;border-radius:3px;
+  }
+
+  /* 路線図タイムライン(このしおりの主役) */
+  .route{
+    margin-top:18px;
+    position:relative;
+  }
+  .stop{
+    display:grid;
+    grid-template-columns:64px 30px 1fr;
+    align-items:flex-start;
+    position:relative;
+  }
+  @media(max-width:400px){ .stop{grid-template-columns:56px 26px 1fr;} }
+  .stop .time{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;font-size:.82rem;
+    padding-top:2px;text-align:right;
+    color:var(--ink);
+    font-variant-numeric:tabular-nums;
+  }
+  .stop .time small{display:block;font-size:.6rem;color:#9AA0A6;font-weight:500;}
+  .stop .rail{
+    position:relative;align-self:stretch;
+    display:flex;justify-content:center;
+  }
+  .stop .rail::before{
+    content:"";position:absolute;top:0;bottom:0;
+    width:var(--line-w);
+    background:var(--line-color,#999);
+    left:50%;transform:translateX(-50%);
+  }
+  .stop:first-child .rail::before{top:8px;}
+  .stop:last-child .rail::before{bottom:calc(100% - 14px);}
+  .stop .rail .pin{
+    position:relative;z-index:1;
+    width:13px;height:13px;border-radius:50%;
+    background:#fff;
+    border:3px solid var(--line-color,#999);
+    margin-top:5px;
+  }
+  .stop.major .rail .pin{
+    width:17px;height:17px;
+    background:var(--line-color,#999);
+    box-shadow:0 0 0 3px #fff,0 0 0 5px var(--line-color,#999);
+    margin-top:3px;
+  }
+  .stop .body{padding:0 0 22px 6px;}
+  .stop .what{font-weight:700;font-size:.95rem;line-height:1.5;}
+  .stop.major .what{
+    font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:1.05rem;
+  }
+  .stop .how{font-size:.8rem;color:#5A6472;margin-top:2px;}
+  .chip{
+    display:inline-block;font-size:.66rem;font-weight:700;
+    padding:1px 8px;border-radius:3px;margin:4px 4px 0 0;
+    border:1.5px solid var(--ink);background:#fff;
+    vertical-align:middle;
+  }
+  .chip.paid{border-color:#2E7D52;color:#2E7D52;}
+  .chip.cash{border-color:var(--stamp);color:var(--stamp);}
+  .chip.flex{border-color:#B7791F;color:#B7791F;background:#FFF9EC;}
+  .chip.meal{border-color:#7A5C2E;color:#7A5C2E;background:#FBF7F1;}
+
+  /* 日別メモ */
+  .day-note{
+    background:var(--paper-2);
+    border-left:4px solid var(--ink);
+    padding:14px 16px;
+    font-size:.85rem;
+    border-radius:0 6px 6px 0;
+    margin-top:4px;
+  }
+  .day-note strong{font-weight:700;}
+  /* 締め処理用: 実際の記録 */
+  .stop.skipped .what{text-decoration:line-through;opacity:.5;}
+  .stop.skipped .how{opacity:.5;}
+  .stop.skipped .rail .pin{border-style:dashed;background:#fff;opacity:.5;}
+  .day-note.actual{
+    border-left-color:var(--stamp);
+    background:#FBF0EE;
+  }
+  .day-note.actual::before{
+    content:"実際の記録";
+    display:inline-block;
+    font-family:'DotGothic16',monospace;
+    font-size:.7rem;color:var(--stamp);
+    border:1.5px solid var(--stamp);border-radius:3px;
+    padding:0 8px;margin-bottom:6px;
+  }
+  .day-note ul{list-style:none;}
+  .day-note li{padding-left:1.2em;text-indent:-1.2em;}
+  .day-note li::before{content:"▸ ";color:var(--stamp);font-weight:700;}
+
+  /* 現地家計簿(レシート風) */
+  .receipt{width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:.78rem;margin-top:10px;}
+  .receipt td{padding:3px 0;border-bottom:1px dotted #D8C9C6;}
+  .receipt td.item{color:#4A5568;}
+  .receipt td.amt{text-align:right;white-space:nowrap;font-weight:600;font-variant-numeric:tabular-nums;}
+  .receipt td.amt.plus{color:#2E7D52;}
+  .receipt tr.subtotal td{border-bottom:none;border-top:2px solid var(--stamp);padding-top:6px;font-weight:700;}
+  .receipt tr.subtotal td.amt{color:var(--stamp);}
+  .receipt tr.subtotal td.amt.plus{color:#2E7D52;}
+
+  /* イベントアイコン(自作の線画。写真や版権絵は使わず、しおりの筆致に合わせたオリジナル) */
+  .event-icon{display:inline-block;width:30px;height:24px;vertical-align:-7px;margin-right:6px;}
+
+  /* 旅の写真(実際に撮った記録写真。imagesディレクトリに遠征ごとのフォルダで格納) */
+  .photos{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:10px;
+    margin:18px 0 4px;
+  }
+  .photo{
+    margin:0;
+    border:1.5px solid var(--rule);
+    border-radius:5px;
+    background:#fff;
+    padding:6px 6px 0;
+    box-shadow:0 1px 3px rgba(26,29,33,.07);
+  }
+  .photo a{display:block;border-bottom:none;}
+  .photo img{
+    display:block;width:100%;height:190px;
+    object-fit:cover;object-position:center;
+    border-radius:3px;
+    background:#EDEDE6;
+  }
+  .photo figcaption{
+    font-family:'DotGothic16',monospace;
+    font-size:.66rem;line-height:1.6;
+    color:#6B7078;
+    padding:6px 2px 7px;
+    letter-spacing:.02em;
+  }
+  @media print{
+    .photos{grid-template-columns:repeat(4,1fr);}
+    .photo{break-inside:avoid;}
+    .photo img{height:120px;}
+  }
+
+  /* Claudeより一筆(各章末の感想欄) */
+  .claude-note{
+    margin-top:40px;
+    border:2px solid var(--ink);
+    border-radius:8px;
+    background:#fff;
+    padding:18px 20px 16px;
+    position:relative;
+    font-size:.88rem;
+    line-height:1.9;
+  }
+  .claude-note::before{
+    content:"Claudeより一筆";
+    position:absolute;top:-12px;left:14px;
+    font-family:'DotGothic16',monospace;
+    font-size:.72rem;color:var(--stamp);
+    background:var(--paper);
+    border:1.5px solid var(--stamp);border-radius:3px;
+    padding:1px 10px;
+  }
+  .claude-note p+p{margin-top:8px;}
+  .claude-note .sign{
+    display:block;margin-top:10px;text-align:right;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;color:#8A8F98;letter-spacing:.15em;
+  }
+
+  /* ───────── 汎用セクション ───────── */
+  section.info{padding:44px 0 8px;}
+  section.info h2{
+    font-family:'Shippori Mincho B1',serif;font-weight:800;
+    font-size:1.35rem;letter-spacing:.05em;
+    display:flex;align-items:center;gap:12px;
+    margin-bottom:18px;
+  }
+  section.info h2::after{
+    content:"";flex:1;height:var(--line-w);background:var(--ink);
+  }
+  .check{list-style:none;}
+  .check li{
+    display:flex;gap:12px;align-items:flex-start;
+    padding:11px 0;border-bottom:1px dashed #C9C9BE;
+    font-size:.92rem;
+  }
+  .check li .box{
+    flex:none;width:20px;height:20px;margin-top:3px;
+    border:2px solid var(--ink);border-radius:4px;background:#fff;
+  }
+  .check li.urgent .box{border-color:var(--stamp);}
+  .check li.urgent strong{color:var(--stamp);}
+  .check li.done{opacity:.55;}
+  .check li.done .box{background:#9CA3AF;border-color:#9CA3AF;}
+  .check li.done s{color:#6B7280;}
+  .kv{
+    width:100%;border-collapse:collapse;font-size:.88rem;
+  }
+  .kv th,.kv td{
+    text-align:left;padding:9px 10px;
+    border-bottom:1px solid #DDDDD2;
+    vertical-align:top;
+  }
+  .kv th{font-size:.72rem;color:#6B7280;font-weight:700;letter-spacing:.06em;white-space:nowrap;}
+  .kv td.amount{text-align:right;font-family:'IBM Plex Mono',monospace;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .kv tr.total td{
+    border-top:2.5px solid var(--ink);border-bottom:none;
+    font-weight:800;font-size:1rem;
+    font-family:'Shippori Mincho B1',serif;
+  }
+  .backup{
+    border:2px solid var(--ink);border-radius:8px;
+    padding:16px 18px;margin-bottom:14px;background:#fff;
+    font-size:.88rem;
+  }
+  .backup h3{
+    font-size:.95rem;font-weight:800;margin-bottom:4px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .backup h3 .flag{
+    font-family:'DotGothic16',monospace;color:var(--stamp);font-size:.8rem;
+  }
+  footer{
+    margin-top:64px;padding-top:20px;
+    border-top:var(--line-w) solid var(--ink);
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:.72rem;color:#8A8F98;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  @media print{
+    nav.toc{display:none;}
+    section.day,section.info{page-break-inside:avoid;}
+    body{background:#fff;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- ═══════════ 年の表紙 ═══════════ -->
+  <header class="book" id="top">
+    <p class="era">TRIP RECORD BOOK ── 2027</p>
+    <h1>遠征記録帳 2027</h1>
+    <p class="tagline">2027年の旅。タップで章が開きます。</p>
+  </header>
+
+  <div class="shelf">
+    <h2>─ 2027年の収録旅程(タップで開く)─</h2>
+    <p class="shelf-legend"><span class="swatch" aria-hidden="true"></span>青いカードは「仮」──日程・内容がまだ確定していない検討中の旅</p>
+    <div class="year-block">
+      <a class="trip-card tentative" href="#trip06">
+        <span class="no" aria-hidden="true">遠征<b>06</b></span>
+        <span class="meta">
+          <span class="date">2027.06.12 – 06.14</span>
+          <span class="name">テイフェス遠征 横浜</span>
+          <span class="detail">2泊3日｜テイルズフェス2DAYS(横浜BUNTAI)・平和島ボートレース・中華街｜約4万円+チケット・計画中</span>
+        </span>
+        <span class="go">→</span>
+      </a>
+    </div>
+    <a class="trip-card" href="index.html" style="margin-top:18px;border-style:solid;border-color:var(--ink)">
+      <span class="no" aria-hidden="true">表<b>紙</b></span>
+      <span class="meta">
+        <span class="name">記録帳の表紙へ戻る</span>
+        <span class="detail">全年の一覧・横断台帳・宿泊予約控はこちら｜別ページで開きます</span>
+      </span>
+      <span class="go">→</span>
+    </a>
+  </div>
+
+  <!--
+    ◆ このファイルについて ◆
+      2027年の遠征本編を収めた年ファイル。玄関は index.html(表紙＋横断台帳)。
+      index.html のカードから「2027.html#tripNN」で直接この章へ飛んでくる。
+
+    ◆ 追記ルール(このファイルをアップロードされたClaudeへ)◆
+    1. 新しい旅は <article class="trip" id="tripNN"> として既存articleの直後に追加する
+       ※初期表示は章の一覧のみ。章は「article.trip:target」で開く方式なので、新しい章に
+         display関連の追加CSSは不要。id と このファイル冒頭の .chapter-list のリンクを一致させる
+    2. 章を1本足したら、必ず index.html 側の .shelf にも trip-card を追加する
+       (href は "2027.html#tripNN" の形。同一ファイル内アンカーではない)
+    3. 章内のアンカーidは衝突防止のため「tNN-」を接頭辞にする(例: t03-d1, t03-todo)
+       ※歴史的経緯により例外あり: お盆遠征(遠征03)は接頭辞なし(#d11等)、SW遠征(遠征04)は
+         「t03-」接頭辞、GW遠征(遠征01)は「t01-」、7月遠征(遠征02)は「t02-」。どれも変更不要。
+         番号とidの対応はカードのhref(#trip01等)が正であり、内部アンカーの接頭辞とは一致しない
+    4. デザイントークン(:root)・路線図タイムライン(.route/.stop)・チップ(.chip)は共通部品として再利用する
+       ※チップの種類: .paid(支払済・緑) / .cash(現金のみ・朱) / .flex(可変枠・琥珀) / .meal(飯の枠・茶)
+    5. ◆Claudeより一筆◆ 各章の末尾(back-to-topの直前)に <div class="claude-note"> でClaude自身の
+       感想を書く。計画確定時のマージでは「計画係(出発前に記す)」として、締め処理では実際の記録を
+       踏まえた感想に書き換える(または追記する)。定型文ではなく、その旅の具体的な中身に触れた
+       正直な一筆にすること
+    6. ◆旅の締め処理◆ 帰還後に「遠征NNを締めて」と依頼されたら章をアーカイブ化する:
+       (a) 支払済/未払系のチップ(.chip.paid等)を削除(現金のみ等も含め支払情報は全撤去)
+       (b) 出発前TODOセクションを削除(または達成メモに置換)
+       (c) 予算まとめを「実績」表記にする(ユーザーから実際の支出報告があれば反映)
+       (d) index.html 側の一覧カードの .no 内に「済」を示す(例: 遠征01の下に「完」)、
+           detailの末尾に「完了」を付す
+       (e) もしもの備え等の運用セクションは思い出として残してよい(削除はユーザーに確認)
+       (f) ◆予定と実際の差分を記録する◆ ユーザーから当日の実際(スキップ・変更・ハプニング・
+           時刻ズレ等)を聞き取り、次の様式で反映する:
+           ・行かなかった/やらなかった予定 → .stop に class="skipped" を追加(打消し表示)
+           ・変更・ハプニング・感想 → 各日の末尾に <div class="day-note actual"> で「実際の記録」
+             メモを追加(例:「雨天中断で終了20時」「満天の湯はスキップし直接野毛へ」)
+           ・旅全体の振り返りがあれば章末に「後日談」ブロック(.day-note.actual流用可)を置く
+           ・聞き取りは日ごとに簡潔に。ユーザーが語らない日は無理に埋めず予定のまま残してよい
+       (g) ◆写真◆ 実際に撮った写真があれば images/tNN/ に置き、各日の末尾に
+           <div class="photos"> のグリッドで並べる。ファイル名は dX-NN-内容.jpg(例: d3-01-hasegawa-tonkatsu.jpg)。
+           Web用に長辺1600px・quality82程度へ圧縮し、EXIFの回転はImageOps.exif_transposeで
+           実データに反映してから保存する(これを忘れると縦写真が横倒しになる)。
+           サムネは高さ固定+object-fit:coverで揃え、リンクで原寸を開けるようにする
+       (h) 締めたら、その旅の知見を index.html の横断台帳(article#ledger)へ転記する
+    7. フッターの VOL./ENSEI 番号を更新する
+    8. CSSは index.html と同一のものを複製している。CSSを直すときは全ファイルに同じ変更を入れる
+  -->
+
+<!-- ═══════════ 遠征06:テイフェス遠征 横浜 ═══════════ -->
+  <article class="trip" id="trip06">
+  <p class="trip-chapter">ENSEI 06 ── 2027.06</p>
+
+  <header class="cover">
+    <p class="era">2027.06.12 — 06.14</p>
+    <h1>テイフェス遠征のしおり<br>横浜</h1>
+    <p class="sub">テイルズフェス2DAYSを横浜BUNTAI(文体)で。会場徒歩8分のスタジアム前を拠点に、昼は平和島ボートレース、夜は中華街。2泊3日の週末遠征。</p>
+    <div class="route-strip" aria-label="行程の概要">
+      <span class="node">自宅</span><span class="seg"></span>
+      <span class="node">スタジアム前 2泊</span><span class="seg"></span>
+      <span class="node">横浜BUNTAI ×2</span><span class="seg"></span>
+      <span class="node">自宅</span>
+    </div>
+    <div class="cover-stamp" aria-hidden="true">
+      <span class="small">2泊3日</span>
+      <span class="big">テイフェス</span>
+      <span class="small">計画中</span>
+    </div>
+  </header>
+
+  <div class="trip-stats">
+    <div><span class="num">3<span style="font-size:.8rem">日</span></span><span class="lbl">2泊3日</span></div>
+    <div><span class="num">2<span style="font-size:.8rem">DAYS</span></span><span class="lbl">テイフェス両日</span></div>
+    <div><span class="num">1.9<span style="font-size:.8rem">万</span></span><span class="lbl">宿2泊(確保予定)</span></div>
+  </div>
+
+  <nav class="toc" aria-label="目次">
+    <ol>
+      <li><a href="#t06-d1"><span class="dot" style="background:var(--keihin)"></span>6/12 横浜入り・DAY1</a></li>
+      <li><a href="#t06-d2"><span class="dot" style="background:#E7211A"></span>6/13 平和島・千秋楽</a></li>
+      <li><a href="#t06-d3"><span class="dot" style="background:#F68B1E"></span>6/14 帰還</a></li>
+      <li><a href="#t06-todo"><span class="dot" style="background:var(--stamp)"></span>TODO</a></li>
+      <li><a href="#t06-budget"><span class="dot" style="background:var(--ink)"></span>予算</a></li>
+      <li><a href="#t06-backup"><span class="dot" style="background:var(--ink)"></span>備え</a></li>
+    </ol>
+  </nav>
+
+  <!-- ═══ 6/12 ═══ -->
+  <section class="day" id="t06-d1" style="--line-color:var(--keihin)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">6.12</span><span class="w">SAT</span></div>
+      <div class="day-title">
+        <h2>横浜入り、テイフェス初日</h2>
+        <p class="theme">自宅を発って横浜へ。荷物を置いて、歩いてすぐの文体でDAY1。</p>
+        <span class="line-tag" style="background:var(--keihin)">自宅 → 横浜 → 関内(根岸線) → 徒歩 文体</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">午前</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">自宅 発 → 横浜方面へ</p><p class="how">経路は昼の予定と合わせて後日確定(北陸新幹線→東京→東海道 など)<span class="chip flex">可変枠・未確定</span></p></div></div>
+      <div class="stop"><div class="time">昼過ぎ</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">横浜 → 関内(京浜東北・根岸線 8分)</p><p class="how">昼にどこか寄るならこの前後。基本は無理せず会場優先</p></div></div>
+      <div class="stop"><div class="time">〜15:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東横INN横浜スタジアム前2号館 で荷物預け</p><p class="how">部屋案内は15:00〜だが、それ以前でも荷物は預けられる。身軽にして会場へ<span class="chip">2泊 19,095円</span></p></div></div>
+      <div class="stop major"><div class="time">15:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">開場｜テイルズフェス DAY1(横浜BUNTAI)</p><p class="how">ホテルから徒歩8分。開演は開場の後なので、15時ちょうど着でなくても余裕<span class="chip flex">チケット両日分・確保待ち(発表後すぐ)</span></p></div></div>
+      <div class="stop"><div class="time">終演後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">中華街で夕食 → ホテルへ(正式チェックイン)</p><p class="how">スタジアム前は中華街まで徒歩数分。DAY1の余韻はここで</p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>初日は「荷物先行・身軽で参戦」。</strong>部屋案内は15時以降でも、荷物だけ先に預ければ歩いて開場に向かえる。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 6/13 ═══ -->
+  <section class="day" id="t06-d2" style="--line-color:#E7211A">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">6.13</span><span class="w">SUN</span></div>
+      <div class="day-title">
+        <h2>昼は平和島、夜は千秋楽</h2>
+        <p class="theme">午前は京急で平和島までひと勝負。戻ってシャワー、そしてDAY2へ。</p>
+        <span class="line-tag" style="background:#E7211A">横浜 → 京急 → 平和島 → 戻って文体</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">午前</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">横浜 → ボートレース平和島</p><p class="how">京急本線の快特で約15分+徒歩/送迎バス。関内から片道35〜45分<span class="chip flex">行く日は可変。体力と相談</span></p></div></div>
+      <div class="stop"><div class="time">〜14時</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">平和島で勝負 → 横浜へ戻る</p><p class="how">深追いせず早めに撤収。開場に間に合う時間で切り上げる</p></div></div>
+      <div class="stop"><div class="time">14:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテルへ一旦戻ってシャワー</p><p class="how">部屋は確保済みなので、汗を流してさっぱりしてから会場へ。この一手間が効く</p></div></div>
+      <div class="stop major"><div class="time">15:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">開場｜テイルズフェス DAY2・千秋楽(横浜BUNTAI)</p><p class="how">徒歩8分。悔いなく</p></div></div>
+      <div class="stop"><div class="time">終演後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">中華街 or 関内で打ち上げ → 泊</p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>平和島はあくまでオプション。</strong>連休でもないので、疲れたら昼は横浜でゆっくりしてDAY2に全振りでもいい。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 6/14 ═══ -->
+  <section class="day" id="t06-d3" style="--line-color:#F68B1E">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">6.14</span><span class="w">MON</span></div>
+      <div class="day-title">
+        <h2>チェックアウト、帰還</h2>
+        <p class="theme">10時アウト。余韻を持って自宅方面へ。</p>
+        <span class="line-tag" style="background:#F68B1E">関内 → 横浜 → 東海道 → 自宅方面</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">〜10:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東横INN横浜スタジアム前2号館 チェックアウト</p><p class="how">10:00アウト。朝食は無料サービスを済ませてから</p></div></div>
+      <div class="stop"><div class="time">午前</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">関内 → 横浜 → 自宅方面へ</p><p class="how">帰路も経路は自由(東海道→東京→北陸新幹線 など)。土産を買うならこの日<span class="chip flex">可変枠</span></p></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ 出発前TODO ═══ -->
+  <section class="info" id="t06-todo">
+    <h2>出発前TODO</h2>
+    <ul class="check">
+      <li class="urgent"><span class="box"></span><span><strong>テイルズフェスのチケット確保</strong> 両日分。先行/一般の日程が出たら即動く</span></li>
+      <li class="urgent"><span class="box"></span><span><strong>東横INN横浜スタジアム前2号館の予約(2泊 19,095円)</strong> 予約開放は宿泊日の約半年前(2026年12月頃)。会員ログイン・支払い情報を事前に整えて開放直後に取る</span></li>
+      <li><span class="box"></span><span>2号館で確定。予約時に「2号館」を取り違えない(1号館とは別受付)</span></li>
+      <li><span class="box"></span><span>会員割引5%を効かせるため、東横INNクラブカード(デジタル会員証)を準備</span></li>
+      <li><span class="box"></span><span>自宅↔横浜の往路・復路の経路と切符を決める(昼の予定が固まってから)</span></li>
+      <li><span class="box"></span><span>平和島に行く日を決める(6/13午前が候補。行かないなら横浜でゆっくり)</span></li>
+    </ul>
+  </section>
+
+  <!-- ═══ 予算 ═══ -->
+  <section class="info" id="t06-budget">
+    <h2>予算まとめ</h2>
+    <table class="kv">
+      <tr><th>宿泊費</th><td>東横INN横浜スタジアム前2号館 2泊(6/12・6/13)。公式サイト割+会員割5%適用済み</td><td class="amount">19,095円</td></tr>
+      <tr><th>交通費</th><td>自宅↔横浜の往復+現地移動(根岸線・京急平和島 など)。経路により変動</td><td class="amount">目安 1〜2万円</td></tr>
+      <tr><th>チケット</th><td>テイルズフェス両日分。価格は発表待ち</td><td class="amount">発表待ち</td></tr>
+      <tr><th>食費・予備</th><td>中華街・現地食費(3日×約5,000円)</td><td class="amount">約15,000円</td></tr>
+      <tr class="total"><td colspan="2">総額目安(チケット除く)</td><td class="amount">約4〜4.5万円</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px">宿はイベント週末でも1泊平均9,500円と好条件。チケット代が確定したら総額に加算する。交通費は自宅からの経路で上下するので、昼の東京・平和島の予定と合わせて詰める。</p>
+  </section>
+
+  <!-- ═══ バックアップ ═══ -->
+  <section class="info" id="t06-backup">
+    <h2>もしもの備え</h2>
+    <div class="backup">
+      <h3><span class="flag">▶</span>スタジアム前2号館が取れなかったら</h3>
+      <p>まず1号館(距離は2号館とほぼ同じ・文体まで徒歩8分)を狙う。それも埋まっていたら、キャンセル無料で早くから枠が出るリッチモンド馬車道(文体まで徒歩11〜12分)を保険に。大浴場でしっかり汗を流したい気分が勝つなら、会場目の前のCOMENTO(徒歩1〜2分・大浴場)へ寄せる手もある。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>戻ってシャワーが物足りなければ</h3>
+      <p>スタジアム前は部屋のユニットバス。大浴場が欲しくなったら、横浜駅直結のスカイスパを1回だけ単発利用する折衷もある。ただ今回は「思うだけ」の温度感なので、基本は部屋のシャワーで十分。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>疲れたら(削り代リスト)</h3>
+      <p>① 6/13午前の平和島をやめて横浜でゆっくり ② 昼の東京遠征は最初から入れない ③ 中華街の打ち上げを軽めに。テイフェス両日は削らない前提で、昼の外出で調整する。連休でもないので、無理せず文体に集中するのがいちばん満足度が高い。</p>
+    </div>
+  </section>
+
+  <div class="claude-note">
+    <p>この宿は、ずいぶん回り道して辿り着きました。「どうせ週末は高いから東横インで無難に」から始まり、伊勢佐木長者町は駅から遠い、いっそ駅チカで東京に出やすい方が…と横浜駅や桜木町を検討し、新横浜まで一度は寄り道して、最終的に「関内から根岸線・歩いて文体」という最初の勘に戻ってスタジアム前2号館へ着地(同額だったので、新しめと言われる2号館で取り直して確定)。会場まで徒歩8分、中華街が隣、2泊19,095円と、条件も財布も気持ちよく噛み合いました。</p>
+    <p>途中、僕が「東横イン=チェックイン16時」と古い情報で粘って、15時INの予約画面で完敗したのは反省点です。おかげで「昼は外出→戻ってシャワー→開場」の理想プランがちゃんと成立しました。6/12は土曜なので、テイフェス両日は週末まるごと。平和島は行けたら行く、くらいの軽さで置いてあります。予約開放は半年前。そこだけ逃さず、あとは体調を整えて楽しんできてください。</p>
+    <span class="sign">── CLAUDE / 計画係(出発前に記す)</span>
+  </div>
+
+  <a class="back-to-top" href="#top">↑ 記録帳の表紙に戻る</a>
+  </article>
+  <footer>
+    <span>TRIP RECORD BOOK</span>
+    <span>VOL.2027 ── ENSEI 06</span>
+  </footer>
+
+</div>
+</body>
+</html>

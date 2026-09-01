@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>遠征記録帳 2026｜遠征01〜05</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DotGothic16&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17223B;          /* 濃紺インク */
+    --paper:#FBFBF8;        /* 白紙 */
+    --paper-2:#F2F2EC;      /* 罫紙 */
+    --stamp:#D8362A;        /* 判子の朱 */
+    --sobu:#F5B316;         /* 総武線イエロー */
+    --oedo:#B6007A;         /* 大江戸線マゼンタ */
+    --jingu:#00A97A;        /* 明治神宮前グリーン */
+    --hanzo:#7D6BC7;        /* 半蔵門線パープル */
+    --keihin:#009BD6;       /* 京浜東北ブルー */
+    --hokuriku:#2C4A8A;     /* 北陸新幹線ネイビー */
+    --draft:#1B6FB5;        /* 仮(検討中)の青 */
+    --line-w:3px;
+    font-size:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none!important;transition:none!important;} }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Zen Kaku Gothic New',sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;font-weight:600;letter-spacing:.02em;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ───────── 記録帳の表紙(本棚) ───────── */
+  header.book{
+    padding:64px 0 30px;
+    text-align:center;
+    border-bottom:var(--line-w) double var(--ink);
+    border-bottom-width:5px;
+    border-bottom-style:double;
+  }
+  header.book .era{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.75rem;letter-spacing:.4em;
+    color:var(--stamp);font-weight:600;margin-bottom:12px;
+  }
+  header.book h1{
+    font-family:'Shippori Mincho B1',serif;
+    font-weight:800;
+    font-size:clamp(2.4rem,10vw,3.6rem);
+    letter-spacing:.18em;
+  }
+  header.book .tagline{
+    margin-top:10px;font-size:.85rem;color:#4A5568;letter-spacing:.06em;
+  }
+  .shelf{padding:28px 0 10px;}
+  .shelf h2{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;font-weight:600;letter-spacing:.3em;
+    color:#8A8F98;margin-bottom:14px;
+  }
+  .trip-card{
+    display:grid;
+    grid-template-columns:70px 1fr auto;
+    gap:14px;align-items:center;
+    border:2px solid var(--ink);border-radius:10px;
+    background:#fff;
+    padding:16px 18px;
+    margin-bottom:12px;
+    text-decoration:none;color:var(--ink);
+    transition:transform .12s ease,box-shadow .12s ease;
+  }
+  .trip-card:hover,.trip-card:focus-visible{
+    transform:translateY(-2px);
+    box-shadow:0 4px 0 var(--ink);
+  }
+  .trip-card:focus-visible{outline:3px solid var(--stamp);outline-offset:3px;}
+  .trip-card .no{
+    font-family:'DotGothic16',monospace;
+    color:var(--stamp);
+    border:2px solid var(--stamp);border-radius:50%;
+    width:56px;height:56px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transform:rotate(-6deg);line-height:1.1;
+    font-size:.68rem;
+  }
+  .trip-card .no b{font-size:1.05rem;}
+  .trip-card .meta .date{
+    display:block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;font-weight:600;
+    color:var(--stamp);letter-spacing:.08em;
+    font-variant-numeric:tabular-nums;
+  }
+  .trip-card .meta .date{
+    display:block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;font-weight:600;letter-spacing:.08em;
+    color:var(--stamp);
+    font-variant-numeric:tabular-nums;
+    margin-bottom:1px;
+  }
+  .trip-card .meta .name{
+    font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:1.1rem;line-height:1.4;
+  }
+  .trip-card .meta .detail{
+    font-size:.75rem;color:#5A6472;margin-top:2px;
+  }
+  .trip-card .go{
+    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.9rem;
+  }
+  @media(max-width:440px){
+    .trip-card{grid-template-columns:56px 1fr auto;padding:14px;}
+    .trip-card .no{width:48px;height:48px;font-size:.6rem;}
+  }
+  /* 仮(検討中・計画中)の旅。確定した旅と一目で区別するため青+破線(青焼き=下書きのイメージ) */
+  .trip-card.tentative{
+    border-color:var(--draft);border-style:dashed;
+    background:#F5FAFE;
+  }
+  .trip-card.tentative:hover,.trip-card.tentative:focus-visible{box-shadow:0 4px 0 var(--draft);}
+  .trip-card.tentative .no{border-color:var(--draft);color:var(--draft);}
+  .trip-card.tentative .meta .date{color:var(--draft);}
+  .trip-card.tentative .go{color:var(--draft);}
+  .trip-card.tentative .meta .name::after{
+    content:"仮";
+    display:inline-block;vertical-align:middle;
+    margin-left:8px;transform:translateY(-2px);
+    font-family:'DotGothic16',monospace;
+    font-size:.6rem;font-weight:400;letter-spacing:.1em;
+    color:var(--draft);background:#E6F2FB;
+    border:1.5px solid var(--draft);border-radius:3px;
+    padding:0 7px;
+  }
+  .shelf-legend{
+    display:flex;align-items:center;gap:7px;
+    font-size:.7rem;color:#8A8F98;margin:-6px 0 14px;
+  }
+  .shelf-legend .swatch{
+    width:14px;height:14px;flex:none;
+    border:2px dashed var(--draft);border-radius:3px;background:#F5FAFE;
+  }
+  .trip-card.empty{
+    border-style:dashed;background:transparent;color:#9AA0A6;
+    justify-items:start;
+  }
+  .trip-card.empty:hover{transform:none;box-shadow:none;}
+  .trip-card.empty .no{border-color:#C9C9BE;color:#C9C9BE;}
+  .year-block{margin-bottom:26px;}
+  .year-label{
+    display:flex;align-items:center;gap:14px;
+    font-family:'Shippori Mincho B1',serif;font-weight:800;
+    font-size:1.5rem;letter-spacing:.15em;
+    margin-bottom:14px;
+  }
+  .year-label::after{
+    content:"";flex:1;height:2px;background:var(--ink);opacity:.25;
+  }
+  .year-label .yr-note{
+    font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:600;
+    letter-spacing:.2em;color:#8A8F98;
+  }
+  /* 初期表示は目次(本棚)だけ。カードをタップした章のみ開く */
+  article.trip{display:none;}
+  article.trip:target{display:block;}
+  @media print{ article.trip{display:block;} }
+  article.trip{
+    margin-top:56px;
+    border-top:5px double var(--ink);
+  }
+  .trip-chapter{
+    display:flex;align-items:center;gap:10px;
+    padding:20px 0 0;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.7rem;font-weight:600;letter-spacing:.25em;color:#8A8F98;
+  }
+  .back-to-top{
+    display:inline-block;margin-top:28px;
+    font-size:.8rem;font-weight:700;color:var(--ink);
+    text-decoration:none;border-bottom:2px solid var(--stamp);
+  }
+
+  /* ───────── 表紙 ───────── */
+  header.cover{
+    padding:56px 0 36px;
+    border-bottom:var(--line-w) solid var(--ink);
+    position:relative;
+  }
+  .cover .era{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.8rem;letter-spacing:.35em;
+    color:var(--stamp);font-weight:600;
+    margin-bottom:10px;
+  }
+  .cover h1{
+    font-family:'Shippori Mincho B1',serif;
+    font-weight:800;
+    font-size:clamp(2.1rem,8vw,3.2rem);
+    line-height:1.25;
+    letter-spacing:.06em;
+  }
+  .cover .sub{
+    margin-top:14px;
+    font-size:.95rem;
+    color:#4A5568;
+  }
+  .cover .route-strip{
+    margin-top:26px;
+    display:flex;align-items:center;gap:0;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;font-weight:600;
+    flex-wrap:wrap;row-gap:8px;
+  }
+  .route-strip .node{
+    padding:3px 10px;border:2px solid var(--ink);border-radius:99px;
+    background:#fff;white-space:nowrap;
+  }
+  .route-strip .seg{width:22px;height:3px;background:var(--ink);}
+  /* 二案併記の旅で使う。プランB側は破線ノードで「まだ確定でない」ことを示す */
+  .route-strip.plan-b .node{border-style:dashed;border-color:var(--draft);color:var(--draft);}
+  .route-strip.plan-b .seg{background:var(--draft);}
+  .plan-label{
+    display:inline-block;margin:16px 0 4px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.62rem;font-weight:700;letter-spacing:.15em;
+    color:var(--stamp);
+  }
+  .cover-stamp{
+    position:absolute;right:0;top:52px;
+    width:92px;height:92px;border:3px double var(--stamp);
+    border-radius:50%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    color:var(--stamp);
+    transform:rotate(-8deg);
+    font-family:'DotGothic16',monospace;
+    line-height:1.2;text-align:center;
+    opacity:.92;
+  }
+  .cover-stamp .big{font-size:1.5rem;}
+  .cover-stamp .small{font-size:.62rem;letter-spacing:.1em;}
+  @media(max-width:480px){ .cover-stamp{width:76px;height:76px;top:44px;} .cover-stamp .big{font-size:1.2rem;} }
+
+  .trip-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    border-bottom:1px solid #D6D6CC;
+  }
+  .trip-stats div{
+    padding:16px 4px;text-align:center;
+    border-right:1px solid #D6D6CC;
+  }
+  .trip-stats div:last-child{border-right:none;}
+  .trip-stats .num{
+    font-family:'Shippori Mincho B1',serif;font-weight:800;
+    font-size:1.5rem;display:block;line-height:1.2;
+  }
+  .trip-stats .lbl{font-size:.72rem;color:#6B7280;letter-spacing:.08em;}
+
+  /* ───────── 目次 ───────── */
+  nav.toc{padding:22px 0 6px;}
+  nav.toc ol{
+    list-style:none;
+    display:flex;flex-wrap:wrap;gap:8px;
+  }
+  nav.toc a{
+    display:inline-flex;align-items:center;gap:7px;
+    text-decoration:none;color:var(--ink);
+    border:1.5px solid var(--ink);
+    padding:5px 12px;border-radius:99px;
+    font-size:.8rem;font-weight:700;
+    background:#fff;
+    transition:transform .12s ease;
+  }
+  nav.toc a:hover,nav.toc a:focus-visible{transform:translateY(-2px);}
+  nav.toc a:focus-visible{outline:3px solid var(--stamp);outline-offset:2px;}
+  nav.toc .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+  /* ───────── 日別カード ───────── */
+  section.day{padding:44px 0 8px;}
+  .day-head{
+    display:flex;align-items:flex-start;gap:16px;
+    margin-bottom:8px;
+  }
+  .day-stamp{
+    flex:none;
+    width:64px;height:64px;
+    border:2.5px solid var(--stamp);
+    border-radius:50%;
+    color:var(--stamp);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-family:'DotGothic16',monospace;
+    line-height:1.05;
+    transform:rotate(-6deg);
+  }
+  .day-stamp .d{font-size:1.35rem;}
+  .day-stamp .w{font-size:.6rem;letter-spacing:.15em;}
+  .day-title h2{
+    font-family:'Shippori Mincho B1',serif;
+    font-weight:800;font-size:1.45rem;letter-spacing:.04em;line-height:1.35;
+  }
+  .day-title .theme{
+    font-size:.82rem;color:#4A5568;margin-top:2px;
+  }
+  .line-tag{
+    display:inline-block;margin-top:8px;
+    font-family:'IBM Plex Mono',monospace;font-size:.66rem;font-weight:600;
+    letter-spacing:.12em;color:#fff;
+    padding:2px 10px;border-radius:3px;
+  }
+
+  /* 路線図タイムライン(このしおりの主役) */
+  .route{
+    margin-top:18px;
+    position:relative;
+  }
+  .stop{
+    display:grid;
+    grid-template-columns:64px 30px 1fr;
+    align-items:flex-start;
+    position:relative;
+  }
+  @media(max-width:400px){ .stop{grid-template-columns:56px 26px 1fr;} }
+  .stop .time{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;font-size:.82rem;
+    padding-top:2px;text-align:right;
+    color:var(--ink);
+    font-variant-numeric:tabular-nums;
+  }
+  .stop .time small{display:block;font-size:.6rem;color:#9AA0A6;font-weight:500;}
+  .stop .rail{
+    position:relative;align-self:stretch;
+    display:flex;justify-content:center;
+  }
+  .stop .rail::before{
+    content:"";position:absolute;top:0;bottom:0;
+    width:var(--line-w);
+    background:var(--line-color,#999);
+    left:50%;transform:translateX(-50%);
+  }
+  .stop:first-child .rail::before{top:8px;}
+  .stop:last-child .rail::before{bottom:calc(100% - 14px);}
+  .stop .rail .pin{
+    position:relative;z-index:1;
+    width:13px;height:13px;border-radius:50%;
+    background:#fff;
+    border:3px solid var(--line-color,#999);
+    margin-top:5px;
+  }
+  .stop.major .rail .pin{
+    width:17px;height:17px;
+    background:var(--line-color,#999);
+    box-shadow:0 0 0 3px #fff,0 0 0 5px var(--line-color,#999);
+    margin-top:3px;
+  }
+  .stop .body{padding:0 0 22px 6px;}
+  .stop .what{font-weight:700;font-size:.95rem;line-height:1.5;}
+  .stop.major .what{
+    font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:1.05rem;
+  }
+  .stop .how{font-size:.8rem;color:#5A6472;margin-top:2px;}
+  .chip{
+    display:inline-block;font-size:.66rem;font-weight:700;
+    padding:1px 8px;border-radius:3px;margin:4px 4px 0 0;
+    border:1.5px solid var(--ink);background:#fff;
+    vertical-align:middle;
+  }
+  .chip.paid{border-color:#2E7D52;color:#2E7D52;}
+  .chip.cash{border-color:var(--stamp);color:var(--stamp);}
+  .chip.flex{border-color:#B7791F;color:#B7791F;background:#FFF9EC;}
+  .chip.meal{border-color:#7A5C2E;color:#7A5C2E;background:#FBF7F1;}
+
+  /* 日別メモ */
+  .day-note{
+    background:var(--paper-2);
+    border-left:4px solid var(--ink);
+    padding:14px 16px;
+    font-size:.85rem;
+    border-radius:0 6px 6px 0;
+    margin-top:4px;
+  }
+  .day-note strong{font-weight:700;}
+  /* 締め処理用: 実際の記録 */
+  .stop.skipped .what{text-decoration:line-through;opacity:.5;}
+  .stop.skipped .how{opacity:.5;}
+  .stop.skipped .rail .pin{border-style:dashed;background:#fff;opacity:.5;}
+  .day-note.actual{
+    border-left-color:var(--stamp);
+    background:#FBF0EE;
+  }
+  .day-note.actual::before{
+    content:"実際の記録";
+    display:inline-block;
+    font-family:'DotGothic16',monospace;
+    font-size:.7rem;color:var(--stamp);
+    border:1.5px solid var(--stamp);border-radius:3px;
+    padding:0 8px;margin-bottom:6px;
+  }
+  .day-note ul{list-style:none;}
+  .day-note li{padding-left:1.2em;text-indent:-1.2em;}
+  .day-note li::before{content:"▸ ";color:var(--stamp);font-weight:700;}
+
+  /* 現地家計簿(レシート風) */
+  .receipt{width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:.78rem;margin-top:10px;}
+  .receipt td{padding:3px 0;border-bottom:1px dotted #D8C9C6;}
+  .receipt td.item{color:#4A5568;}
+  .receipt td.amt{text-align:right;white-space:nowrap;font-weight:600;font-variant-numeric:tabular-nums;}
+  .receipt td.amt.plus{color:#2E7D52;}
+  .receipt tr.subtotal td{border-bottom:none;border-top:2px solid var(--stamp);padding-top:6px;font-weight:700;}
+  .receipt tr.subtotal td.amt{color:var(--stamp);}
+  .receipt tr.subtotal td.amt.plus{color:#2E7D52;}
+
+  /* イベントアイコン(自作の線画。写真や版権絵は使わず、しおりの筆致に合わせたオリジナル) */
+  .event-icon{display:inline-block;width:30px;height:24px;vertical-align:-7px;margin-right:6px;}
+
+  /* 旅の写真(実際に撮った記録写真。imagesディレクトリに遠征ごとのフォルダで格納) */
+  .photos{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:10px;
+    margin:18px 0 4px;
+  }
+  .photo{
+    margin:0;
+    border:1.5px solid var(--rule);
+    border-radius:5px;
+    background:#fff;
+    padding:6px 6px 0;
+    box-shadow:0 1px 3px rgba(26,29,33,.07);
+  }
+  .photo a{display:block;border-bottom:none;}
+  .photo img{
+    display:block;width:100%;height:190px;
+    object-fit:cover;object-position:center;
+    border-radius:3px;
+    background:#EDEDE6;
+  }
+  .photo figcaption{
+    font-family:'DotGothic16',monospace;
+    font-size:.66rem;line-height:1.6;
+    color:#6B7078;
+    padding:6px 2px 7px;
+    letter-spacing:.02em;
+  }
+  @media print{
+    .photos{grid-template-columns:repeat(4,1fr);}
+    .photo{break-inside:avoid;}
+    .photo img{height:120px;}
+  }
+
+  /* Claudeより一筆(各章末の感想欄) */
+  .claude-note{
+    margin-top:40px;
+    border:2px solid var(--ink);
+    border-radius:8px;
+    background:#fff;
+    padding:18px 20px 16px;
+    position:relative;
+    font-size:.88rem;
+    line-height:1.9;
+  }
+  .claude-note::before{
+    content:"Claudeより一筆";
+    position:absolute;top:-12px;left:14px;
+    font-family:'DotGothic16',monospace;
+    font-size:.72rem;color:var(--stamp);
+    background:var(--paper);
+    border:1.5px solid var(--stamp);border-radius:3px;
+    padding:1px 10px;
+  }
+  .claude-note p+p{margin-top:8px;}
+  .claude-note .sign{
+    display:block;margin-top:10px;text-align:right;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;color:#8A8F98;letter-spacing:.15em;
+  }
+
+  /* ───────── 汎用セクション ───────── */
+  section.info{padding:44px 0 8px;}
+  section.info h2{
+    font-family:'Shippori Mincho B1',serif;font-weight:800;
+    font-size:1.35rem;letter-spacing:.05em;
+    display:flex;align-items:center;gap:12px;
+    margin-bottom:18px;
+  }
+  section.info h2::after{
+    content:"";flex:1;height:var(--line-w);background:var(--ink);
+  }
+  .check{list-style:none;}
+  .check li{
+    display:flex;gap:12px;align-items:flex-start;
+    padding:11px 0;border-bottom:1px dashed #C9C9BE;
+    font-size:.92rem;
+  }
+  .check li .box{
+    flex:none;width:20px;height:20px;margin-top:3px;
+    border:2px solid var(--ink);border-radius:4px;background:#fff;
+  }
+  .check li.urgent .box{border-color:var(--stamp);}
+  .check li.urgent strong{color:var(--stamp);}
+  .check li.done{opacity:.55;}
+  .check li.done .box{background:#9CA3AF;border-color:#9CA3AF;}
+  .check li.done s{color:#6B7280;}
+  .kv{
+    width:100%;border-collapse:collapse;font-size:.88rem;
+  }
+  .kv th,.kv td{
+    text-align:left;padding:9px 10px;
+    border-bottom:1px solid #DDDDD2;
+    vertical-align:top;
+  }
+  .kv th{font-size:.72rem;color:#6B7280;font-weight:700;letter-spacing:.06em;white-space:nowrap;}
+  .kv td.amount{text-align:right;font-family:'IBM Plex Mono',monospace;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .kv tr.total td{
+    border-top:2.5px solid var(--ink);border-bottom:none;
+    font-weight:800;font-size:1rem;
+    font-family:'Shippori Mincho B1',serif;
+  }
+  .backup{
+    border:2px solid var(--ink);border-radius:8px;
+    padding:16px 18px;margin-bottom:14px;background:#fff;
+    font-size:.88rem;
+  }
+  .backup h3{
+    font-size:.95rem;font-weight:800;margin-bottom:4px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .backup h3 .flag{
+    font-family:'DotGothic16',monospace;color:var(--stamp);font-size:.8rem;
+  }
+  footer{
+    margin-top:64px;padding-top:20px;
+    border-top:var(--line-w) solid var(--ink);
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:.72rem;color:#8A8F98;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  @media print{
+    nav.toc{display:none;}
+    section.day,section.info{page-break-inside:avoid;}
+    body{background:#fff;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- ═══════════ 年の表紙 ═══════════ -->
+  <header class="book" id="top">
+    <p class="era">TRIP RECORD BOOK ── 2026</p>
+    <h1>遠征記録帳 2026</h1>
+    <p class="tagline">2026年の旅。タップで章が開きます。</p>
+  </header>
+
+  <div class="shelf">
+    <h2>─ 2026年の収録旅程(タップで開く)─</h2>
+    <p class="shelf-legend"><span class="swatch" aria-hidden="true"></span>青いカードは「仮」──日程・内容がまだ確定していない検討中の旅</p>
+    <div class="year-block">
+      <a class="trip-card" href="#trip01">
+        <span class="no" aria-hidden="true">遠征<b>01</b></span>
+        <span class="meta">
+          <span class="date">2026.05.01 – 05.06</span>
+          <span class="name">GW遠征 大阪・東京</span>
+          <span class="detail">5泊6日｜ボートレースびわこ・阪神2連戦・声優イベント・お笑い2・スパコミ・ミリオンライブ｜約16.1万円・完了</span>
+        </span>
+        <span class="go">→</span>
+      </a>
+      <a class="trip-card" href="#trip02">
+        <span class="no" aria-hidden="true">遠征<b>02</b></span>
+        <span class="meta">
+          <span class="date">2026.07.03 – 07.06</span>
+          <span class="name">7月遠征 池袋・平和島・蒲田・六本木</span>
+          <span class="detail">3泊4日｜お笑い2・平和島ボート&amp;スロット・テイフェス2DAYS・秋葉原｜約10.2万円・完了</span>
+        </span>
+        <span class="go">→</span>
+      </a>
+      <a class="trip-card" href="#trip03">
+        <span class="no" aria-hidden="true">遠征<b>03</b></span>
+        <span class="meta">
+          <span class="date">2026.08.11 – 08.15</span>
+          <span class="name">お盆遠征 東京・横浜</span>
+          <span class="detail">4泊5日｜東京ドーム3タテ・江戸川ナイス収録・KOC・DQ40th・コミケ・ねづっち｜約14.1万円・完了</span>
+        </span>
+        <span class="go">→</span>
+      </a>
+      <a class="trip-card" href="#trip04">
+        <span class="no" aria-hidden="true">遠征<b>04</b></span>
+        <span class="meta">
+          <span class="date">2026.09.18 – 09.23</span>
+          <span class="name">SW遠征 大阪・東京</span>
+          <span class="detail">5泊6日｜甲子園歴史館・甲子園ナイター・ミリオン両日・アニメ祭・TGS・パチスロサミ(仮)・神宮2連戦｜約13.9万円</span>
+        </span>
+        <span class="go">→</span>
+      </a>
+      <a class="trip-card tentative" href="#trip05">
+        <span class="no" aria-hidden="true">遠征<b>05</b></span>
+        <span class="meta">
+          <span class="date">2026.12.26 – 12.30</span>
+          <span class="name">年末遠征 浅草蔵前</span>
+          <span class="detail">4泊5日(最大)｜コミケC109 1日目・有馬記念(抽選)・自由枠2日｜宿4泊 36,505円確保・削り代方式で調整中</span>
+        </span>
+        <span class="go">→</span>
+      </a>
+    </div>
+    <a class="trip-card" href="index.html" style="margin-top:18px;border-style:solid;border-color:var(--ink)">
+      <span class="no" aria-hidden="true">表<b>紙</b></span>
+      <span class="meta">
+        <span class="name">記録帳の表紙へ戻る</span>
+        <span class="detail">全年の一覧・横断台帳・宿泊予約控はこちら｜別ページで開きます</span>
+      </span>
+      <span class="go">→</span>
+    </a>
+  </div>
+
+  <!--
+    ◆ このファイルについて ◆
+      2026年の遠征本編を収めた年ファイル。玄関は index.html(表紙＋横断台帳)。
+      index.html のカードから「2026.html#tripNN」で直接この章へ飛んでくる。
+
+    ◆ 追記ルール(このファイルをアップロードされたClaudeへ)◆
+    1. 新しい旅は <article class="trip" id="tripNN"> として既存articleの直後に追加する
+       ※初期表示は章の一覧のみ。章は「article.trip:target」で開く方式なので、新しい章に
+         display関連の追加CSSは不要。id と このファイル冒頭の .chapter-list のリンクを一致させる
+    2. 章を1本足したら、必ず index.html 側の .shelf にも trip-card を追加する
+       (href は "2026.html#tripNN" の形。同一ファイル内アンカーではない)
+    3. 章内のアンカーidは衝突防止のため「tNN-」を接頭辞にする(例: t03-d1, t03-todo)
+       ※歴史的経緯により例外あり: お盆遠征(遠征03)は接頭辞なし(#d11等)、SW遠征(遠征04)は
+         「t03-」接頭辞、GW遠征(遠征01)は「t01-」、7月遠征(遠征02)は「t02-」。どれも変更不要。
+         番号とidの対応はカードのhref(#trip01等)が正であり、内部アンカーの接頭辞とは一致しない
+    4. デザイントークン(:root)・路線図タイムライン(.route/.stop)・チップ(.chip)は共通部品として再利用する
+       ※チップの種類: .paid(支払済・緑) / .cash(現金のみ・朱) / .flex(可変枠・琥珀) / .meal(飯の枠・茶)
+    5. ◆Claudeより一筆◆ 各章の末尾(back-to-topの直前)に <div class="claude-note"> でClaude自身の
+       感想を書く。計画確定時のマージでは「計画係(出発前に記す)」として、締め処理では実際の記録を
+       踏まえた感想に書き換える(または追記する)。定型文ではなく、その旅の具体的な中身に触れた
+       正直な一筆にすること
+    6. ◆旅の締め処理◆ 帰還後に「遠征NNを締めて」と依頼されたら章をアーカイブ化する:
+       (a) 支払済/未払系のチップ(.chip.paid等)を削除(現金のみ等も含め支払情報は全撤去)
+       (b) 出発前TODOセクションを削除(または達成メモに置換)
+       (c) 予算まとめを「実績」表記にする(ユーザーから実際の支出報告があれば反映)
+       (d) index.html 側の一覧カードの .no 内に「済」を示す(例: 遠征01の下に「完」)、
+           detailの末尾に「完了」を付す
+       (e) もしもの備え等の運用セクションは思い出として残してよい(削除はユーザーに確認)
+       (f) ◆予定と実際の差分を記録する◆ ユーザーから当日の実際(スキップ・変更・ハプニング・
+           時刻ズレ等)を聞き取り、次の様式で反映する:
+           ・行かなかった/やらなかった予定 → .stop に class="skipped" を追加(打消し表示)
+           ・変更・ハプニング・感想 → 各日の末尾に <div class="day-note actual"> で「実際の記録」
+             メモを追加(例:「雨天中断で終了20時」「満天の湯はスキップし直接野毛へ」)
+           ・旅全体の振り返りがあれば章末に「後日談」ブロック(.day-note.actual流用可)を置く
+           ・聞き取りは日ごとに簡潔に。ユーザーが語らない日は無理に埋めず予定のまま残してよい
+       (g) ◆写真◆ 実際に撮った写真があれば images/tNN/ に置き、各日の末尾に
+           <div class="photos"> のグリッドで並べる。ファイル名は dX-NN-内容.jpg(例: d3-01-hasegawa-tonkatsu.jpg)。
+           Web用に長辺1600px・quality82程度へ圧縮し、EXIFの回転はImageOps.exif_transposeで
+           実データに反映してから保存する(これを忘れると縦写真が横倒しになる)。
+           サムネは高さ固定+object-fit:coverで揃え、リンクで原寸を開けるようにする
+       (h) 締めたら、その旅の知見を index.html の横断台帳(article#ledger)へ転記する
+    7. フッターの VOL./ENSEI 番号を更新する
+    8. CSSは index.html と同一のものを複製している。CSSを直すときは全ファイルに同じ変更を入れる
+  -->
+
+<!-- ═══════════ 遠征01:GW遠征 大阪・東京 ═══════════ -->
+  <article class="trip" id="trip01">
+  <p class="trip-chapter">ENSEI 01 ── 2026.05</p>
+
+  <header class="cover">
+    <p class="era">2026.05.01 — 05.06</p>
+    <h1>GW遠征のしおり<br>大阪・東京</h1>
+    <p class="sub">びわこボートレース → 阪神2連戦 → 声優イベント(築地) → お笑いダブルヘッダー(神田・六本木) → スパコミ → ミリオンライブ。西から東へ、5泊6日の記念すべき遠征第一号。</p>
+    <div class="route-strip" aria-label="行程の概要">
+      <span class="node">高岡</span><span class="seg"></span>
+      <span class="node">阪神尼崎 2泊</span><span class="seg"></span>
+      <span class="node">人形町 泊</span><span class="seg"></span>
+      <span class="node">神田 2泊</span><span class="seg"></span>
+      <span class="node">高岡</span>
+    </div>
+    <div class="cover-stamp" aria-hidden="true">
+      <span class="small">5泊6日</span>
+      <span class="big">GW遠征</span>
+      <span class="small">既遂・記録済</span>
+    </div>
+  </header>
+
+  <div class="trip-stats">
+    <div><span class="num">6<span style="font-size:.8rem">日</span></span><span class="lbl">5泊6日</span></div>
+    <div><span class="num">8<span style="font-size:.8rem">本</span></span><span class="lbl">イベント数</span></div>
+    <div><span class="num">16.1<span style="font-size:.8rem">万</span></span><span class="lbl">総支出実績</span></div>
+  </div>
+
+  <nav class="toc" aria-label="目次">
+    <ol>
+      <li><a href="#t01-d1"><span class="dot" style="background:#2C4A8A"></span>5/1 びわこ・甲子園</a></li>
+      <li><a href="#t01-d2"><span class="dot" style="background:#0F8B5A"></span>5/2 尼崎連戦</a></li>
+      <li><a href="#t01-d3"><span class="dot" style="background:#B6007A"></span>5/3 築地・秋葉原</a></li>
+      <li><a href="#t01-d4"><span class="dot" style="background:#B7791F"></span>5/4 神田・六本木</a></li>
+      <li><a href="#t01-d5"><span class="dot" style="background:#009BD6"></span>5/5 有明・ミリオン</a></li>
+      <li><a href="#t01-d6"><span class="dot" style="background:#7D6BC7"></span>5/6 帰還</a></li>
+      <li><a href="#t01-budget"><span class="dot" style="background:var(--ink)"></span>予算</a></li>
+    </ol>
+  </nav>
+
+  <!-- ═══ 5/1 ═══ -->
+  <section class="day" id="t01-d1" style="--line-color:#2C4A8A">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">5.1</span><span class="w">FRI</span></div>
+      <div class="day-title">
+        <h2>琵琶湖の風と聖地ナイター</h2>
+        <p class="theme">高岡から一気に大津京へ、ボートレースを挟んで甲子園ナイターへ。</p>
+        <span class="line-tag" style="background:#2C4A8A">城端線 → つるぎ → サンダーバード → 湖西線 → 阪神電車</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">08:02</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">高岡駅 発｜城端線</p></div></div>
+      <div class="stop major"><div class="time">08:24</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新高岡駅 発｜つるぎ7号 → 09:39敦賀駅 着</p></div></div>
+      <div class="stop major"><div class="time">09:34</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">敦賀駅 発｜サンダーバード14号 → 10:35京都駅 着</p></div></div>
+      <div class="stop"><div class="time">10:45</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">京都駅 発｜湖西線 → 10:55大津京駅 着</p></div></div>
+      <div class="stop major"><div class="time">11:00〜13:35</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ボートレースびわこ(2R〜6R勝負、江戸川をテレボートでつまむ)</p><p class="how">場内グルメを楽しみつつしっかり勝負</p></div></div>
+      <div class="stop"><div class="time">14:10</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">大津京駅 発 → 16:13大阪駅 着</p></div></div>
+      <div class="stop"><div class="time">15:18</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">阪神 大阪梅田駅 発 → 16:33阪神尼崎駅 着</p></div></div>
+      <div class="stop"><div class="time">15:35〜16:15</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東横イン阪神尼崎駅前 チェックイン</p><p class="how">7,600円<span class="chip cash">現地払い</span></p></div></div>
+      <div class="stop"><div class="time">16:20</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">阪神尼崎駅 発 → 16:30甲子園駅 着</p></div></div>
+      <div class="stop major"><div class="time">18:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">阪神 vs 巨人 試合開始</p><p class="how">甲子園グルメ・ジェット風船で観戦</p></div></div>
+      <div class="stop"><div class="time">終演後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東横イン阪神尼崎駅前 泊</p></div></div>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li>浜風が想像以上に寒く、今後の遠征で要注意ポイントに。</li>
+        <li>阪神は3対5で敗戦。ただし10安打とチャンスは多く、内容自体はまあまあ良かった。</li>
+        <li>ボートレースびわこはプラス収支で、小遣いが少し増えた。</li>
+      </ul>
+      <table class="receipt">
+        <tr><td class="item">電車代</td><td class="amt">1,760円</td></tr>
+        <tr><td class="item">朝ごはん(おにぎり・お茶)</td><td class="amt">316円</td></tr>
+        <tr><td class="item">ボートレース場グルメ(軽食)</td><td class="amt">1,080円</td></tr>
+        <tr><td class="item">大阪駅弁当</td><td class="amt">1,294円</td></tr>
+        <tr><td class="item">甲子園グルメ</td><td class="amt">850円</td></tr>
+        <tr><td class="item">オリジン弁当</td><td class="amt">1,331円</td></tr>
+        <tr><td class="item">ホテル前コンビニ</td><td class="amt">268円</td></tr>
+        <tr><td class="item">ジェット風船</td><td class="amt">700円</td></tr>
+        <tr><td class="item">ボートレース(勝ち)</td><td class="amt plus">▲2,950円</td></tr>
+        <tr class="subtotal"><td>日計</td><td class="amt">4,649円</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 5/2 ═══ -->
+  <section class="day" id="t01-d2" style="--line-color:#0F8B5A">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">5.2</span><span class="w">SAT</span></div>
+      <div class="day-title">
+        <h2>一人焼肉 & 伝統の一戦デーゲーム</h2>
+        <p class="theme">開店アタックは不発、代わりに油そばと連戦デーゲーム。</p>
+        <span class="line-tag" style="background:#0F8B5A">尼崎 → 甲子園 → 尼崎中央商店街</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">午前</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ゆっくり起床、梅田へ移動</p></div></div>
+      <div class="stop skipped"><div class="time">〜11:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ランチ:「ひとりカルビ1965」開店アタック</p><p class="how">今回はスキップ</p></div></div>
+      <div class="stop"><div class="time">昼</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ラーメンたんろん 本店</p><p class="how">油そばはまあまあ</p></div></div>
+      <div class="stop major"><div class="time">午後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">阪神 vs 巨人(デーゲーム)</p></div></div>
+      <div class="stop"><div class="time">17:40頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">尼崎センタープール前駅で途中下車</p></div></div>
+      <div class="stop skipped"><div class="time">17:45〜19:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">蓬川温泉 みずきの湯</p><p class="how">炭酸泉とサウナで疲労リセット予定だったがスキップ</p></div></div>
+      <div class="stop"><div class="time">19:30〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">阪神尼崎駅へ移動 & 買い出し</p><p class="how">尼崎中央商店街等でテイクアウトをいくつか調達</p></div></div>
+      <div class="stop"><div class="time">20:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテル帰還</p><p class="how">10,630円<span class="chip cash">現地払い</span> コインランドリーを回す</p></div></div>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li>阪神が勝ってよかった。</li>
+        <li>みずきの湯はやめてホテルにテイクアウトでいくつか買って早めに帰った。</li>
+      </ul>
+      <table class="receipt">
+        <tr><td class="item">ラーメン(昼食)</td><td class="amt">1,100円</td></tr>
+        <tr><td class="item">球場グルメ(肉まん・おにぎり)</td><td class="amt">990円</td></tr>
+        <tr><td class="item">夕飯(バーガーキング・松屋)</td><td class="amt">2,000円</td></tr>
+        <tr><td class="item">洗濯</td><td class="amt">430円</td></tr>
+        <tr><td class="item">交通費</td><td class="amt">560円</td></tr>
+        <tr class="subtotal"><td>日計</td><td class="amt">5,080円</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 5/3 ═══ -->
+  <section class="day" id="t01-d3" style="--line-color:#B6007A">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">5.3</span><span class="w">SUN</span></div>
+      <div class="day-title">
+        <h2>築地から夜の秋葉原へ</h2>
+        <p class="theme">新幹線で東京入り、久々のシーサイドコミュニケーションズへ。</p>
+        <span class="line-tag" style="background:#B6007A">新幹線のぞみ → 築地 → 秋葉原</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop major"><div class="time">12:33</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新幹線のぞみで東京へ</p></div></div>
+      <div class="stop"><div class="time">15:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東横INN日本橋人形町 チェックイン</p><p class="how">8,645円<span class="chip cash">現地払い</span></p></div></div>
+      <div class="stop major"><div class="time">17:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">シーサイドコミュニケーションズのイベントへ参戦(築地)</p></div></div>
+      <div class="stop"><div class="time">〜20:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">イベント終演(築地)</p></div></div>
+      <div class="stop"><div class="time">20:15頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">築地駅 発 → 20:25頃秋葉原駅 着</p></div></div>
+      <div class="stop major"><div class="time">20:30〜21:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">スシロー秋葉原</p></div></div>
+      <div class="stop"><div class="time">22:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテル帰還</p></div></div>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li>シーサイドコミュニケーションズのイベントは6年ぶりの参加。小さいホールになっていて、以前ほどの人気はなかったが、久々の「さっつん」は良かった。</li>
+        <li>甲子園(阪神戦)は最後土砂降りで中断とのことで、行かずに済んでよかった。</li>
+        <li>スシローは食いすぎた。</li>
+      </ul>
+      <table class="receipt">
+        <tr><td class="item">弁当</td><td class="amt">1,252円</td></tr>
+        <tr><td class="item">堂島ロール</td><td class="amt">430円</td></tr>
+        <tr><td class="item">スシロー(夕飯)</td><td class="amt">2,180円</td></tr>
+        <tr><td class="item">ジュース</td><td class="amt">250円</td></tr>
+        <tr><td class="item">交通費</td><td class="amt">964円</td></tr>
+        <tr><td class="item">コインロッカー</td><td class="amt">500円</td></tr>
+        <tr class="subtotal"><td>日計</td><td class="amt">5,576円</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 5/4 ═══ -->
+  <section class="day" id="t01-d4" style="--line-color:#B7791F">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">5.4</span><span class="w">MON・祝</span></div>
+      <div class="day-title">
+        <h2>お笑いダブルヘッダー & 神田満喫</h2>
+        <p class="theme">日経ホールとよしもと六本木を1日でハシゴ。</p>
+        <span class="line-tag" style="background:#B7791F">人形町 → 神田 → 大手町 → 六本木</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">10:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">人形町のホテルをチェックアウト</p></div></div>
+      <div class="stop"><div class="time">10:15〜10:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">歩いてアパホテル〈神田駅東〉に荷物を預ける</p></div></div>
+      <div class="stop skipped"><div class="time">10:45〜11:45</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ランチ:二代目 らーめん 谷瀬家</p><p class="how">神田ラーメン わいずに変更(一番並んでいた)</p></div></div>
+      <div class="stop"><div class="time">12:00〜12:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">日経ホール(大手町)へ移動</p></div></div>
+      <div class="stop major"><div class="time">13:00〜14:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">公演①「春とヒコーキ」ライブ</p><p class="how">5,000円</p></div></div>
+      <div class="stop"><div class="time">15:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテルチェックイン & リラックス</p></div></div>
+      <div class="stop"><div class="time">16:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">夕食:神田の老舗定食屋(しんぱち食堂など)</p></div></div>
+      <div class="stop skipped"><div class="time">18:00〜20:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">RAKU SPA 1010 神田</p><p class="how">混雑時のBプラン(ユニットバス)を用意していたが、予定変更(17,800円)</p></div></div>
+      <div class="stop"><div class="time">20:15頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">日高屋で公演待ち</p></div></div>
+      <div class="stop major"><div class="time">21:00〜22:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">公演②「芸大とかたまり」(よしもと六本木)</p><p class="how">3,300円</p></div></div>
+      <div class="stop"><div class="time">22:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテル帰還</p></div></div>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li>神田ラーメン わいずはまあまあだったが、家系＋ドロドロ系で本当に好きな家系ではなかった。</li>
+        <li>「春とヒコーキ」のライブは面白く、土岡の発想が怖くなるレベル。</li>
+        <li>予定を変えて17,800円の出費。安めではあったが、その分ホテル代がやや高くついた。</li>
+        <li>「芸大とかたまり」も行ってよかった。安定の面白さ。</li>
+      </ul>
+      <table class="receipt">
+        <tr><td class="item">ラーメン(昼食・神田)</td><td class="amt">1,150円</td></tr>
+        <tr><td class="item">飲み物</td><td class="amt">118円</td></tr>
+        <tr><td class="item">ホテル前買い出し</td><td class="amt">440円</td></tr>
+        <tr><td class="item">日高屋</td><td class="amt">840円</td></tr>
+        <tr><td class="item">コンビニ夜食</td><td class="amt">848円</td></tr>
+        <tr><td class="item">交通費</td><td class="amt">1,224円</td></tr>
+        <tr><td class="item">予定変更(RAKU SPA→変更)</td><td class="amt">17,800円</td></tr>
+        <tr class="subtotal"><td>日計</td><td class="amt">22,420円</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 5/5 ═══ -->
+  <section class="day" id="t01-d5" style="--line-color:#009BD6">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">5.5</span><span class="w">TUE・祝</span></div>
+      <div class="day-title">
+        <h2>有明・ビッグサイト、そしてミリオンライブ</h2>
+        <p class="theme">スパコミを急遽秋葉原とセットに、夜は遠征のフィナーレへ。</p>
+        <span class="line-tag" style="background:#009BD6">秋葉原 → 有明・ビッグサイト → 神田</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">〜10:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテルでゆっくり準備</p></div></div>
+      <div class="stop"><div class="time">11:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">秋葉原散策</p><p class="how">急遽追加</p></div></div>
+      <div class="stop major"><div class="time">13:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京ビッグサイト(SUPER COMIC CITY)到着</p><p class="how">アイマス系サークルを中心に巡回。入場1,500円</p></div></div>
+      <div class="stop"><div class="time">15:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">有明エリアでランチ</p><p class="how">予定より遅れて有明ガーデンで</p></div></div>
+      <div class="stop skipped"><div class="time">候補</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">スモールワールズ ミニチュアミュージアム</p><p class="how">涼しい屋内で没頭する予定だったがスキップ</p></div></div>
+      <div class="stop"><div class="time">16:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ライブ会場へ移動</p></div></div>
+      <div class="stop major"><div class="time">17:00〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ミリオンライブ！ 公演開始</p><p class="how">14,750円<span class="chip paid">支払済</span> 遠征のフィナーレ、全力を出し切る</p></div></div>
+      <div class="stop"><div class="time">終演後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">神田でラーメン & 休息</p><p class="how">当初のホテル直行から変更</p></div></div>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li>ミリオンライブは最高だった。今後はライブも積極的に行くことにする。</li>
+        <li>スパコミは展示が多かったが、いきなり一人で行くには少し早かった。同人イベントについて勉強不足だった。</li>
+        <li>ここまで平均10km毎日歩いているが特にきつさは感じない。先月のウォーキング習慣が効いているみたい。</li>
+      </ul>
+      <table class="receipt">
+        <tr><td class="item">朝飯(しんぱち食堂)</td><td class="amt">638円</td></tr>
+        <tr><td class="item">スライムの保冷剤(お土産)</td><td class="amt">880円</td></tr>
+        <tr><td class="item">有明ガーデン(昼ごはん)</td><td class="amt">1,580円</td></tr>
+        <tr><td class="item">ラーメン(夕飯)</td><td class="amt">1,350円</td></tr>
+        <tr><td class="item">夜食</td><td class="amt">278円</td></tr>
+        <tr><td class="item">交通費</td><td class="amt">1,317円</td></tr>
+        <tr><td class="item">水</td><td class="amt">210円</td></tr>
+        <tr class="subtotal"><td>日計</td><td class="amt">6,253円</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 5/6 ═══ -->
+  <section class="day" id="t01-d6" style="--line-color:#7D6BC7">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">5.6</span><span class="w">WED・振休</span></div>
+      <div class="day-title">
+        <h2>最終日・帰宅</h2>
+        <p class="theme">アパ会員特典でチェックアウト、まっすぐ高岡へ。</p>
+        <span class="line-tag" style="background:#7D6BC7">神田 → 東京 → 新高岡</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">〜10:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">チェックアウト</p><p class="how">アパ会員特典</p></div></div>
+      <div class="stop skipped"><div class="time">10:30〜12:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京駅でお土産と弁当買う</p><p class="how">予定を早めに切り上げてすぐ帰路の動きに変更</p></div></div>
+      <div class="stop major"><div class="time">12:48</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京駅 発｜新幹線</p><p class="how">高岡へ帰還。お疲れ様でした</p></div></div>
+    </div>
+    <div class="day-note actual">
+      <ul><li>最終日は当初の滞在プランを切り上げて早めに動き、家計簿上の個別記録は前日までに集約。無理のない着地となった。</li></ul>
+    </div>
+  </section>
+
+  <!-- ═══ 予算 ═══ -->
+  <section class="info" id="t01-budget">
+    <h2>予算まとめ(実績)</h2>
+    <table class="kv">
+      <tr><th>チケット代</th><td>甲子園2枚/声優イベント/お笑い2公演/ミリオン/スパコミ入場</td><td class="amount">44,000円</td></tr>
+      <tr><th>ホテル代</th><td>阪神尼崎2泊/日本橋人形町1泊/神田2泊</td><td class="amount">43,684円</td></tr>
+      <tr><th>交通費(新幹線等)</th><td>一筆書き乗車券12,430+新大阪→東京特急券6,210+東京→富山特急券6,760、ほかWESTERポイント特典きっぷ4,440pt利用分</td><td class="amount">29,000円</td></tr>
+      <tr><th>食事</th><td>現地食費(5日間家計簿より)</td><td class="amount">20,793円</td></tr>
+      <tr><th>予定変更(5/4夜)</th><td>RAKU SPAから変更</td><td class="amount">17,800円</td></tr>
+      <tr><th>交通費(現地)</th><td>電車移動</td><td class="amount">5,825円</td></tr>
+      <tr><th>野球観戦</th><td>ジェット風船等</td><td class="amount">700円</td></tr>
+      <tr><th>お土産</th><td>スライムの保冷剤 他</td><td class="amount">880円</td></tr>
+      <tr><th>その他</th><td>洗濯・コインロッカー等</td><td class="amount">930円</td></tr>
+      <tr><th>ギャンブル</th><td>ボートレースびわこ(プラス収支)</td><td class="amount" style="color:#2E7D52">▲2,950円</td></tr>
+      <tr class="total"><td colspan="2">総支出実績</td><td class="amount">160,662円</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px">チケット代・ホテル代・交通費(新幹線等)は出発前に手配済み(合計116,684円)。現地5日間の家計簿実績と合わせた総額。ボートレースびわこは家計簿上▲2,950円(=2,950円の勝ち)で、収支をわずかに圧縮した。</p>
+
+    <table class="kv" style="margin-top:22px">
+      <tr><th>5/1(金)</th><td>電車・食事・ボートレース(勝ち)</td><td class="amount">4,649円</td></tr>
+      <tr><th>5/2(土)</th><td>食事・洗濯・交通費</td><td class="amount">5,080円</td></tr>
+      <tr><th>5/3(日)</th><td>食事・コインロッカー・交通費</td><td class="amount">5,576円</td></tr>
+      <tr><th>5/4(月)</th><td>食事・交通費・予定変更(17,800円)</td><td class="amount">22,420円</td></tr>
+      <tr><th>5/5(火)</th><td>食事・お土産・交通費</td><td class="amount">6,253円</td></tr>
+      <tr><th>5/6(水)</th><td>記録なし(前日までに集約)</td><td class="amount">—</td></tr>
+      <tr class="total"><td colspan="2">現地家計簿 実績合計</td><td class="amount">43,978円</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px">記念すべき遠征第一号。家計簿アプリの実額が最も正確な記録として残っている旅。</p>
+  </section>
+
+  <div class="claude-note">
+    <p>これが遠征記録帳の一冊目、というのがいいですね。ボートレースびわこで軽く勝ち、甲子園で10安打の接戦を見て、6年ぶりのシーサイドコミュニケーションズで「さっつんはよかった」と言い、神田でお笑いを2本ハシゴする──同じ5泊6日の中に、几帳面な移動計画と、その場の気分で動く柔らかさが同居しているのがよく分かる記録です。</p>
+    <p>スモールワールズや「ひとりカルビ1965」開店アタックなど、行けなかった候補地も含めて、この旅で「削れるところ・削れないところ」の感覚ができたはずです。以降の遠征でその勘がずっと生きています。記録帳の一番最初に置くのにふさわしい一冊です。</p>
+    <span class="sign">── CLAUDE / 記録係</span>
+  </div>
+
+  <a class="back-to-top" href="#top">↑ 記録帳の表紙に戻る</a>
+  </article>
+
+<!-- ═══════════ 遠征02:7月遠征 池袋・平和島・蒲田・六本木 ═══════════ -->
+  <article class="trip" id="trip02">
+  <p class="trip-chapter">ENSEI 02 ── 2026.07</p>
+
+  <header class="cover">
+    <p class="era">2026.07.03 — 07.06</p>
+    <h1>7月遠征のしおり<br>お笑い・テイフェス・平和島</h1>
+    <p class="sub">半休出発 → 空気階段 → 平和島でボート&スロット → テイフェス2days → 六本木コント → 秋葉原。3泊4日、ほぼ予定通り走り切った記録。</p>
+    <div class="route-strip" aria-label="行程の概要">
+      <span class="node">高岡</span><span class="seg"></span>
+      <span class="node">蔵前 泊</span><span class="seg"></span>
+      <span class="node">蒲田 泊</span><span class="seg"></span>
+      <span class="node">大森 泊</span><span class="seg"></span>
+      <span class="node">高岡</span>
+    </div>
+    <div class="cover-stamp" aria-hidden="true">
+      <span class="small">3泊4日</span>
+      <span class="big">7月遠征</span>
+      <span class="small">既遂・記録済</span>
+    </div>
+  </header>
+
+  <div class="trip-stats">
+    <div><span class="num">4<span style="font-size:.8rem">日</span></span><span class="lbl">3泊4日</span></div>
+    <div><span class="num">5<span style="font-size:.8rem">本</span></span><span class="lbl">イベント数</span></div>
+    <div><span class="num">10.2<span style="font-size:.8rem">万</span></span><span class="lbl">総予算目安</span></div>
+  </div>
+
+  <nav class="toc" aria-label="目次">
+    <ol>
+      <li><a href="#t02-d1"><span class="dot" style="background:#2C4A8A"></span>7/3 池袋</a></li>
+      <li><a href="#t02-d2"><span class="dot" style="background:#0F8B5A"></span>7/4 平和島</a></li>
+      <li><a href="#t02-d3"><span class="dot" style="background:#B6007A"></span>7/5 六本木</a></li>
+      <li><a href="#t02-d4"><span class="dot" style="background:#B7791F"></span>7/6 秋葉原</a></li>
+      <li><a href="#t02-budget"><span class="dot" style="background:var(--ink)"></span>予算</a></li>
+    </ol>
+  </nav>
+
+  <!-- ═══ 7/3 ═══ -->
+  <section class="day" id="t02-d1" style="--line-color:#2C4A8A">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">7.3</span><span class="w">FRI</span></div>
+      <div class="day-title">
+        <h2>半休出発・お笑いナイト</h2>
+        <p class="theme">仕事終わりからの爆速移動、池袋で空気階段。</p>
+        <span class="line-tag" style="background:#2C4A8A">北陸新幹線 → 埼京線</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">15:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">退勤・移動</p><p class="how">在宅勤務を早退で切り上げ、車で高岡駅周辺の駐車場へ</p></div></div>
+      <div class="stop"><div class="time">15:40頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">高岡 発｜あいの風とやま鉄道 → 富山</p></div></div>
+      <div class="stop major"><div class="time">16:15</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">富山 発｜かがやき</p><p class="how">早特1<span class="chip paid">支払済</span></p></div></div>
+      <div class="stop major"><div class="time">17:59</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">大宮 着 → 埼京線で池袋へ</p></div></div>
+      <div class="stop"><div class="time">18:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">池袋 着</p></div></div>
+      <div class="stop major"><div class="time">夜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">空気階段 単独ライブ</p><p class="how"><span class="chip paid">7,500円 済</span></p></div></div>
+      <div class="stop"><div class="time">終演後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">夕食(池袋・蔵前エリア)</p><p class="how">ラーメン等</p></div></div>
+      <div class="stop"><div class="time">22:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">アパホテル〈浅草 蔵前〉泊</p><p class="how">7,300円<span class="chip paid">支払済</span> 大浴場で長距離移動の疲れをリセット</p></div></div>
+    </div>
+    <div class="day-note actual">
+      <ul><li>予定通り進行。</li></ul>
+      <table class="receipt">
+        <tr><td class="item">サイゼリヤ</td><td class="amt">1,300円</td></tr>
+        <tr><td class="item">コンビニ</td><td class="amt">500円</td></tr>
+        <tr><td class="item">交通費(電車)</td><td class="amt">1,217円</td></tr>
+        <tr class="subtotal"><td>日計</td><td class="amt">3,517円</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 7/4 ═══ -->
+  <section class="day" id="t02-d2" style="--line-color:#0F8B5A">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">7.4</span><span class="w">SAT</span></div>
+      <div class="day-title">
+        <h2>ボートレース平和島 &amp; テイフェスDay1</h2>
+        <p class="theme">秋葉原プランを平和島へ差し替え。鳥九弁当とレース、その足でスロット。</p>
+        <span class="line-tag" style="background:#0F8B5A">平和島 → 関内(横浜BUNTAI)</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop skipped"><div class="time">日中</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">秋葉原散策</p><p class="how">今回はスキップ</p></div></div>
+      <div class="stop"><div class="time">午前</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテルに荷物を預ける</p><p class="how">鳥九の弁当を購入</p></div></div>
+      <div class="stop major"><div class="time">昼〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what"><svg class="event-icon" viewBox="0 0 60 30" aria-hidden="true"><path d="M6 20 L14 20 L18 12 L40 12 L46 20 L54 20 L48 26 L12 26 Z" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/><line x1="30" y1="12" x2="30" y2="4" stroke="var(--ink)" stroke-width="2"/><path d="M30 4 L38 8 L30 10 Z" fill="var(--ink)"/><path d="M2 24 Q8 22 14 24" fill="none" stroke="var(--ink)" stroke-width="1.5" opacity=".5"/><path d="M46 24 Q52 22 58 24" fill="none" stroke="var(--ink)" stroke-width="1.5" opacity=".5"/></svg>ボートレース平和島</p><p class="how">数レース外し、徒歩圏のレイトギャップ平和島でスロット(トータル約4,000円)</p></div></div>
+      <div class="stop"><div class="time">夕方</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">平和島 → 関内(横浜BUNTAI最寄り)へ移動</p></div></div>
+      <div class="stop major"><div class="time">夜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what"><svg class="event-icon" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="var(--ink)" stroke-width="2"/><line x1="20" y1="6" x2="20" y2="28" stroke="var(--ink)" stroke-width="2"/><line x1="14" y1="12" x2="26" y2="12" stroke="var(--ink)" stroke-width="2"/><path d="M14 28 L26 28 L23 34 L17 34 Z" fill="var(--ink)"/><path d="M20 6 L16 2 L24 2 Z" fill="var(--ink)"/></svg>テイルズ オブ フェスティバル 2026 Day1</p><p class="how"><span class="chip paid">2DAYS 26,000円 済</span></p></div></div>
+      <div class="stop"><div class="time">終演後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東横イン蒲田東口 泊</p><p class="how">9,500円<span class="chip cash">現地払い</span> ※当初のR&amp;Bホテル蒲田東口(12,100円)から旅行前に変更</p></div></div>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li>秋葉原はスキップし、平和島でボートレース&スロットに差し替え。実質的な変更点はこの日だけ。</li>
+      </ul>
+      <table class="receipt">
+        <tr><td class="item">鳥久(お弁当)</td><td class="amt">1,100円</td></tr>
+        <tr><td class="item">ケンタッキー</td><td class="amt">990円</td></tr>
+        <tr><td class="item">ラーメン</td><td class="amt">900円</td></tr>
+        <tr><td class="item">お茶</td><td class="amt">130円</td></tr>
+        <tr><td class="item">飲み物</td><td class="amt">250円</td></tr>
+        <tr><td class="item">ボートレース</td><td class="amt">4,500円</td></tr>
+        <tr><td class="item">スロット(勝ち)</td><td class="amt plus">▲10,000円</td></tr>
+        <tr><td class="item">コインランドリー</td><td class="amt">400円</td></tr>
+        <tr><td class="item">交通費(電車)</td><td class="amt">1,543円</td></tr>
+        <tr class="subtotal"><td>日計</td><td class="amt plus">▲557円(プラス収支)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 7/5 ═══ -->
+  <section class="day" id="t02-d3" style="--line-color:#B6007A">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">7.5</span><span class="w">SUN</span></div>
+      <div class="day-title">
+        <h2>六本木コント &amp; テイフェスDay2</h2>
+        <p class="theme">完璧な手ぶら動線でお笑い・アニメをハシゴ。</p>
+        <span class="line-tag" style="background:#B6007A">蒲田 → 六本木 → 関内</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">朝</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東横イン蒲田東口をチェックアウト</p><p class="how">今夜の宿・アパホテル〈大森〉(蒲田から京浜東北線1駅)に荷物を預けて手ぶら化</p></div></div>
+      <div class="stop"><div class="time">10:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">蒲田 → 六本木</p></div></div>
+      <div class="stop major"><div class="time">11:30〜13:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">六本木お笑いコントライブ！1周年SP！</p><p class="how">YOSHIMOTO ROPPONGI THEATER・全席指定4列8番<span class="chip paid">3,300円 済</span></p></div></div>
+      <div class="stop"><div class="time">13:30〜14:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">昼食</p><p class="how">移動しながらコンビニ等で</p></div></div>
+      <div class="stop"><div class="time">14:30〜15:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">六本木 → 関内(横浜BUNTAI)</p></div></div>
+      <div class="stop major"><div class="time">夜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what"><svg class="event-icon" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="var(--ink)" stroke-width="2"/><line x1="20" y1="6" x2="20" y2="28" stroke="var(--ink)" stroke-width="2"/><line x1="14" y1="12" x2="26" y2="12" stroke="var(--ink)" stroke-width="2"/><path d="M14 28 L26 28 L23 34 L17 34 Z" fill="var(--ink)"/><path d="M20 6 L16 2 L24 2 Z" fill="var(--ink)"/></svg>テイルズ オブ フェスティバル 2026 Day2</p></div></div>
+      <div class="stop"><div class="time">終演後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">アパホテル〈大森〉泊</p><p class="how">5,950円(クーポン込み)<span class="chip cash">現地払い</span> ※当初のアパホテル〈蒲田駅前〉(7,450円)から旅行前に変更</p></div></div>
+    </div>
+    <div class="day-note actual">
+      <ul><li>昼食は予定どおりコンビニでの軽食。それ以外もほぼ計画どおり進行。</li></ul>
+      <table class="receipt">
+        <tr><td class="item">Fireburg(ハンバーグ)</td><td class="amt">1,430円</td></tr>
+        <tr><td class="item">ココイチ</td><td class="amt">1,221円</td></tr>
+        <tr><td class="item">ローソン</td><td class="amt">381円</td></tr>
+        <tr><td class="item">交通費(電車)</td><td class="amt">1,291円</td></tr>
+        <tr><td class="item">ICカード物販利用</td><td class="amt">150円</td></tr>
+        <tr class="subtotal"><td>日計</td><td class="amt">4,473円</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 7/6 ═══ -->
+  <section class="day" id="t02-d4" style="--line-color:#B7791F">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">7.6</span><span class="w">MON</span></div>
+      <div class="day-title">
+        <h2>秋葉原 &amp; スマート帰還</h2>
+        <p class="theme">未定枠は秋葉原へ。計算し尽くされた帰路。</p>
+        <span class="line-tag" style="background:#B7791F">大森 → 東京 → 新高岡</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">9:00〜10:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">朝食 → チェックアウト</p><p class="how">朝食は松屋で(家計簿より530円)。10時にアパホテル〈大森〉をチェックアウト</p></div></div>
+      <div class="stop"><div class="time">10:10〜10:50</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">大森 → 東京駅、コインロッカーに荷物を預ける</p><p class="how">京浜東北線で1本。最終日も手ぶら行動</p></div></div>
+      <div class="stop skipped"><div class="time">候補</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">映画『日本統一』/ボートレース/東洋館</p><p class="how">『日本統一』は上映が旅行前日までで終了しており行けず。残る候補も選ばず秋葉原へ</p></div></div>
+      <div class="stop major"><div class="time">11:00〜14:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">秋葉原へ</p><p class="how">ミリオンライブのグッズを購入、いくつか店を回った</p></div></div>
+      <div class="stop"><div class="time">14:00〜15:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">昼食(東京駅周辺)</p></div></div>
+      <div class="stop"><div class="time">15:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京駅ロッカーで荷物回収</p></div></div>
+      <div class="stop major"><div class="time">15:24</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京 発｜はくたか569号</p><p class="how">早特14・6号車10番A席<span class="chip paid">9,620円 済</span> 6号車は新高岡駅のエスカレーター・階段の目の前</p></div></div>
+      <div class="stop major"><div class="time">18:05</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新高岡 着</p><p class="how">速やかに改札を抜け、北口(瑞龍寺口)バスロータリーへ</p></div></div>
+      <div class="stop"><div class="time">18:10</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新高岡 発｜高岡駅行きシャトルバス</p></div></div>
+      <div class="stop"><div class="time">18:20以降</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">高岡到着、車を回収して帰宅</p></div></div>
+    </div>
+    <div class="day-note actual">
+      <ul><li>未定だった11:00〜14:00の枠は秋葉原へ。本命候補だった『日本統一』は上映が旅行前日で終了しており観られず。代わりにミリオンライブグッズを購入し、それ以外はほぼ計画どおり完遂。</li></ul>
+      <table class="receipt">
+        <tr><td class="item">松屋(朝食)</td><td class="amt">530円</td></tr>
+        <tr><td class="item">まい泉(東京駅)</td><td class="amt">1,630円</td></tr>
+        <tr><td class="item">ミリオンライブグッズ</td><td class="amt">3,080円</td></tr>
+        <tr><td class="item">ドラクエグッズ</td><td class="amt">990円</td></tr>
+        <tr><td class="item">お土産代</td><td class="amt">2,600円</td></tr>
+        <tr><td class="item">タオル</td><td class="amt">380円</td></tr>
+        <tr><td class="item">交通費(電車)</td><td class="amt">408円</td></tr>
+        <tr class="subtotal"><td>日計</td><td class="amt">9,618円</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 予算 ═══ -->
+  <section class="info" id="t02-budget">
+    <h2>予算まとめ</h2>
+    <table class="kv">
+      <tr><th>交通費</th><td>富山→大宮(早特1)/東京→新高岡(早特14)</td><td class="amount">20,810円</td></tr>
+      <tr><th>宿泊費</th><td>アパ浅草蔵前/東横イン蒲田東口/アパ大森(クーポン込み)</td><td class="amount">22,750円</td></tr>
+      <tr><th>チケット</th><td>空気階段/テイフェス2DAYS/六本木お笑い/映画『日本統一』(予算枠・上映終了で未購入)</td><td class="amount">38,800円</td></tr>
+      <tr><th>食費・雑費</th><td>1日5,000円×4日 + 平和島スロット4,000円</td><td class="amount">約20,000円+</td></tr>
+      <tr class="total"><td colspan="2">総額目安</td><td class="amount">約102,360円</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px">支払済 66,910円/現地払い 35,450円。旅行前の宿変更(R&amp;B→東横イン、アパ蒲田→アパ大森)で当初計画から4,100円圧縮。映画『日本統一』の2,000円は上映が旅行前日で終了していたため使わずじまい。</p>
+
+    <table class="kv" style="margin-top:22px">
+      <tr><th>7/3(金)</th><td>サイゼリヤ・コンビニ・交通費</td><td class="amount">3,517円</td></tr>
+      <tr><th>7/4(土)</th><td>食費・娯楽費(ボート4,500/スロット▲10,000)・交通費</td><td class="amount" style="color:#2E7D52">▲557円</td></tr>
+      <tr><th>7/5(日)</th><td>食費・交通費・IC物販</td><td class="amount">4,473円</td></tr>
+      <tr><th>7/6(月)</th><td>食費・グッズ・お土産・交通費</td><td class="amount">9,618円</td></tr>
+      <tr class="total"><td colspan="2">現地家計簿 実績合計</td><td class="amount">17,051円</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px">見込み(1日5,000円×4日=20,000円)に対し実績17,051円。<strong>平和島のスロットで1万円勝った</strong>おかげで4日間トータルの現地収支が大きく圧縮された1回。</p>
+  </section>
+
+  <div class="claude-note">
+    <p>この旅で一番好きなのは7/4です。予定表には「秋葉原散策」と書いてあったのに、当日の気分で平和島に舵を切り、鳥久の弁当を持ってレースを眺め、外したその足でスロットに入って1万円勝つ。計画を裏切ったはずの日が、家計簿上は唯一のプラス収支の日になっている──記録として出来すぎです。</p>
+    <p>一方で、出発前に宿を丸ごと組み替えて4,100円圧縮する調整力や、翌晩の宿に朝のうちに荷物を預けて手ぶら化する動線、新高岡の階段前に着く6号車指定など、随所の設計は几帳面そのもの。「骨格はきっちり、中身は気分で」という遊び方のバランスが、この3泊4日にはよく出ていると思います。観るつもりだった『日本統一』の上映が旅行前日で終わっていたのだけは、計画では防ぎようのない不運。次の遠征では上映スケジュールの確認も計画係の仕事に加えておきます。</p>
+    <span class="sign">── CLAUDE / 記録係</span>
+  </div>
+
+  <a class="back-to-top" href="#top">↑ 記録帳の表紙に戻る</a>
+  </article>
+
+<!-- ═══════════ 遠征03:お盆遠征 東京・横浜 ═══════════ -->
+  <article class="trip" id="trip03">
+  <p class="trip-chapter">ENSEI 03 ── 2026.08</p>
+
+  <!-- ═══════════ 表紙 ═══════════ -->
+  <header class="cover">
+    <p class="era">2026.08.11 — 08.15</p>
+    <h1>お盆遠征の記録<br>東京・横浜</h1>
+    <p class="sub">台風で開幕し、東京ドーム3タテで終わる ── 回収遠征、完走。</p>
+    <div class="route-strip" aria-label="行程の概要">
+      <span class="node">高岡</span><span class="seg"></span>
+      <span class="node">長野 乗継</span><span class="seg"></span>
+      <span class="node">両国 4泊</span><span class="seg"></span>
+      <span class="node">横浜</span><span class="seg"></span>
+      <span class="node">高岡</span>
+    </div>
+    <div class="cover-stamp" aria-hidden="true">
+      <span class="small">4泊5日</span>
+      <span class="big">完 走</span>
+      <span class="small">両国駐屯</span>
+    </div>
+  </header>
+
+  <div class="trip-stats">
+    <div><span class="num">5<span style="font-size:.8rem">日</span></span><span class="lbl">4泊5日</span></div>
+    <div><span class="num">3<span style="font-size:.8rem">勝</span></span><span class="lbl">東京ドーム3タテ</span></div>
+    <div><span class="num">14.1<span style="font-size:.8rem">万</span></span><span class="lbl">総額 実績</span></div>
+  </div>
+
+  <nav class="toc" aria-label="目次">
+    <ol>
+      <li><a href="#d11"><span class="dot" style="background:var(--sobu)"></span>8/11 直行→デーゲーム</a></li>
+      <li><a href="#d12"><span class="dot" style="background:var(--oedo)"></span>8/12 競艇→ナイター</a></li>
+      <li><a href="#d13"><span class="dot" style="background:var(--jingu)"></span>8/13 三本立て</a></li>
+      <li><a href="#d14"><span class="dot" style="background:var(--hanzo)"></span>8/14 回復日</a></li>
+      <li><a href="#d15"><span class="dot" style="background:var(--keihin)"></span>8/15 コミケ→帰還</a></li>
+      <li><a href="#t03-meals"><span class="dot" style="background:#7A5C2E"></span>飯の一覧</a></li>
+      <li><a href="#t03-fares"><span class="dot" style="background:var(--keihin)"></span>電車賃の一覧</a></li>
+      <li><a href="#budget"><span class="dot" style="background:var(--ink)"></span>出費の実績</a></li>
+      <li><a href="#backup"><span class="dot" style="background:var(--stamp)"></span>もしもの備え</a></li>
+    </ol>
+  </nav>
+
+  <!-- ═══════════ 8/11 ═══════════ -->
+  <section class="day" id="d11" style="--line-color:var(--sobu)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">8.11</span><span class="w">TUE 祝</span></div>
+      <div class="day-title">
+        <h2>朝イチ直行 &amp; 東京ドーム デーゲーム</h2>
+        <p class="theme">前乗りを解体し自宅から直行。長野分割+株主優待の抜け道で行く。</p>
+        <span class="line-tag" style="background:var(--sobu);color:var(--ink)">城端線 → HAKUTAKA → KAGAYAKI</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">6:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">起床(自宅)</p><p class="how">前夜22時台就寝で7時間確保。荷物(TRAVELIST S + fuglカバー)は前夜のうちに車へ</p></div></div>
+      <div class="stop"><div class="time">前夜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">朝食を買っておく</p><p class="how">7:00の城端線に乗るため当日の朝に買う時間はゼロ。前夜にコンビニで調達して車へ積んでおく<span class="chip meal">飯①・朝</span></p></div></div>
+      <div class="stop"><div class="time">6:45</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">高岡駅 駐車場に駐車</p><p class="how">帰還(8/15深夜)があいの風で高岡着のため、車は高岡駅が正解。<strong>新幹線利用者は7日間無料</strong>だが、<strong>無料化の手続きは新高岡駅の機械で駐車券を通す方式</strong>——駐車券は必ず持って乗ること</p></div></div>
+      <div class="stop major"><div class="time">7:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">城端線 高岡 発</p><p class="how">1駅・約3分。この1本を逃すと次がないので余裕を持って</p></div></div>
+      <div class="stop"><div class="time">7:03</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新高岡 着 → 券売機で発券 ＋ <strong>駐車券を処理</strong></p><p class="how">eチケット早特14(新高岡→長野)を発券。<strong>同時に高岡駅駐車場の駐車券を機械に通して7日間無料化しておく。</strong>帰りは富山→あいの風→高岡で<strong>新高岡を通らないため、この30分を逃すと二度と手続きできない</strong>。バッファ約30分に2つの用事があると意識しておく<span class="chip paid">5,190円 予約済</span></p></div></div>
+      <div class="stop major"><div class="time">7:34</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新高岡 発｜はくたか558号</p><p class="how">列車限定きっぷ。車内は仮眠タイム第1弾</p></div></div>
+      <div class="stop major"><div class="time">8:46</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">長野 着 → 株主優待きっぷを発券</p><p class="how">JR東日本の指定席券売機で発券(北陸エリアの駅では受取不可のためここで)。乗継約30分<span class="chip paid">5,300円 予約済</span></p></div></div>
+      <div class="stop"><div class="time">9時台</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">長野 発｜かがやき</p><p class="how">株主優待4割引。仮眠タイム第2弾</p></div></div>
+      <div class="stop"><div class="time">10:40頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京 着 → グランスタ東京B1「駅弁 つばめグリル」</p><p class="how">改札内B1・スクエア ゼロエリア。つばめ風ハンブルグステーキ弁当1,980円/ハンブルグステーキ弁当1,380円。アルミホイル包みのハンバーグ+新潟コシヒカリ。<strong>買い物は20分しかないので目当てを決め打ち。</strong>行列・売切なら1階中央通路の「駅弁屋 祭」へ即切替<span class="chip meal">飯②・昼(ドームで)</span></p></div></div>
+      <div class="stop"><div class="time">11:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京 → 御茶ノ水 → 両国</p><p class="how">中央線→総武線各停に乗換。<strong>東京から両国への直通はない</strong>ので注意(約20分)</p></div></div>
+      <div class="stop"><div class="time">11:20</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">アパホテル両国駅タワー 着</p><p class="how">スーツケースを預けるだけ(チェックインは帰着後)</p></div></div>
+      <div class="stop"><div class="time">11:35</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">両国 → 水道橋</p><p class="how">総武線各停で直通2駅・約5分</p></div></div>
+      <div class="stop major"><div class="time">11:50頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京ドーム前 着・開場待ち</p><p class="how">開場10分前。前泊案より15分ほど後ろだが許容範囲</p></div></div>
+      <div class="stop"><div class="time">12:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">開場</p><p class="how">席確保→場内散策→弁当。<strong>阪神(ビジター)打撃練習は12:30頃〜</strong>が通例なのでフルで見られる見込み</p></div></div>
+      <div class="stop major"><div class="time">14:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">試合開始｜巨人 × 阪神 ①</p><p class="how">3試合分 31,000円<span class="chip paid">支払済</span></p></div></div>
+      <div class="stop"><div class="time">17:15頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">試合終了(阪神 9-1 巨人) → 新宿へ</p><p class="how">11安打・無失策の快勝で初戦を取る。台風接近で雨脚が強まる前に、水道橋→四谷→新宿三丁目と地下でつないで<strong>パウパウアクアガーデン新宿店</strong>へ<span class="chip meal">飯③は昼のいちかつで消化済</span></p></div></div>
+      <div class="stop major"><div class="time">18:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">パウパウアクアガーデン新宿店(B1)</p><p class="how">祝日短縮で19:00閉店。ビルB1で地上に出ずに入れるのが台風の日に効いた。40cmキューブの下見に徹して購入はなし。<strong>小さいゴマハギが心残り</strong></p></div></div>
+      <div class="stop"><div class="time">19:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新宿で肉弁当を確保 → 両国へ</p><p class="how">閉店前の3割引に当たり1,587円。両国駅前のコンビニで国技館やきとりを狙うも売切、コロッケ等で代替<span class="chip meal">飯④・夜</span></p></div></div>
+      <div class="stop"><div class="time">20:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテルチェックイン → 宿で完結</p><p class="how">台風の夜は出歩かず部屋で。まつり湯は見送り</p></div></div>
+    </div>
+    <div class="photos">
+      <figure class="photo"><a href="images/t03/d1-01-ichikatsu.jpg" target="_blank" rel="noopener"><img src="images/t03/d1-01-ichikatsu.jpg" alt="いちかつのロースカツ定食" loading="lazy"></a><figcaption>いちかつ／ロースカツ定食 900円。予定を繰り上げて昼に</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d1-02-dome-lineup.jpg" target="_blank" rel="noopener"><img src="images/t03/d1-02-dome-lineup.jpg" alt="東京ドームのスタメン表示" loading="lazy"></a><figcaption>初戦スタメン。先発 村上 対 山﨑伊織</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d1-03-dome-9-1.jpg" target="_blank" rel="noopener"><img src="images/t03/d1-03-dome-9-1.jpg" alt="東京ドームのスコアボード 9-1" loading="lazy"></a><figcaption>9-1。11安打・無失策で初戦快勝</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d1-04-paupau-shinjuku.jpg" target="_blank" rel="noopener"><img src="images/t03/d1-04-paupau-shinjuku.jpg" alt="パウパウアクアガーデン新宿店の看板" loading="lazy"></a><figcaption>新宿パウパウ。祝日は19:00閉店だった</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d1-05-rikishi-hamburg.jpg" target="_blank" rel="noopener"><img src="images/t03/d1-05-rikishi-hamburg.jpg" alt="RIKISHIのハンバーグの店頭メニュー" loading="lazy"></a><figcaption>両国で見つけたRIKISHIのハンバーグ。今回は見送り</figcaption></figure>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>この朝の生命線は城端線7:00発。</strong>早特14は列車限定・乗り遅れ厳禁。6:45には高岡駅にいること。</li>
+        <li><strong>株主優待きっぷは長野でしか発券できない</strong>(JR西日本 北陸エリアの駅では受取不可)。乗継30分あれば十分。</li>
+        <li><strong>新高岡でやることは2つ。</strong>①早特14の発券 ②駐車券を機械に通す。②を忘れると駐車場代が丸ごと有料になる——帰路は新高岡を経由しないので、当日の朝が唯一のチャンス。</li>
+        <li><strong>練習の順序:</strong>ホーム(巨人)が先→ビジター(阪神)が後、が慣例。開場時点で巨人練習は終盤〜終了のことも。</li>
+      </ul>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li><strong>上野で降りたほうが両国は近い。</strong>荷物を置きに行く初日は東京より上野で降りるのが正解だった。運賃も気持ち安い。次回以降の初動はこれで。</li>
+        <li><strong>いちかつは夜ではなく昼に消化。</strong>ロースカツ定食900円。夜の枠が空いたので、台風の合間を縫って新宿パウパウの下見に振り替えた。</li>
+        <li><strong>台風15号は夕方から関東接近。</strong>試合後に西へ動くのは賭けだったが、パウパウがビルB1で地下から入れたおかげで濡れずに済んだ。20時前には宿に戻れて想定どおり。</li>
+        <li><strong>閉店前の値引きに当たる。</strong>新宿の肉弁当が3割引で1,587円。この「遅い時間に戻ると安い」パターンは翌日も再現した。</li>
+        <li>国技館やきとりは売切。両国駅前のコンビニに置いてあるのは分かったので、次は早い時間に。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 8/12 ═══════════ -->
+  <section class="day" id="d12" style="--line-color:var(--oedo)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">8.12</span><span class="w">WED</span></div>
+      <div class="day-title">
+        <h2>ボートレース江戸川 → ナイター</h2>
+        <p class="theme">昼は水面、夜はドーム。体力勝負・前半戦の山。</p>
+        <span class="line-tag" style="background:var(--oedo)">大江戸線 → 都営新宿線</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">10:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">アパホテル出発</p><p class="how">両国→森下(大江戸線)→船堀(都営新宿線)→無料送迎バス</p></div></div>
+      <div class="stop major"><div class="time">10:40頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what"><svg class="event-icon" viewBox="0 0 60 30" aria-hidden="true"><path d="M6 20 L14 20 L18 12 L40 12 L46 20 L54 20 L48 26 L12 26 Z" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/><line x1="30" y1="12" x2="30" y2="4" stroke="var(--ink)" stroke-width="2"/><path d="M30 4 L38 8 L30 10 Z" fill="var(--ink)"/><path d="M2 24 Q8 22 14 24" fill="none" stroke="var(--ink)" stroke-width="1.5" opacity=".5"/><path d="M46 24 Q52 22 58 24" fill="none" stroke="var(--ink)" stroke-width="1.5" opacity=".5"/></svg>ボートレース江戸川 着</p><p class="how">「第48回大江戸賞」<strong>3日目</strong>。前日8/11が台風で全レース中止となり、番組変更なしでこの日に順延された回。入場100円<span class="chip cash">現地払い</span> <strong>「江戸川ナイス」の収録が目的の本命日。</strong></p></div></div>
+      <div class="stop"><div class="time">11:00〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">レース観戦 + 場内グルメで昼</p><p class="how">朝は雨。<strong>雨天時の「江戸川ナイス」収録は屋内に移り観覧できない</strong>ため、前半は様子見に徹する。場内の飲食は<strong>すべてポイントで精算</strong>したので現金支出はゼロ<span class="chip meal">飯⑤・朝昼兼用</span></p></div></div>
+      <div class="stop major"><div class="time">13時台</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">台風一過の快晴 → 「江戸川ナイス」屋外収録</p><p class="how">朝の雨がやみ、後半は真夏の青空に。<strong>8Rまで粘って様子を見る</strong>という判断が当たり、屋外に出てきた収録に立ち会えた。この日いちばんの回収</p></div></div>
+      <div class="stop"><div class="time">15:50頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">急な土砂降り</p><p class="how">晴れていたのが一転、座席が水浸しになる本降り。台風一過の大気不安定。屋外収録は間一髪で滑り込んだ形になった</p></div></div>
+      <div class="stop"><div class="time">17:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">競艇場 発 → 平井経由へ変更</p><p class="how">船堀(バス5分)ではなく<strong>平井(バス15分)</strong>を選択。バスで濡れないなら、乗換なしで水道橋直結の総武線が有利という判断</p></div></div>
+      <div class="stop major"><div class="time">18:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ナイター開始｜巨人 × 阪神 ②</p><p class="how">3塁側・内野後方のビジター寄り。先発 髙橋。1回2点・3回2点・7回1点と重ねて<strong>5-1で連勝</strong>。途中でスマホが力尽きChargeSpotを借りる<span class="chip meal">飯⑥・場内で軽食</span></p></div></div>
+      <div class="stop"><div class="time">試合後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ペッパーランチ ＋ 半額のカルビ丼</p><p class="how">帰投後に調達。<strong>閉店間際の値引きでカルビ丼が半値以下の500円</strong>。「揚げ物ひとつだけ」のつもりが肉が二重になった<span class="chip meal">飯⑦・夜</span></p></div></div>
+      <div class="stop skipped"><div class="time">試合後<br>22時前後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">横浜家系ラーメン 匠(両国)</p><p class="how">現地で確認したところ<strong>すでに別のラーメン店に変わっていた</strong>。この遠征の家系欲は8/14に渋谷で回収することになる</p></div></div>
+    </div>
+    <div class="photos">
+      <figure class="photo"><a href="images/t03/d2-01-edogawa-ramen.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-01-edogawa-ramen.jpg" alt="ボートレース江戸川の場内ラーメン" loading="lazy"></a><figcaption>場内グルメの醤油ラーメン。支払いはポイントで完結</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-02-edogawa-race.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-02-edogawa-race.jpg" alt="快晴のボートレース江戸川" loading="lazy"></a><figcaption>台風一過。首都高の高架下、荒川の難水面</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-03-edogawa-nice.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-03-edogawa-nice.jpg" alt="江戸川ナイスの屋外収録" loading="lazy"></a><figcaption>本命の屋外収録。8Rまで粘った甲斐があった</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-04-edogawa-rain.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-04-edogawa-rain.jpg" alt="土砂降りの観客席" loading="lazy"></a><figcaption>そして急な土砂降り。座席が水浸しに</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-05-dome-lineup.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-05-dome-lineup.jpg" alt="東京ドームのスタメン" loading="lazy"></a><figcaption>2戦目。先発 髙橋、捕手 伏見、遊撃 熊谷</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-06-chargespot.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-06-chargespot.jpg" alt="ChargeSpotのモバイルバッテリー" loading="lazy"></a><figcaption>電池切れ。ドームでChargeSpotを借りる</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-07-dome-5-1.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-07-dome-5-1.jpg" alt="スコアボード 5-1" loading="lazy"></a><figcaption>7回で5-1。このまま連勝</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d2-08-dome-view.jpg" target="_blank" rel="noopener"><img src="images/t03/d2-08-dome-view.jpg" alt="3塁側から見た東京ドーム" loading="lazy"></a><figcaption>3塁側・内野後方。ズームなしでこの距離</figcaption></figure>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li><strong>前日が台風中止で、この日が「3日目」として順延実施。</strong>番組変更なし。開催そのものが危ぶまれたが無事に行われた。</li>
+        <li><strong>収録は朝の雨で屋内スタート。</strong>後半8R〜12Rで屋外に戻る可能性に賭けて8Rまで残り、快晴になった後半で屋外収録に立ち会えた。粘って正解だった日。</li>
+        <li><strong>舟券は最終 -6,000円。</strong>10R終了時点で投資16,000／回収14,000と踏みとどまっていたが、11R・12Rが不的中。難水面＋後半の土砂降りで条件も厳しかった。</li>
+        <li><strong>場内の飲食はポイントで精算。</strong>現金支出が出ないので、この日の食費は実質ドーム内550円と夜のテイクアウトのみ。</li>
+        <li><strong>匠は閉店していた。</strong>しおりで「時間を気にしなくていい飯」として置いていた保険が消滅。代わりに帰投後のペッパーランチ＋半額カルビ丼で締めた。</li>
+        <li>モバイルバッテリーは満充電で持参すべきだった。ChargeSpotのレンタル代は削れた出費。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 8/13 ═══════════ -->
+  <section class="day" id="d13" style="--line-color:var(--jingu)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">8.13</span><span class="w">THU</span></div>
+      <div class="day-title">
+        <h2>とんかつ・DQ・そして3タテ</h2>
+        <p class="theme">KOC第1部を捨て、両国→銀座→渋谷→原宿→水道橋。</p>
+        <span class="line-tag" style="background:var(--jingu)">両国 → 銀座 → 渋谷 → 原宿 → 水道橋</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop skipped"><div class="time">午前</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">キングオブコント準々決勝 第1部</p><p class="how">出場者を見て食指が動かず<strong>この日の第1部は見送り</strong>。KOCは翌8/14の第1部に一本化した</p></div></div>
+      <div class="stop major"><div class="time">11:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">とんかつ はせがわ(両国)</p><p class="how">開店前から行列。栃木県産「平牧バーク三元豚」の専門店で、平日ランチ限定の<strong>ロース&amp;半ひれ(120g/60g) 2,200円</strong>。厚切極上ロース3,500円とはせ川とんかつ3,000円は勇気が出ず見送り。<strong>今まで食べたとんかつで一番</strong>という結論<span class="chip meal">飯⑧・昼</span></p></div></div>
+      <div class="stop"><div class="time">13:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">両国 → 築地市場 → パウパウアクアガーデン銀座店</p><p class="how">都営地下鉄で移動。ワンデーパス500円も検討したが<strong>この日は都営が1回だけなので都度払いが正解</strong>と判断して見送り。銀座は生体・用品とも中心部最大級で下見は30〜40分</p></div></div>
+      <div class="stop"><div class="time">14:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">銀座 → 渋谷、アニメショップで時間調整</p><p class="how">東京メトロで移動。渋谷BEAMのまんだらけ・アニメイトなど。原宿へは1駅なのでDQの15:00に余裕を残す<span class="chip flex">可変枠</span></p></div></div>
+      <div class="stop major"><div class="time">15:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">DQ40th the DIVE(原宿ハラカド)</p><p class="how">入場区分A・44番。少し早めに入れた。<strong>VR RIDEはかなりの出来</strong>で、モンスターのスタチュー展示も見応えあり。物販で荷物になる量を購入(7,850円)</p></div></div>
+      <div class="stop"><div class="time">16:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">原宿 → 両国(一度ホテルへ)</p><p class="how">グッズが荷物になったので直接ドームへ向かわず一旦帰投。<strong>シャワーを浴びて仕切り直し</strong>。総武線が遅れていたが駅に着いた瞬間に来る幸運</p></div></div>
+      <div class="stop major"><div class="time">18:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ナイター開始｜巨人 × 阪神 ③</p><p class="how">三連戦の千秋楽。先発 下村。<strong>3-2の1点差を工藤が締めて東京ドーム3タテ達成</strong></p></div></div>
+      <div class="stop skipped"><div class="time">試合終了<br>直後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">スシローの「今から行く」を受付</p><p class="how"><strong>席を立ちながら押す。</strong>早すぎると到着前に呼ばれて流れる。案内目安が約30分後なら1時間以内の来店が目安。席タイプは選べるが確約ではない<span class="chip flex">アプリ/LINEミニアプリ</span></p></div></div>
+      <div class="stop skipped"><div class="time">21:45頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">スシロー 秋葉原</p><p class="how">水道橋→秋葉原 約8分 → <strong>秋葉原→両国は総武線各停で直通2駅・約6分</strong>と一直線。試合終了21:10以内ならアキバプレイス8F店(評価4.6・徒歩8〜10分)、押していたらBiTO AKIBA B1F店(徒歩2〜3分)。どちらも23:00まで<span class="chip meal">飯⑨・夜</span><span class="chip flex">押したら中止</span></p></div></div>
+    </div>
+    <div class="photos">
+      <figure class="photo"><a href="images/t03/d3-01-hasegawa-tonkatsu.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-01-hasegawa-tonkatsu.jpg" alt="とんかつはせがわのロース&amp;半ひれ" loading="lazy"></a><figcaption>はせがわ／ロース&amp;半ひれ 2,200円。この遠征の主役</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-02-hasegawa-menu.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-02-hasegawa-menu.jpg" alt="はせがわの店頭メニュー" loading="lazy"></a><figcaption>看板は栃木県産「平牧バーク三元豚」</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-03-hasegawa-lunch.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-03-hasegawa-lunch.jpg" alt="はせがわの平日ランチメニュー" loading="lazy"></a><figcaption>平日ランチ。ロース単品1,600円は破格</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-04-dq40-logo.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-04-dq40-logo.jpg" alt="ドラゴンクエスト40周年のロゴ" loading="lazy"></a><figcaption>DQ40th the DIVE。since 1986</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-05-dq40-statue.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-05-dq40-statue.jpg" alt="ドラクエのモンスタースタチュー" loading="lazy"></a><figcaption>スタチュー展示。撮影OK</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-06-dome-lineup.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-06-dome-lineup.jpg" alt="千秋楽のスタメン" loading="lazy"></a><figcaption>千秋楽スタメン。先発 下村 対 西舘</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d3-07-dome-3-2.jpg" target="_blank" rel="noopener"><img src="images/t03/d3-07-dome-3-2.jpg" alt="スコアボード 3-2" loading="lazy"></a><figcaption>3-2。1点差を締めて3タテ達成</figcaption></figure>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li><strong>KOC第1部は見送り、代わりに一日を組み替えた。</strong>出場者を見て食指が動かず、朝ゆっくり→はせがわ→銀座パウパウ→渋谷→原宿という西向きの動線に変更。結果的にこの日がいちばん充実した。</li>
+        <li><strong>とんかつ はせがわが今回の最大の発見。</strong>開店前から行列、平日ランチのロース&amp;半ひれ2,200円。ロースの脂が甘く、「今まで食ったとんかつで一番」。ロース単品1,600円の安さも異常。次回の宿題は厚切極上ロース(3,500円)・はせ川とんかつ(3,000円)・シャ豚ブリアン(3,300円)、そして常連が頼んでいたカレールー500円の追加。</li>
+        <li><strong>都営ワンデーパス500円は買わなかった。</strong>この日の都営利用は1回のみで、原宿はメトロ、ドーム〜両国はJRが最短。元が取れないと判断して都度払いに。</li>
+        <li><strong>DQのVR RIDEは満足度が高かった。</strong>ただし物販で荷物が増え、ドームへ直行できず一度ホテルへ戻ることに。シャワーを挟めたのはむしろ良かった。</li>
+        <li><strong>そして東京ドーム3タテ。</strong>9-1、5-1と打ち勝ったあとの3-2。競った試合を締めてのスイープは格別だった。</li>
+        <li>スシロー秋葉原は組み込む余地がなくなり中止。夜は両国のセール品で軽く済ませた。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 8/14 ═══════════ -->
+  <section class="day" id="d14" style="--line-color:var(--hanzo)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">8.14</span><span class="w">FRI</span></div>
+      <div class="day-title">
+        <h2>KOC本命 &amp; 海水魚専門店</h2>
+        <p class="theme">第1部を取り、第2部を捨て、暑さに屈した日。</p>
+        <span class="line-tag" style="background:var(--hanzo)">渋谷 → 目白 → 南長崎 → 両国</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">9:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">起床 → 9:28の総武線に乗る</p><p class="how">10:00開場・10:30開演から逆算した生命線。前夜は乾燥機の空き待ちで就寝が遅れ、ジーパンを裏返して追い込む一幕も</p></div></div>
+      <div class="stop major"><div class="time">10:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">キングオブコント準々決勝 第1部</p><p class="how">大和田 4階さくらホール。<strong>この日の第1部が本命</strong>で、前日ぶんを捨ててここに集約した。面白かったが上演は長め</p></div></div>
+      <div class="stop skipped"><div class="time">午後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">KOC準々決勝 第2部</p><p class="how">第1部が長く、睡眠不足もあって<strong>第2部は見送り</strong>。空いた午後を海水魚専門店に振り替えた</p></div></div>
+      <div class="stop"><div class="time">13:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">横浜家系ラーメン Samurai(道玄坂2丁目)</p><p class="how">地元客の多い実力店。前日に匠が消えて宙に浮いた<strong>家系欲をここで回収</strong>。1,150円<span class="chip meal">飯⑪・昼</span></p></div></div>
+      <div class="stop major"><div class="time">15:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">海水魚ショップ ナチュラル(南長崎)</p><p class="how">渋谷→目白、そこから<strong>バスで店の前まで</strong>(徒歩300m)。坂を歩かずに済むルートが正解だった。お盆特別営業12:00〜18:30。店は広くないが海水・サンゴに絞った品揃えで、40cmキューブの本命下見としては十分。帰りも店前のバス停から新宿行きに乗れた</p></div></div>
+      <div class="stop skipped"><div class="time">18:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">サルゴリラ×空気階段「サル階段」(六本木)</p><p class="how">この日の夜公演は行程から外れた</p></div></div>
+      <div class="stop skipped"><div class="time">夕方</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">神宮ナイター・秋葉原</p><p class="how">目白から乗り換えて秋葉原、あるいは神宮へ、という案が浮かんだが<strong>頭痛と発汗が出たため全て中止</strong>して両国へ直帰</p></div></div>
+      <div class="stop"><div class="time">17:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新宿経由で両国へ → 休養</p><p class="how">暑さと寝不足で消耗。宿で2時間ほど眠ると回復した。夜は焼き鳥とペッパーランチ等で軽く済ませ、深夜に液キャベコーワA＋キューピーコーワヒーリングを調達<span class="chip meal">飯⑫・夜</span></p></div></div>
+    </div>
+    <div class="photos">
+      <figure class="photo"><a href="images/t03/d4-01-samurai-ramen.jpg" target="_blank" rel="noopener"><img src="images/t03/d4-01-samurai-ramen.jpg" alt="渋谷Samuraiの家系ラーメン" loading="lazy"></a><figcaption>Samurai(渋谷)／家系 1,150円。匠の代わりに</figcaption></figure>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li><strong>KOCは8/14の第1部に一本化して正解。</strong>前日の第1部を捨てて朝を確保したので、9時起き→9:28発でも間に合った。内容も面白かった。</li>
+        <li><strong>第2部は見送り。</strong>上演が長く、睡眠不足で集中が切れていた。無理に座り続けるより海水魚専門店に振り替えたほうが得るものが多かった。</li>
+        <li><strong>ナチュラルへは目白からバス。</strong>東長崎から歩くより、店の前がバス停で徒歩300m。帰りも同じバス停から新宿行きに乗れて、坂道をまったく歩かずに済んだ。次に行くときもこの経路で。</li>
+        <li><strong>この日の後半で暑さにやられた。</strong>頭痛と止まらない発汗。神宮も秋葉原も切り捨てて直帰し、2時間仮眠したら回復。<strong>予定を捨てる判断が、翌日のコミケを救った。</strong></li>
+        <li>タレカツ・サル階段・炭田屋は行程から外れた。この日は「軽くする日」という設計思想だけが残った形。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 8/15 ═══════════ -->
+  <section class="day" id="d15" style="--line-color:var(--keihin)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">8.15</span><span class="w">SAT</span></div>
+      <div class="day-title">
+        <h2>コミケ → 横浜 → 帰還</h2>
+        <p class="theme">ロッカー予約で朝を2時間買った日。21:04に間に合う。</p>
+        <span class="line-tag" style="background:var(--keihin)">東京 → ビッグサイト → 新橋 → 桜木町 → 東京</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop skipped"><div class="time">朝</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">アパホテルのフロントでゆうパック発送</p><p class="how">荷物は東京駅のロッカーに預ける方式に変更したため発送は不要になった</p></div></div>
+      <div class="stop major"><div class="time">11:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">チェックアウト → 東京駅で荷物を預ける</p><p class="how">前夜のうちに<strong>新幹線乗換口に近い地下1階・手荷物預かり横のロッカーをL(1,400円)で事前予約</strong>。当日探す手間が消え、そのぶん<strong>朝を2時間長く眠れた</strong>。帰りに迷わない場所を選んだのが最大の狙い<span class="chip paid">予約済</span></p></div></div>
+      <div class="stop"><div class="time">11:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京駅八重洲口 → ビッグサイト(直行バス)</p><p class="how">210円・乗換なし。りんかい線より安く座って行ける。<strong>飲み物を買う前に乗ってしまった</strong>ので、会場周辺で確保することに</p></div></div>
+      <div class="stop major"><div class="time">12:00頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">コミックマーケット(東京ビッグサイト)</p><p class="how">午前入場リストバンド確保済(とらのあな)<span class="chip paid">1,210円 済</span> <strong>あえて開場の波が引いた12時入りにして待機列を回避</strong>。前日の消耗を考えれば正解だった。グッズ等で12,600円</p></div></div>
+      <div class="stop"><div class="time">14:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ビッグサイト離脱 → 新橋(直行バス)</p><p class="how">210円。りんかい線・ゆりかもめの混雑を避けて座って移動。戦利品はすべてリュックに収まった</p></div></div>
+      <div class="stop"><div class="time">14:40頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">山本のハンバーグ 新橋食堂</p><p class="how">15:00ラストオーダーに滑り込み。<strong>1,300円でハンバーグ・味噌汁・ライス・卵つき、ライスおかわり自由</strong>。コスパが良い<span class="chip meal">飯⑭・昼</span></p></div></div>
+      <div class="stop"><div class="time">15:35</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">横浜 → 桜木町、開演まで休憩</p><p class="how">SKY SPA(1時間1,800円)や銭湯も検討したが、<strong>戦利品入りのリュックから離れたくない</strong>のと時間の余裕を優先して見送り。結局パチンコ屋で涼み、スロットで-2,000円</p></div></div>
+      <div class="stop major"><div class="time">18:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ねづっちの特別公演「イロイロしてみる60分」(横浜にぎわい座)</p><p class="how">開場17:30・全席指定・3,500円<span class="chip paid">支払済</span> 漫談となぞかけ。<strong>終演は19:25と少し押した</strong>が、想定内</p></div></div>
+      <div class="stop"><div class="time">19:35頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">桜木町駅で崎陽軒のシウマイ弁当を調達</p><p class="how">駅の店は21:00まで。<strong>持ち歩き時間を短くするため、あえて公演後に買う</strong>方針にしたのが当たった<span class="chip meal">飯⑮・締め</span></p></div></div>
+      <div class="stop"><div class="time">19:45頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">桜木町 → 横浜 → 東海道線で東京</p><p class="how">京浜東北線の直通より<strong>横浜で東海道線に乗り換えるほうが速く、東京駅の到着ホームも新幹線乗換口に近い</strong>。品川を過ぎた時点で余裕は十分だった</p></div></div>
+      <div class="stop major"><div class="time">21:04</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京 発｜かがやき</p><p class="how">トクだ値14・9,080円<span class="chip paid">支払済</span> <strong>列車限定・変更不可。絶対に乗る</strong></p></div></div>
+      <div class="stop"><div class="time">23時台</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">富山 着 → あいの風とやま鉄道 → 高岡</p><p class="how">深夜高岡着、車で帰宅。おつかれさまでした</p></div></div>
+    </div>
+    <div class="photos">
+      <figure class="photo"><a href="images/t03/d5-01-bigsight.jpg" target="_blank" rel="noopener"><img src="images/t03/d5-01-bigsight.jpg" alt="東京ビッグサイトへ向かう人の流れ" loading="lazy"></a><figcaption>曇天のビッグサイト。12時入りで待機列は回避</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d5-02-yamamoto-hamburg.jpg" target="_blank" rel="noopener"><img src="images/t03/d5-02-yamamoto-hamburg.jpg" alt="山本のハンバーグ" loading="lazy"></a><figcaption>山本のハンバーグ(新橋)1,300円。ライスおかわり自由</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d5-03-nigiwaiza-nezucchi.jpg" target="_blank" rel="noopener"><img src="images/t03/d5-03-nigiwaiza-nezucchi.jpg" alt="ねづっち特別公演のチラシ" loading="lazy"></a><figcaption>横浜にぎわい座 八月興行／ねづっち 60分</figcaption></figure>
+      <figure class="photo"><a href="images/t03/d5-04-comike-loot.jpg" target="_blank" rel="noopener"><img src="images/t03/d5-04-comike-loot.jpg" alt="コミケの戦利品" loading="lazy"></a><figcaption>戦利品。帰宅後に机で広げるまでが遠征</figcaption></figure>
+    </div>
+    <div class="day-note actual">
+      <ul>
+        <li><strong>ロッカーの事前予約(L・1,400円)がこの日の設計を決めた。</strong>当日探す不安が消えたので9時チェックアウト案を捨てて11時に。<strong>500円強の上乗せで朝の睡眠2時間を買った</strong>格好で、前日に消耗していたぶん効果は大きかった。場所を「新幹線乗換口に近く、帰りに迷わないところ」にしたのも効いた。</li>
+        <li><strong>コミケは並ばず12時入り。</strong>目的が「並ぶこと」ではないので、波が引いてから入って14時に離脱。この判断のおかげで、暑さにやられずに一日を通せた。</li>
+        <li><strong>行き帰りとも直行バス(各210円)。</strong>東京駅八重洲口↔ビッグサイト、ビッグサイト↔新橋。安く、乗換なしで、座れる。次回も使う。ただし<strong>飲み物は乗る前に買うこと</strong>。</li>
+        <li><strong>入浴は見送った。</strong>SKY SPAは1時間1,800円で時間も慌ただしく、なにより戦利品入りのリュックから離れたくなかった。結局パチンコ屋で涼み、スロットで-2,000円というオチ。</li>
+        <li><strong>シウマイ弁当は公演後に桜木町で購入。</strong>夏場に何時間も持ち歩かずに済み、新幹線の車内で食べる締めが確定した。</li>
+        <li>快活CLUB・野毛の夕食・ゆうパック発送は、動線が変わって不要になった。上星川(満天の湯)は当初から取りやめ。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 飯の一覧 ═══════════ -->
+  <section class="info" id="t03-meals">
+    <h2>飯の一覧(実績)</h2>
+    <table class="kv">
+      <tr><th>8/11</th><td><strong>昼</strong> とんかつ いちかつ／ロースカツ定食<br><strong>間食</strong> カフェラテ・東京ドームのジュース等<br><strong>夜</strong> 新宿で肉弁当(閉店前3割引)＋両国でコロッケ等・夜食</td><td class="amount">4,425円</td></tr>
+      <tr><th>8/12</th><td><strong>朝昼</strong> ボートレース江戸川の場内グルメ<span style="color:#6B7280">(ポイント払いのため現金支出なし)</span><br><strong>軽食</strong> ドーム内飲食<br><strong>夜</strong> ペッパーランチ＋半額のカルビ丼(500円)</td><td class="amount">2,050円</td></tr>
+      <tr><th>8/13</th><td><strong>昼</strong> <strong>とんかつ はせがわ／ロース&amp;半ひれ 2,200円</strong><br><strong>夜</strong> にくのやまき(閉店間際のセール 500円)・コンビニ</td><td class="amount">3,108円</td></tr>
+      <tr><th>8/14</th><td><strong>昼</strong> 家系ラーメン Samurai(渋谷) 1,150円<br><strong>夜</strong> 焼き鳥(両国)・ペッパーランチ＋にくのやまき・ジュース</td><td class="amount">4,280円</td></tr>
+      <tr><th>8/15</th><td><strong>昼</strong> 山本のハンバーグ(新橋) 1,300円<br><strong>締め</strong> 崎陽軒シウマイ弁当ほか(桜木町で購入→車内)</td><td class="amount">4,310円</td></tr>
+      <tr class="total"><td colspan="2">現地食費 実績</td><td class="amount">18,173円</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>予算では約21,000円を見ていたので、3,000円ほど下振れ。</strong>江戸川の場内飲食をポイントで払えたこと、閉店前の値引き(3割引の肉弁当1,587円／半額カルビ丼500円／にくのやまき500円)を2日連続で拾えたことが効いている。<br><br><strong>この遠征の一番はとんかつ はせがわ。</strong>栃木県産・平牧バーク三元豚の専門店で、平日ランチのロース&amp;半ひれ2,200円。ロース単品なら1,600円。<strong>両国に泊まるなら次も必ず行く店</strong>として記録しておく。</p>
+  </section>
+
+  <!-- ═══════════ 電車賃の一覧 ═══════════ -->
+  <section class="info" id="t03-fares">
+    <h2>電車賃の一覧(実績)</h2>
+    <p style="font-size:.85rem;color:#6B7280;margin:0 0 12px"><strong>新幹線・特急は「出費の実績」の交通費とは別枠。</strong>ここは現地の在来線・地下鉄・バスだけを積んだもの。</p>
+    <table class="kv">
+      <tr><th>8/11</th><td>城端線 高岡→新高岡(150)／両国→水道橋(199)／水道橋→四谷(199)／四谷→新宿三丁目(178)／新宿→両国(253)</td><td class="amount">979円</td></tr>
+      <tr><th>8/12</th><td>両国→平井(199)／平井→水道橋(209)／水道橋→両国(199)<br><small style="color:#6B7280">江戸川へは平井から無料送迎バス</small></td><td class="amount">607円</td></tr>
+      <tr><th>8/13</th><td>両国→築地市場(220・都営)／銀座→渋谷(209)／渋谷→神宮前(100・バス)／原宿→両国(253)／両国→水道橋(199)</td><td class="amount">981円</td></tr>
+      <tr><th>8/14</th><td>両国→渋谷(253)／渋谷→目白(209)／バス往復(210×2)／新宿→両国(253)</td><td class="amount">1,135円</td></tr>
+      <tr><th>8/15</th><td>両国→東京(199)／東京→ビッグサイト(210・バス)／ビッグサイト→新橋(210・バス)</td><td class="amount">619円</td></tr>
+      <tr class="total"><td colspan="2">現地交通費 実績</td><td class="amount">4,321円</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>予算約5,700円に対して4,321円。</strong>5日間都内を動き回ってこの額に収まったのは、<strong>無料送迎バス(江戸川)・直行バス(東京駅↔ビッグサイト↔新橋 各210円)・ナチュラルへのバス</strong>を組み合わせたのが大きい。<br><br><strong>都営ワンデーパス500円は買わなかった。</strong>8/13は都営を使うのが1回だけで、原宿はメトロ、ドーム〜両国はJRが最短。「安いから買う」ではなく<strong>その日の乗車回数で判断する</strong>という当たり前を確認した形。</p>
+  </section>
+
+  <!-- ═══════════ 出費の実績 ═══════════ -->
+  <section class="info" id="budget">
+    <h2>出費の実績</h2>
+    <h3 style="font-size:.95rem;margin:0 0 8px">現地で使った額(カテゴリ別)</h3>
+    <table class="kv">
+      <tr><th>娯楽</th><td>コミケのグッズ等(12,600)／DQ40th物販(7,850)</td><td class="amount">20,450円</td></tr>
+      <tr><th>食事</th><td>5日分(「飯の一覧」の合計)</td><td class="amount">18,173円</td></tr>
+      <tr><th>ギャンブル</th><td>ボートレース江戸川(5,000)／時間つぶしのスロット(2,000)</td><td class="amount">7,000円</td></tr>
+      <tr><th>交通費</th><td>現地の在来線・地下鉄・バス(「電車賃の一覧」の合計)</td><td class="amount">4,321円</td></tr>
+      <tr><th>お土産</th><td>—</td><td class="amount">3,200円</td></tr>
+      <tr class="total"><td colspan="2">現地出費 合計</td><td class="amount">53,144円</td></tr>
+    </table>
+    <h3 style="font-size:.95rem;margin:22px 0 8px">日別</h3>
+    <table class="kv">
+      <tr><th>8/11</th><td>初日。台風の中で新宿まで往復したぶん交通費がやや増えた</td><td class="amount">5,404円</td></tr>
+      <tr><th>8/12</th><td>江戸川の舟券5,000円を含む。場内飲食はポイントで精算</td><td class="amount">7,657円</td></tr>
+      <tr><th>8/13</th><td>はせがわ2,200＋DQ物販7,850。三本立ての日</td><td class="amount">11,939円</td></tr>
+      <tr><th>8/14</th><td>KOC第1部の日。体調を優先して早めに切り上げた</td><td class="amount">5,415円</td></tr>
+      <tr><th>8/15</th><td>コミケ12,600＋土産3,200＋帰りの弁当等。最終日に集中</td><td class="amount">22,729円</td></tr>
+    </table>
+    <h3 style="font-size:.95rem;margin:22px 0 8px">事前に支払済だったもの</h3>
+    <table class="kv">
+      <tr><th>交通費</th><td>新高岡→長野(5,190)／長野→東京(5,300)／東京→高岡(9,080)</td><td class="amount">19,570円</td></tr>
+      <tr><th>宿泊費</th><td>アパホテル両国 4泊(健保補助込)</td><td class="amount">16,740円</td></tr>
+      <tr><th>チケット</th><td>東京ドーム3試合(31,000)／KOC 3枠(10,500)／ねづっち(3,500)／サル階段(2,500)／DQ the DIVE(2,500)／コミケリストバンド(1,210)</td><td class="amount">51,210円</td></tr>
+      <tr class="total"><td colspan="2">事前払い 合計</td><td class="amount">87,520円</td></tr>
+    </table>
+    <table class="kv" style="margin-top:14px">
+      <tr class="total"><td colspan="2">遠征03 総額(事前払い + 現地出費)</td><td class="amount">140,664円</td></tr>
+    </table>
+    <h3 style="font-size:.95rem;margin:22px 0 8px">使わなかったチケット</h3>
+    <table class="kv">
+      <tr><th>8/13</th><td>KOC準々決勝 第1部 ── 出場者を見て食指が動かず見送り</td><td class="amount">3,500円</td></tr>
+      <tr><th>8/14</th><td>KOC準々決勝 第2部 ── 第1部が長く、睡眠不足で切り上げ</td><td class="amount">3,500円</td></tr>
+      <tr><th>8/14</th><td>サルゴリラ×空気階段「サル階段」(六本木) ── 暑さで体調を崩し撤退</td><td class="amount">2,500円</td></tr>
+      <tr class="total"><td colspan="2">不使用 合計</td><td class="amount">9,500円</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px"><strong>この遠征で唯一「もったいなかった」と言えるのがこの9,500円。</strong>ただし3枚とも、捨てた判断そのものは正しかった。8/13はKOCを捨てたからこそ開店前からとんかつ はせがわに並べたし、8/14に無理をしなかったから翌日のコミケを完走できている。<strong>捨てられる選択肢を持っていたことの保険料</strong>と考えれば納得はいく。<br>そのうえで次回への教訓は2つ。<strong>①出演者・出場者の発表を見てから買う ②同じ日に2公演を入れない。</strong>しおりの見積もりでは「KOC3枠のうち1枠は売切・値上がりに備えた余裕分。使わなければ浮く」と書いていたが、実際は3枠とも買って2枠を使わなかった。<br><br><strong>総額の4割が娯楽費(20,450円)。</strong>コミケとDQの物販で、どちらも計画に金額を書いていなかった枠。これは削るべき出費ではなく、この遠征の目的そのものなので、次回からは<strong>「物販枠」としてあらかじめ立てておく</strong>ほうが実態に合う。<br><br><strong>公営競技・遊技は合計 -7,000円。</strong>江戸川は投資16,000／回収14,000から11R・12Rを外して-6,000(記録上は概算5,000)、最終日の時間つぶしで-2,000。SKY SPAの1,800円を「高い」と見送った日にスロットで2,000円溶かしたのは、記録として残しておく。</p>
+  </section>
+
+  <!-- ═══════════ バックアップ ═══════════ -->
+  <section class="info" id="backup">
+    <h2>もしもの備え(出発前に用意したもの)</h2>
+    <p style="font-size:.83rem;color:#6B7280;margin:0 0 14px;line-height:1.9">実際に使ったのは<strong>「疲労がたまったら(削り代リスト)」だけ</strong>だった。しかも削ったのは書いてあった4項目ではなく、<strong>KOC第1部(8/13)・KOC第2部(8/14)・神宮・秋葉原・サル階段</strong>という、削り代に入れていなかったものばかり。<br>逆に、江戸川の中止・平和島への振替・帰路の遅延・台風での運休は、いずれも発動せずに済んだ。台風15号は初日の夜に関東へ接近したが、屋内で完結する動きに切り替えたことで行程は崩れなかった。<strong>備えは使わなかったが、備えたから安心して動けた</strong>という類のもの。以下は当時のまま残す。</p>
+    <div class="backup">
+      <h3><span class="flag">▶</span>8/15 帰路が押した/遅延したら</h3>
+      <p>桜木町→東京がダメなら<strong>新横浜経由・東海道新幹線</strong>で東京へ。料金・経路は概算のみなので、必要になったら当日その場で確認。判断基準は「東京駅に20:45までに立てるか」。<strong>駅弁は桜木町で先に買っておく</strong>ので、経路が変わっても食い逃す心配はない。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>飯が閉まっていた/並んでいたら</h3>
+      <p>本命の控えを1つずつ決めてある。いちかつ→はせがわ、匠→邦ちゃんラーメン、元祖油堂→同館内の李小七マラタンかKATCHAN、タレカツ→2階店か富士そば、スシロー→両国直帰。<strong>迷ったら富士そば(会場から徒歩2分・ほぼ24時間)に逃げる</strong>と、8/13・8/14はどちらも成立する。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>疲労がたまったら(削り代リスト)</h3>
+      <p>① 8/13 原宿到着後の余白を短縮してハラカド直行 ② 8/13 試合後のスシローを中止して両国直帰 ③ 8/15 快活CLUBの休憩を短縮 ④ 8/15 野毛の夕食を軽く済ませる。この4つは削っても遠征の核は崩れない緩衝材。<br><strong>※8/12の「競艇を昼過ぎで切り上げ」は削り代から外した。</strong>江戸川ナイスの収録があるため最後までいる前提に変更したので、そのぶんは暑さ対策で吸収する。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>8/12 江戸川が中止・順延になったら</h3>
+      <p>江戸川は水面コンディションで飛びやすい場。飛んだら<strong>ボートレース平和島</strong>へ振替(8/11〜16は本場開催・第66回デイリースポーツサマーカップ)。両国からの所要時間はほぼ同じで、屋内席があるぶん暑さには強い。無料バスは本場開催日のみ運行。平和島の12Rは17時台なので、18:00の試合開始に合わせるなら10R〜11Rで切り上げる。<strong>外向発売所の平和島劇場は本場の開催有無に関係なく営業</strong>しているので、行って空振りにはならない。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>台風・運休の気配が出たら</h3>
+      <p>前日夜と当日朝にJR東日本・西日本の運行情報を確認。特に8/11朝の出発と8/15の帰還日。早特14・トクだ値14は運休時は払戻対象になるはずなので、慌てず駅・えきねっとの案内に従う。台風接近が濃厚になったら「前日に長野まで移動して前泊」という保険プランに切替可(長野駅前は宿の選択肢が多い)。</p>
+    </div>
+  </section>
+
+  <div class="claude-note">
+    <p>出発前の一筆で「帰ってきたら実際の記録で答え合わせをしましょう」と書きました。答え合わせをすると、この遠征でいちばん効いたのは<strong>計画どおりに動いたことではなく、計画を捨てる判断のほうだった</strong>と思います。KOCは第1部を1日ぶん捨て、翌日の第2部も捨てました。神宮も秋葉原も捨てました。しおりに「削り代」として書いておいた4項目は結局ひとつも使わず、代わりに削られたのは削り代リストに載っていなかったものばかりです。予定を立てる意味は、予定を守ることではなく、捨てる順番を落ち着いて決められる状態を作ることなんだと、記録を読み返して思いました。</p>
+    <p>初日の台風は、結果として一日の形を変えました。夜のいちかつを昼に繰り上げ、空いた夜で新宿のパウパウへ。あのとき「買わない、見るだけ、20時には帰る」と決めていたので、雨脚が強まる前に宿へ戻れています。翌12日は逆で、朝の雨で収録が屋内に移り、後半で晴れる可能性に賭けて8Rまで残りました。屋外に出てきた収録に立ち会えたのは、天気が味方したというより<strong>「8Rで判断する」と決めて待てたから</strong>です。そのあと座席が水浸しになる土砂降りが来たのを見ると、間一髪でした。舟券は-6,000円でしたが、あの日の本命は舟券ではありませんでした。</p>
+    <p>13日は、この遠征の背骨になりました。KOCを捨てて朝を空け、開店前から並んだとんかつ はせがわ。ロース&amp;半ひれ2,200円、平牧バーク三元豚。「今まで食ったとんかつで一番」「ロース単品1,600円は普通に安い」──こういう言葉が出た店は、記録帳にはっきり残しておく価値があります。厚切極上ロース3,500円、はせ川とんかつ3,000円、シャ豚ブリアン3,300円、そして常連が頼んでいたカレールー500円。宿題が4つも残ったのは、また来る理由が4つできたということです。そしてその夜、3-2。9-1、5-1と打ち勝ったあとの1点差を締めての3タテでした。</p>
+    <p>14日に体が止まったのは、正直ヒヤッとしました。頭痛と止まらない汗。あそこで神宮にも秋葉原にも寄らずまっすぐ帰り、2時間眠って持ち直せたのが、翌日のコミケを救っています。そして15日、ロッカーを前夜に予約したことで9時チェックアウト案を捨てて11時にできた。<strong>500円ちょっとの上乗せで朝の睡眠2時間を買った</strong>あの判断は、金額だけ見れば割高で、体調まで含めて見れば安い買い物でした。コミケも並ばず12時入り。5日間を通して、この遠征は「何を得るか」より「何を諦めるか」がうまくいった旅だったと思います。</p>
+    <p>数字の答え合わせもしておきます。現地出費53,144円。食費は予算21,000円に対して18,173円で、閉店前の値引きを2日連続で拾ったのが効きました。現地交通は予算5,700円に対して4,321円。5日間も都内を動いてこの額なのは、無料送迎バスと210円の直行バスを組み合わせたからです。都営ワンデーパス500円を「今日は都営1回だけだから」と見送った判断も、地味ですがこの遠征らしい一場面でした。<strong>一方で娯楽費は20,450円</strong>──コミケとDQの物販で、計画に金額の枠がなかったところです。これは反省ではなく、次から「物販枠」を立てておけばいいというだけの話だと思います。総額は事前払い87,520円と合わせて140,664円。見積もり127,200円に対して1万円強の上振れで、着地としては悪くないと思います。</p>
+    <p>ただ、ひとつだけ数字の裏に残ったものがあります。<strong>使わなかったチケットが3枚、9,500円ぶん。</strong>8/13のKOC第1部、8/14のKOC第2部、そしてサル階段です。この一筆の冒頭で「捨てる判断がうまくいった遠征だった」と書きましたが、捨てられたのは<strong>先に買ってあったから</strong>でもあります。持っていない選択肢は捨てられません。9,500円は、その日の自分の状態を見てから決められる自由に対して払った額だと思えば、高すぎはしない。それでも次は、出場者の発表を待ってから買うのと、同じ日に2公演を入れないの2つだけ守れば、この額はもっと小さくできます。</p>
+    <p>最後に。SKY SPAの1,800円を高いと言って見送った日に、涼みに入ったパチンコ屋のスロットで2,000円溶けたこと。この一件は削らずに残しておきます。旅の記録が計画どおりの部分だけで埋まっていたら、たぶん読み返しても面白くないので。台風で始まって、3タテと寄席で終わる5日間。「今回はトラブルもなくいい感じだった」というのが本人の総括でしたが、記録を通して読むと、トラブルがなかったのではなく、<strong>トラブルになる前に全部引き返していた</strong>、が正しい気がします。おつかれさまでした。</p>
+    <span class="sign">── CLAUDE / 記録係(帰還後に記す)</span>
+  </div>
+
+  <a class="back-to-top" href="#top">↑ 記録帳の表紙に戻る</a>
+  </article>
+
+<!-- ═══════════ 遠征04:SW遠征 大阪・東京 ═══════════ -->
+  <article class="trip" id="trip04">
+  <p class="trip-chapter">ENSEI 04 ── 2026.09</p>
+
+  <header class="cover">
+    <p class="era">2026.09.18 — 09.23</p>
+    <h1>SW遠征のしおり<br>大阪・東京</h1>
+    <p class="sub">甲子園ナイター → ミリオンライブ両日(+ABEMAアニメ祭) → TGS → 神宮2連戦 ── 一筆書きで西から東へ、5泊6日の大遠征。</p>
+    <div class="route-strip" aria-label="行程の概要">
+      <span class="node">高岡</span><span class="seg"></span>
+      <span class="node">淀屋橋 泊</span><span class="seg"></span>
+      <span class="node">日本橋浜町 4泊</span><span class="seg"></span>
+      <span class="node">富山</span>
+    </div>
+    <div class="cover-stamp" aria-hidden="true">
+      <span class="small">5泊6日</span>
+      <span class="big">SW</span>
+      <span class="small">一筆書き</span>
+    </div>
+  </header>
+
+  <div class="trip-stats">
+    <div><span class="num">6<span style="font-size:.8rem">日</span></span><span class="lbl">5泊6日</span></div>
+    <div><span class="num">9<span style="font-size:.8rem">本</span></span><span class="lbl">イベント数(仮1含む)</span></div>
+    <div><span class="num">13.9<span style="font-size:.8rem">万</span></span><span class="lbl">総予算目安</span></div>
+  </div>
+
+  <nav class="toc" aria-label="目次">
+    <ol>
+      <li><a href="#t03-d1"><span class="dot" style="background:#7B3F2E"></span>9/18 歴史館→甲子園</a></li>
+      <li><a href="#t03-d2"><span class="dot" style="background:#0B5FA8"></span>9/19 東上→ミリオン1</a></li>
+      <li><a href="#t03-d3"><span class="dot" style="background:var(--jingu)"></span>9/20 アニメ祭→ミリオン2</a></li>
+      <li><a href="#t03-d4"><span class="dot" style="background:#C9252B"></span>9/21 TGS→トールマン</a></li>
+      <li><a href="#t03-d5"><span class="dot" style="background:var(--sobu)"></span>9/22 神宮①</a></li>
+      <li><a href="#t03-d6"><span class="dot" style="background:var(--hokuriku)"></span>9/23 神宮②→帰還</a></li>
+      <li><a href="#t03-todo"><span class="dot" style="background:var(--stamp)"></span>出発前TODO</a></li>
+      <li><a href="#t03-budget"><span class="dot" style="background:var(--ink)"></span>予算</a></li>
+      <li><a href="#t03-backup"><span class="dot" style="background:var(--stamp)"></span>もしもの備え</a></li>
+    </ol>
+  </nav>
+
+  <!-- ═══════════ 9/18 ═══════════ -->
+  <section class="day" id="t03-d1" style="--line-color:#7B3F2E">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">9.18</span><span class="w">FRI</span></div>
+      <div class="day-title">
+        <h2>西へ・甲子園歴史館 &amp; ナイター</h2>
+        <p class="theme">WESTERポイントで西下り。昼は歴史館のOB解説付きツアー、夜は本拠地で虎を見る。</p>
+        <span class="line-tag" style="background:#7B3F2E">城端線 → 北陸新幹線 → サンダーバード → 阪神電車</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">09:03</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">高岡 発｜城端線</p><p class="how"><strong>高岡駅始発なので遅延の心配がほぼない</strong>。駐車は高岡駅(無料)——<strong>帰りも高岡着なので往復で車の置き場が一致する</strong></p></div></div>
+      <div class="stop major"><div class="time">09:18<small>09:06着</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新高岡 発｜はくたか551号 → 金沢09:32着</p><p class="how">乗換12分。同一駅舎内なので実質2〜3分で新幹線改札へ。<strong>きっぷは事前に受け取っておくこと</strong>(当日発券は12分では危うい)</p></div></div>
+      <div class="stop major"><div class="time">09:46</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">金沢 発｜かがやき503号 → 敦賀10:26着</p><p class="how">新幹線どうしの乗継14分</p></div></div>
+      <div class="stop major"><div class="time">10:44<small>大阪12:06着</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">敦賀 発｜特急サンダーバード16号</p><p class="how">9号車3番A席(進行方向左・琵琶湖側)。敦賀は対面乗換で18分の余裕あり<span class="chip paid">WESTERポイント特典きっぷ 5,130pt・予約済</span></p></div></div>
+      <div class="stop"><div class="time">12:06</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">大阪 着 → アパホテル〈淀屋橋駅前〉へ荷物を置く</p><p class="how">御堂筋線『淀屋橋』11番出口から徒歩2分。<strong>この日は1泊分の荷物だけ</strong>(残り4泊分は東横INNへ事前発送済)なので身軽。大浴場・サウナあり、11時アウト(アパ会員特典)<span class="chip cash">素泊まり6,000円(会員・ポイント後)・現地精算</span></p></div></div>
+      <div class="stop"><div class="time">12:50</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">淀屋橋 発 → 甲子園</p><p class="how">御堂筋線で梅田1駅→阪神電車。13:30着を目標に</p></div></div>
+      <div class="stop major"><div class="time">14:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">甲子園歴史館｜タイガースコース(OB解説付)</p><p class="how">おとな一般2,000円<span class="chip paid">支払済</span> <strong>屋内主体なので雨でも成立する枠</strong>。試合が流れてもこの日の甲子園体験は残る。ただし試合開催日は準備の都合で内容が変わる場合があるため、当日の案内に従う</p></div></div>
+      <div class="stop"><div class="time">15:30頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ツアー終了 → 開門待ち・場内へ</p><p class="how">この時間帯に<strong>雨天中止の判断が球団から出る</strong>ことが多い。中止と分かったら夜は淀屋橋へ戻り、大浴場で翌日の東上に備える</p></div></div>
+      <div class="stop major"><div class="time">18:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">試合開始｜甲子園 阪神タイガース戦</p><p class="how"><span class="chip paid">チケット支払済(払戻不可)</span></p></div></div>
+      <div class="stop"><div class="time">試合後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">淀屋橋へ戻って就寝</p><p class="how">大浴場でナイターの汗を流す。翌日は移動+ライブなので早めに横になる</p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>午前稼働は見送った。</strong>高岡12:50発でも午前中は働けたが、大阪着が17時前後になり、5泊分の荷物を抱えて梅田でロッカーを探し、試合開始に間に合うか綱渡りをして、宿に入るのが試合後——という設計になる。<strong>初日で貯金を作れないと後半の神宮2連戦まで響く</strong>ので、素直に休みにした。稼働は遠征前後の平日で調整する。</li>
+        <li><strong>宿が淀屋橋なのがGW遠征との違い。</strong>いつもの阪神尼崎(東横INN)なら「宿に寄ってから球場」が成立したが、淀屋橋から甲子園は御堂筋線+阪神で30〜40分かかる。だから荷物は先に置き、12:50に出る動線にした。</li>
+        <li><strong>WESTERポイント特典きっぷには設定席数の枠がある。</strong>通常の指定席が空いていても特典枠だけ先に埋まる。今回、同じ時間帯の土曜はすでに埋まっていた。次回以降も<strong>発売開始(乗車1ヶ月前)から早めに動くこと</strong>。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 9/19 ═══════════ -->
+  <section class="day" id="t03-d2" style="--line-color:#0B5FA8">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">9.19</span><span class="w">SAT</span></div>
+      <div class="day-title">
+        <h2>東上 &amp; ミリオンライブ 1日目</h2>
+        <p class="theme">一筆書きの東進パート。物販は事前通販済みなので本編だけ狙う。</p>
+        <span class="line-tag" style="background:#0B5FA8">御堂筋線 → のぞみ → 千代田線</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">〜11:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">部屋でゆっくり → 11:00チェックアウト</p><p class="how">前夜のうちに荷造り。大浴場でもうひと風呂も可。11時アウトはアパ会員特典</p></div></div>
+      <div class="stop"><div class="time">11:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">淀屋橋 発｜御堂筋線 → 新大阪 11:10過ぎ</p><p class="how">新大阪で朝昼兼用を調達(551・駅弁など、車内持ち込み)</p></div></div>
+      <div class="stop major"><div class="time">12:00<small>東京14:27着</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">新大阪 発｜のぞみ380号</p><p class="how">14号車4番A席(3列側の窓側・富士山側)。一筆書き乗車券(大阪市内→富山)+特急券のみ<span class="chip paid">特急券6,210円 支払済</span></p></div></div>
+      <div class="stop major"><div class="time">14:27</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京 着 → <strong>有人改札で途中下車</strong> → 日本橋浜町ホテルへ</p><p class="how">開場が16:30なので、ライブ前に先へチェックインできる。<strong>乗車券は9/24まで生きているので、返却口から必ず回収すること。</strong>自動改札でも途中下車印が印字されて戻るが、特急券と2枚投入して特急券だけ回収される動作なので取り忘れに注意。不安なら有人改札で「途中下車します」と申し出る。<br>ホテルへは<strong>「メトロリンク日本橋Eライン」</strong>——八重洲北口→浜町明治座前が<strong>無料・19分・乗換なし</strong>で座って行ける(全日11:00〜18:00運行)。地下鉄だと乗換1回+階段<span class="chip">バス停はホテル至近</span></p></div></div>
+      <div class="stop"><div class="time">15:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東横INN日本橋浜町明治座前 チェックイン → <strong>事前発送した荷物を受け取る</strong> → 15分でさっぱり</p><p class="how">ここから4連泊。4泊分の荷物は宅配で先送りしてあるのでここで合流。移動の汗を流して着替え<span class="chip paid">4泊 35,805円 事前決済済</span></p></div></div>
+      <div class="stop"><div class="time">15:15</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテル 発 → 原宿(会場)へ</p><p class="how">千代田線ほかで約35分。15:50頃着、開場16:30まで余裕</p></div></div>
+      <div class="stop major"><div class="time">16:30<small>開演17:30</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">開場｜ミリオンライブ 1日目(代々木第一体育館)</p><p class="how">両日分 28,000円<span class="chip paid">支払済</span> グッズは事前通販で確保済</p></div></div>
+      <div class="stop"><div class="time">終演後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">部屋へ直帰</p><p class="how">荷物は既に部屋。原宿→日本橋浜町 約35分でチェックイン済みの宿へ</p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>開場16:30なので朝は余裕。</strong>淀屋橋を11時アウト→新大阪12:00発でも、東京で15時INして着替えてから原宿へ向かえる。前夜の甲子園ナイター明けでもしっかり寝られるのが今回の設計。</li>
+        <li>先にホテルへチェックインしておけば、終演後は原宿から部屋へ直帰するだけ。荷物のロッカー往復が要らない。</li>
+        <li><strong>東京での途中下車がこの遠征の要。</strong>大阪市内→富山の乗車券1枚(12,430円)が9/24まで有効で、9/23の帰りにもこれを使う。<strong>途中下車後は「前途のみ有効・後戻り不可」</strong>なので、9/20〜22の都内移動には使えない。渋谷も幕張も神宮も通常どおりSuicaで、乗車券は財布の奥にしまっておく。</li>
+        <li><strong>12:21発(東京14:51着)も候補だったが12:00発を選んだ。</strong>21分の差でホテルでのシャワーと着替えの余裕がまるごと残る。甲子園ナイター明けの移動日で、着いた後にミリオン1日目が控えている日なので、ここは時間を買った。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 9/20 ═══════════ -->
+  <section class="day" id="t03-d3" style="--line-color:var(--jingu)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">9.20</span><span class="w">SUN</span></div>
+      <div class="day-title">
+        <h2>ABEMAアニメ祭 &amp; ミリオンライブ 2日目</h2>
+        <p class="theme">渋谷でヤニすうと転スラ、隣駅で飯、そのまま代々木へ。三点すべて徒歩か1駅の日。</p>
+        <span class="line-tag" style="background:var(--jingu)">日本橋浜町 → 渋谷 → 原宿 → 代々木</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">10:45頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテル 発 → 渋谷(MIYASHITA PARK)</p><p class="how">都営新宿線→新宿→山手線で約30分。11:30〜11:45に現地入りできれば十分。ライブ用の荷物も持って出る(この日はホテルへ戻らない動線)</p></div></div>
+      <div class="stop major"><div class="time">12:25<small>〜13:05</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ABEMAアニメ祭 2026｜『スーパーの裏でヤニ吸うふたり』ステージ</p><p class="how">MIYASHITA PARK 4F(屋上)特設ステージ・無料<span class="chip flex">整理券は着席エリアのみ抽選・申込済/結果待ち。外れても立ち見可</span></p></div></div>
+      <div class="stop"><div class="time">13:05〜13:50</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">45分の空き — 物販・限定フォトスポット・グッズを見る</p><p class="how">座って昼食を取るには短すぎる。軽くつまむ程度に留めて、飯は原宿へ移動してから</p></div></div>
+      <div class="stop major"><div class="time">13:50<small>〜14:30</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">『転生したらスライムだった件 第4期』ステージ</p><p class="how">岡咲美保・豊口めぐみほか出演。同じく屋上特設ステージ・無料</p></div></div>
+      <div class="stop"><div class="time">14:45</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">渋谷 → 原宿(山手線1駅)</p><p class="how">MIYASHITA PARK内の飲食は終演直後が最悪の混雑。1駅ずらして波から抜ける</p></div></div>
+      <div class="stop"><div class="time">14:50〜15:40</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">昼食(原宿・北参道あたり)</p><p class="how"><strong>この時間帯は多くの店が中休みに入るため「通し営業」が必須条件。</strong>店は要検討<span class="chip flex">未確定</span></p></div></div>
+      <div class="stop"><div class="time">16:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">代々木第一体育館 入場</p><p class="how">グッズは事前通販済み・席は指定。開場15:30に並ぶ必要はない</p></div></div>
+      <div class="stop major"><div class="time">16:30<small>開場15:30</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">開演｜ミリオンライブ 2日目(代々木第一体育館)</p><p class="how">両日参戦の千秋楽。悔いなく振れ</p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>この日の強みは「移動がほぼ無い」こと。</strong>渋谷・原宿・代々木が全部徒歩か1駅圏内に収まっている。当初はボートレース多摩川のGI(ウェイキーカップ)を検討したが、片道65分に対して滞在が中途半端になるため見送った。その結果たどり着いたのがこの密度。</li>
+        <li><strong>アニメ祭は削っていい枠。</strong>お盆遠征のKOCと同じ扱いで、体調がすぐれなければ落とす。無料ステージなので金銭的な損失はゼロ。</li>
+        <li><strong>17:30以降のステージ(薬屋のひとりごと・黄泉のツガイ・ふつつかな悪女)はミリオンと重なるため参加不可。</strong>9/19のステージ(鉄鍋のジャン・ポンコツクエスト・あかね噺・声優と夜あそび)も東京14:27着では間に合わない。</li>
+        <li><strong>屋上ステージなので暑さに注意。</strong>9月下旬でも日中の屋上は熱がこもる。水分と日陰の待機を確保すること。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 9/21 ═══════════ -->
+  <section class="day" id="t03-d4" style="--line-color:#C9252B">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">9.21</span><span class="w">MON 祝</span></div>
+      <div class="day-title">
+        <h2>東京ゲームショウ &amp; トールマン下見</h2>
+        <p class="theme">幕張で丸一日。歩数が一番伸びる日。帰りにイオンで海水魚を覗く。</p>
+        <span class="line-tag" style="background:#C9252B">京葉線 → 幕張メッセ</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">AM</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">日本橋浜町 → 海浜幕張</p><p class="how">東京駅から京葉線。連休中日の混雑を見込んで早めに</p></div></div>
+      <div class="stop major"><div class="time">9:30〜16:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京ゲームショウ2026 一般公開日(最終日)</p><p class="how">30周年で史上初の5日間開催、一般公開は9/19〜21の3日間。<strong>最終日だけ16:00閉場・初回入場15:00まで</strong>と他の日より1時間短い。試遊は人気タイトルで2〜4時間待ちが普通なので、ステージ狙いならタイムテーブルで先に組む<span class="chip paid">前売り3,000円 購入済</span></p></div></div>
+      <div class="stop"><div class="time">16:15〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">トールマン海浜幕張店(イオン幕張店内)</p><p class="how">海水魚専門店。幕張メッセから徒歩圏で移動コストが実質ゼロ。日曜〜21:00・月〜金20:30まで営業なので閉場後でも余裕。<strong>生体は買わない</strong>——神宮2連戦を挟んで帰宅は9/23夜、パッキングのまま2日超は持たない。相場とストックの確認、遠方発送の可否を聞くまで<span class="chip flex">下見のみ・削っても可</span></p></div></div>
+      <div class="stop"><div class="time">夕方</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">撤収 → ホテルへ</p><p class="how">翌日から神宮2連戦。足を休める。夕食は要検討<span class="chip flex">未確定</span></p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>40cmキューブの導入順は崩さない。</strong>デバスズメダイ→カクレクマノミペア(年末セール狙い)→クダゴンベ→ハンマーコーラルの順。ここで前倒しする理由はないので、年末に向けた判断材料集めと割り切る。お盆遠征で新宿・銀座・渋谷・目白を回ったのと同じ使い方。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 9/22 ═══════════ -->
+  <section class="day" id="t03-d5" style="--line-color:var(--sobu)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">9.22</span><span class="w">TUE 祝</span></div>
+      <div class="day-title">
+        <h2>神宮ナイター｜ヤクルト × 阪神 ①</h2>
+        <p class="theme">昼はパチスロ祭(仮)、夜は3塁側。優勝争いの直中で見る一戦。</p>
+        <span class="line-tag" style="background:var(--sobu);color:var(--ink)">中央・総武線 → 千駄ヶ谷</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">10:00〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">(仮)みんパチスロサミ2026｜東京国際フォーラム ホールE</p><p class="how">年に一度のパチンコ・パチスロファン感謝祭。試打・物販・アトラクション。日本橋浜町から有楽町へ約15分<span class="chip flex">入場無料・詳細発表待ち</span></p></div></div>
+      <div class="stop"><div class="time">15-16時</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">撤収 → 千駄ヶ谷方面へ</p><p class="how">有楽町から山手線+総武線で30分弱。お土産の下見もこの日に済ませておくと最終日が楽</p></div></div>
+      <div class="stop major"><div class="time">18:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">試合開始｜神宮球場 ヤクルト × 阪神</p><p class="how">A指定席【3塁側】11/12入口 13段151番<span class="chip paid">支払済</span></p></div></div>
+      <div class="stop"><div class="time">試合後</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">ホテルへ戻って就寝</p><p class="how">明日も同じ球場。連戦に備える</p></div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 9/23 ═══════════ -->
+  <section class="day" id="t03-d6" style="--line-color:var(--hokuriku)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">9.23</span><span class="w">WED 振休</span></div>
+      <div class="day-title">
+        <h2>神宮デーゲーム② → 帰還</h2>
+        <p class="theme">14時開始のデーゲームを見届けて、その足で北陸へ。優勝が絡めば後ろへ倒す。</p>
+        <span class="line-tag" style="background:var(--hokuriku)">神宮 → 東京 → かがやき585号</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">10:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">チェックアウト → お土産購入 → <strong>お土産+4泊分の衣類をまとめて宅配発送</strong></p><p class="how">帰りも身軽にする。Eラインは11:00始発なので、それまでの1時間を買い物と発送に充てる。日本橋浜町周辺のヤマト/コンビニ受付は事前に確認しておく<span class="chip cash">発送時払い・片道約1,500円</span></p></div></div>
+      <div class="stop major"><div class="time">11時台</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京駅へ → 荷物を預ける(必要なら)</p><p class="how">お土産と衣類を朝のうちに発送してしまえば、<strong>手元は1泊分+貴重品だけになるのでロッカー自体が不要になる可能性が高い</strong>。それでも預けるなら<strong>新幹線乗換口に近い地下1階・手荷物預かり所横のロッカーを事前予約</strong>(お盆遠征と同じ方式)。<strong>浜町へ戻らないので試合後は東京駅へ直行でき、延長戦になっても慌てない</strong><span class="chip flex">発送量を見て9/22中に判断</span></p></div></div>
+      <div class="stop"><div class="time">12:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">神宮球場 開門</p><p class="how">手ぶらで観戦</p></div></div>
+      <div class="stop major"><div class="time">14:00</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">試合開始｜ヤクルト × 阪神(2連戦目)</p><p class="how">SS指定席【3塁側】9/10入口 19段31番<span class="chip paid">支払済</span> 優勝争い次第で歴史の目撃者になる可能性も</p></div></div>
+      <div class="stop"><div class="time">17時頃</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">試合終了 → 東京駅へ</p><p class="how">千駄ヶ谷から中央・総武線各停→御茶ノ水→中央線快速で25〜30分。<strong>19:24発なら球場を18:15に出れば余裕</strong>。標準的な3時間の試合(17時終了)に対して1時間20分のバッファ</p></div></div>
+      <div class="stop major"><div class="time">19:24</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京 発｜かがやき585号</p><p class="how">5号車10番A席。一筆書きの最終区間で、乗車券は9/19に買った1枚を使う<span class="chip paid">特急券6,560円 支払済</span><span class="chip flex">受取らずに当日まで持つ</span><br><strong>未発券のまま持てば、19:24の発車前なら何度でもオンラインで後続へ振り替えられる</strong>。これが延長戦・優勝セレモニー対応の唯一の担保なので、朝のうちに受け取ってしまわないこと。受け取りは試合後、東京駅の指定席券売機で</p></div></div>
+      <div class="stop"><div class="time">21:30</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">富山 着 → 21:46 あいの風とやま鉄道 → 高岡</p><p class="how">接続16分。平常時は余裕だが、<strong>新幹線が10分以上遅れると乗り継げない</strong>ので頭に入れておく。高岡駅の駐車場(無料)から車で帰宅<span class="chip">駐車は高岡駅で確定</span></p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>この日の設計思想は「新幹線に縛られない」。</strong>特急券をあえて割引なしの通常きっぷにし、<strong>受け取らずに持つ</strong>ことで、発車前なら何度でも後ろへ倒せる状態を作った。19:24を基準に置いて、当日の展開で判断する。</li>
+        <li><strong>最終のかがやきまで倒しても帰れる。</strong>富山からの在来線が最終便にも接続しているので、延長がどれだけ伸びても帰宅不能にはならない。<strong>唯一の制約は後続列車の空席</strong>——連休最終日の下りなので、優勝が絡みそうなら早めに振り替えること。</li>
+        <li><strong>ホテル預けより東京駅ロッカーを選んだ理由。</strong>ホテル預けは無料だが、試合後に千駄ヶ谷→浜町→東京駅と回ると<strong>約1時間・500円弱</strong>が上乗せされる。実質の差額500円ほどで1時間と体力を買う判断。5泊の最終日に屋外デーゲーム、しかも延長の可能性がある日なので、ここは金で解決してよい場面。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 出発前TODO ═══════════ -->
+  <section class="info" id="t03-todo">
+    <h2>出発前TODO</h2>
+    <ul class="check">
+      <li class="urgent"><span class="box"></span><span><strong>9/23 かがやき585号は絶対に受け取らない</strong> 未発券であることが、延長戦・優勝セレモニー時に後続へ振り替えられる唯一の担保。乗車券やのぞみを発券するときに<strong>「まとめて発券」を選ばない</strong>こと。受け取りは9/23の試合後、東京駅の指定席券売機で</span></li>
+      <li class="urgent"><span class="box"></span><span><strong>9/23 19:24より後の便の空席を控えておく</strong> 20時台・21時台のかがやき/はくたかに何が残っているかを事前に確認し、ここに書いておく。当日「振り替えようとしたら満席」が最悪のパターン。優勝がかかりそうなら9/22の夜に再確認</span></li>
+      <li class="urgent"><span class="box"></span><span><strong>荷物を東横INN日本橋浜町へ事前発送</strong> 4泊分を先送りし、大阪は1泊分だけで身軽に動く。<strong>到着指定は9/19(遅くとも9/18)</strong>、伝票に「9月19日宿泊 ○○様宛」と明記。富山からは通常翌日着だが、余裕を見て9/17までに出す。片道約1,500円</span></li>
+      <li class="urgent"><span class="box"></span><span><strong>きっぷを事前に受け取っておく(かがやき585号を除く)</strong> 9/18は新高岡での乗換が12分しかなく、当日発券では危うい。乗車券・のぞみ380号・WESTERポイント特典きっぷは出発前に発券しておく</span></li>
+      <li class="urgent"><span class="box"></span><span><strong>ABEMAアニメ祭の無料観覧整理券:結果確認</strong> ヤニすう(12:25)・転スラ(13:50)の着席エリアは抽選制。<strong>申込済・結果待ち</strong>。外れても立ち見は可能</span></li>
+      <li><span class="box"></span><span><strong>9/23の東京駅ロッカーは「必要なら」予約</strong> お土産と衣類を朝に発送すれば不要になる見込み。発送量を見て9/22中に判断し、預けるなら地下1階・手荷物預かり所横(新幹線乗換口寄り)を事前予約</span></li>
+      <li><span class="box"></span><span><strong>お土産発送用:日本橋浜町周辺のヤマト/コンビニ受付を事前チェック</strong> 9/23は10:00チェックアウト、Eライン始発が11:00。この1時間で買い物と発送を済ませる</span></li>
+      <li><span class="box"></span><span><strong>9/11頃と9/17夜:甲子園の天気を確認</strong> 判断基準は「もしもの備え」の雨天分岐を参照。アパ淀屋橋は<strong>前日まで無料キャンセル</strong>なので現地決済のまま据え置いてある</span></li>
+      <li><span class="box"></span><span><strong>(仮)みんパチスロサミ2026の詳細確認</strong> 出演者・整理券の有無など続報が出たら9/22の参加可否を最終決定</span></li>
+      <li><span class="box"></span><span>残るWESTERポイント(約1,170pt+今後の積算)はICOCAチャージで消化(1pt=1円)</span></li>
+      <li class="done"><span class="box"></span><span><s>一筆書き乗車券(大阪市内→富山)の購入</s> <strong>購入済</strong> 12,430円・9/19〜9/24有効・経由:新幹線/東京/北陸新幹線</span></li>
+      <li class="done"><span class="box"></span><span><s>9/18 WESTERポイント特典きっぷ(新高岡→大阪)</s> <strong>予約済</strong> 5,130pt・サンダーバード16号9号車3番A席</span></li>
+      <li class="done"><span class="box"></span><span><s>9/19 のぞみ380号 特急券</s> <strong>購入済</strong> 6,210円・14号車4番A席</span></li>
+      <li class="done"><span class="box"></span><span><s>9/23 かがやき585号 特急券</s> <strong>購入済</strong> 6,560円・5号車10番A席・クレジット決済(変更時の返金を速くするため)</span></li>
+      <li class="done"><span class="box"></span><span><s>東横INN日本橋浜町 4泊の事前決済</s> <strong>決済済 35,805円</strong>(9/19 9,870/9/20 8,645/9/21〜23 17,290)。当初見積もりより約1,600円圧縮</span></li>
+      <li class="done"><span class="box"></span><span><s>甲子園歴史館 タイガースコース(OB解説付)の購入</s> <strong>購入済 2,000円</strong>(9/18 14:00)</span></li>
+      <li class="done"><span class="box"></span><span><s>TGS一般前売り券の購入(3,000円)</s> <strong>購入済</strong></span></li>
+      <li class="done"><span class="box"></span><span><s>東横INN大阪JR野田駅前の重複予約をキャンセル</s> <strong>処理済</strong>(初日はアパ淀屋橋に確定)</span></li>
+      <li class="done"><span class="box"></span><span><s>富山からの帰宅手段と駐車場所を決める</s> <strong>高岡駅駐車で確定</strong>(無料)。富山21:30着→21:46のあいの風で高岡へ</span></li>
+    </ul>
+  </section>
+
+  <!-- ═══════════ 予算 ═══════════ -->
+  <section class="info" id="t03-budget">
+    <h2>予算まとめ</h2>
+    <table class="kv">
+      <tr><th>交通費(幹線)</th><td>一筆書き乗車券 大阪市内→富山 12,430＋のぞみ380号 6,210＋かがやき585号 6,560<br><small style="color:#6B7280">9/18 新高岡→大阪はWESTERポイント特典きっぷ(5,130pt)</small></td><td class="amount">25,200円<br><small style="color:#6B7280;font-weight:400">+5,130pt</small></td></tr>
+      <tr><th>宿泊費</th><td>東横INN日本橋浜町4泊 35,805(事前決済済) + アパ淀屋橋1泊 6,000(現地精算)</td><td class="amount">41,805円</td></tr>
+      <tr><th>チケット</th><td>ミリオンライブ両日28,000/神宮2試合(A指定+SS指定)約11,000/TGS前売り3,000/甲子園歴史館2,000</td><td class="amount">約44,000円</td></tr>
+      <tr><th>食費・予備</th><td>現地食費・在来線交通(5日×5,000円)</td><td class="amount">25,000円</td></tr>
+      <tr><th>荷物の発送</th><td>4泊分を東横INNへ事前発送＋帰りにお土産と衣類をまとめて発送(片道約1,500円)</td><td class="amount">3,000円</td></tr>
+      <tr class="total"><td colspan="2">総額目安</td><td class="amount">約139,000円</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px">支払済:ミリオン28,000＋神宮2試合(約11,000)＋TGS3,000＋歴史館2,000＋幹線交通25,200＋東横INN35,805 = <strong>約105,000円</strong>。残るはアパ淀屋橋6,000円(現地)と現地費用のみ。甲子園チケット(既払・払戻不可)はサンクコストとして計上外。<br><br><strong>交通費の構造:</strong>東京単独の往復は通常運賃で25,960円。今回は往路をポイントで抜き、復路を東京経由の一筆書きに載せたことで<strong>現金25,200円＋5,130pt</strong>に収まった。新高岡起点で京都経由の一周を全額現金で組むと31,310円だったので、<strong>ポイント投入と「乗車券の起点を大阪市内にする」判断で約6,000円圧縮</strong>している。9/30でeチケット早特14(片道約9,000円)が廃止されるため、この形が今後の複合遠征の基本形になる。WESTERポイントは月700pt前後の積算で年8,000〜9,000pt、<strong>この使い方ができるのは年1〜2回</strong>。</p>
+  </section>
+
+  <!-- ═══════════ バックアップ ═══════════ -->
+  <section class="info" id="t03-backup">
+    <h2>もしもの備え</h2>
+    <div class="backup">
+      <h3><span class="flag">▶</span>9/23 試合が延長・中断したら</h3>
+      <p>かがやき585号は<strong>受け取らずに持っているので、19:24の発車前ならe5489から何度でも後続に振り替えられる</strong>。判断のタイミングは<strong>7回終了あたり</strong>——ここで同点なら延長の可能性が見え始める。<strong>18:45までに球場を出られるかが分岐点</strong>で、間に合わなそうならその場でスマホから動かす。発車時刻を過ぎると変更できないので、迷ったら早めに。<br>最終のかがやきまで倒しても富山からの在来線接続はあるので、帰宅不能にはならない。<strong>唯一の制約は後続の空席</strong>なので、事前に20時台・21時台の残席を控えておくこと。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>9/23 優勝セレモニーがあったら</h3>
+      <p>胴上げがかかった試合だと、試合終了後に監督インタビュー・場内一周などで<strong>30分〜1時間</strong>。3塁側を阪神ファンが埋めた状態では簡単に帰れない。17時終了→セレモニー→18時半退場となると19:24は危うい。<br><strong>セレモニーを見ると決めた時点で、その場で20時台・21時台へ振り替える。</strong>ただし同じことを考える人が集中するので、当日その場だと満席で動かせない可能性がある。<strong>9/22の神宮①の時点でマジックの情勢は見えているはず</strong>なので、そのタイミングで後続の空席を確認し、必要なら先に振り替えておく。<br>なお9/23は広島×巨人が15時開始。<strong>他球場の結果で優勝が決まる可能性</strong>もあり、神宮の試合終了とほぼ同時にセレモニーへ移ることもある。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>9/17夜:甲子園が雨で流れそうなら(A/B分岐)</h3>
+      <p>降水確率90%以上・終日雨予報なら、9/18を丸ごと捨てる選択肢がある。金額で並べると:<br>
+      <strong>A案(予定どおり大阪へ)</strong>──中止でも失うのは甲子園チケット代(既払・払戻不可)のみで、これは行かなくても戻らない。歴史館ツアーは屋内主体なので実施される見込みで2,000円は活きる。乗車券も宿もそのまま使う。<strong>追加損失ゼロ。</strong><br>
+      <strong>B案(大阪を飛ばし9/19に新高岡から東京へ)</strong>──乗車券の払戻220円＋通し12,430円が分割約16,000円になり約3,500円増＋歴史館2,000円。アパ淀屋橋は前日まで無料なのでゼロ。<strong>計5,700円前後</strong>。ポイント特典きっぷの払戻も必要(現金損失はほぼなし)。<br>
+      つまりB案は<strong>約5,700円で5泊6日の初日を自宅で買い戻す取引</strong>。神宮2連戦が本命で体力を温存したいなら筋は通る。ただし幹線を全部押さえた今、払戻の手間は増えている。<strong>9/11頃に週間予報で傾向を見て、9/17夜に最終判断する。</strong></p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>疲労がたまったら(削り代リスト)</h3>
+      <p>削れる予定は5つ。<strong>① 9/18 甲子園歴史館ツアー(2,000円・雨天時はむしろ主役) ② 9/20 ABEMAアニメ祭(無料・お盆のKOCと同じ扱い) ③ 9/21 TGSを午後だけに短縮 ④ 9/21 トールマン下見をやめる ⑤ 9/22 パチスロサミ(仮)</strong>。支払済で外せないのは<strong>ミリオン両日と神宮2連戦だけ</strong>なので、休養日をあらかじめ設けなくても、しんどくなった時点で上から落とせる構造になっている。<br><br>負荷のピークは最終日9/23——5泊の疲労の底で14時開始のデーゲームを屋外で見て、その足で新幹線。ここは削れないので手前で調整する。<strong>荷物を往復とも宅配に逃がしたことで、体力面の底上げは済んでいる。</strong></p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>資金が想定より膨らんだら</h3>
+      <p>調整弁は現地食費(1日5,000円枠)。1日数百円の圧縮で数千円戻る。事前払いが約105,000円まで進んでいるので、遠征中に動く現金は現地費用とアパ淀屋橋6,000円だけ。<strong>遠征中は勝ち金を持ち歩かないこと。</strong>ボートレース平和島は候補として残っているが、予算枠を膨らませる方向には使わない。</p>
+    </div>
+  </section>
+
+  <div class="claude-note">
+    <p>この計画の裏側は「検証と撤回の山」でした。神宮を2連戦にして甲子園を切る案、京都始まりの一筆書き、敦賀・米原経由の大回り、糸魚川で切ってポイント消化する案──全部数字で検証して、全部見送りました。残ったのが「甲子園も行く、神宮も2連戦、帰りは変更可能なきっぷで延長戦に備える」という、いちばん欲張りで、いちばん筋の通った形です。テンションで買ってしまった9/23のチケットが、1ゲーム差の優勝争いのおかげで「余分」どころか目玉になりそうなのは、計画では作れない巡り合わせだと思います。</p>
+    <p>出発1ヶ月前、9/20の日中枠をめぐってもう一山ありました。ボートレース多摩川のGIウェイキーカップが会期に重なると分かって、19日・20日・21日の三通りを検証したのですが、どの日も「片道65分に対して滞在が中途半端」か「他を削る」かのどちらかにしかならない。大阪を切る案まで出したうえで、最後は見送りました。捨てた判断のほうが多い日でしたが、そのおかげで辿り着いたのがABEMAアニメ祭です。渋谷でヤニすうと転スラを見て、隣駅で飯を食って、そのまま代々木へ。移動がほぼ存在しない一日になりました。多摩川に固執していたら、絶対に出てこなかった形です。</p>
+    <p>出発2週間半前、交通が全部埋まりました。この詰めの過程がまた面白くて、私はけっこう間違えました。「e5489は乗車券だけでは買えない」と言い切って窓口へ行く段取りまで組んだのに実際は買えたし、「変更は1回まで無料」と制約を作ったところで<strong>「発券しなければ何度でも変えられる」</strong>と返されて、そこから設計が一段良くなりました。1列目は足元が広いと書いたのも逆で、あれは荷物が置けるだけです。訂正した数が多い分、残った形は検証済みだと思います。</p>
+    <p>その結果が<strong>「乗車券だけは紙で確定させ、9/23の特急券だけは未発券のまま握っておく」</strong>という組み方です。大阪市内→富山の1枚を9/24まで生かして東京で途中下車し、帰りのかがやき585号は受け取らずに持つ。19:24を基準に置きつつ、優勝セレモニーが始まったらその場で21時台へ倒せる。「新幹線に縛られない」という当初の設計思想が、最初に考えていたやり方よりきれいな形で実装できました。<strong>富山21:30着に21:46の在来線が待っていて、最終便でも接続がある</strong>と分かった時点で、この日は事実上ノーリスクになっています。</p>
+    <p>9/18の甲子園歴史館は、雨の話をしている最中に足された枠でした。結果として<strong>「試合が流れても、その日の甲子園体験は残る」</strong>という保険になっています。狙って買ったものではないぶん、いい引きだったと思います。B案(大阪を飛ばす)も金額まで出して残してありますが、往路をポイントで押さえた今となっては、たぶん使わないでしょう。それでいいと思います。</p>
+    <p>荷物を往復とも宅配に逃がしたのも効くはずです。往復3,000円で、大阪は1泊分だけ、帰りは手ぶら。5泊の疲労の底で14時開始の屋外デーゲームを見る日に、これは効きます。<strong>1日5,000円枠の6割ほどで、5泊6日ぶんの肩の重さが消える</strong>のは安い買い物です。</p>
+    <p>財布のほうは、3日間の公営競技の振れがそのまま宿代になりました。「手元にあると使っちゃうよ」と言って4万を東横INNの事前決済にぶつけたのは、自分の癖を知ったうえで仕組みを作る、いいやり方だと思います。ただ勝ちが続いているときほど、動いている金額のほうを見ておいてください。<strong>8万勝てる日があるということは、8万負ける日もある</strong>ということなので。遠征の予算はしおりで決まっています。そこを膨らませないでいられれば、それが一番強いです。</p>
+    <p>あとは体調だけ整えて行ってきてください。虎が神宮で歴史を作る瞬間に立ち会えたら、締め処理のときにぜひ聞かせてください。かがやき585号を21時台に振り替えた、という報告なら最高です。</p>
+    <span class="sign">── CLAUDE / 計画係(出発前に記す)</span>
+  </div>
+
+  <a class="back-to-top" href="#top">↑ 記録帳の表紙に戻る</a>
+  </article>
+
+<!-- ═══════════ 遠征05:年末遠征 浅草蔵前 ═══════════ -->
+  <article class="trip" id="trip05">
+  <p class="trip-chapter">ENSEI 05 ── 2026.12</p>
+
+  <header class="cover">
+    <p class="era">2026.12.26 — 12.30</p>
+    <h1>年末遠征のしおり<br>浅草蔵前</h1>
+    <p class="sub">軸はコミケC109の1日目(12/29)と有馬記念(12/27・抽選)。大阪案は却下し、東京4泊で通す一本立てに整理した。宿は前から順に削れる構造なので、イベントの決まり具合で4泊→3泊→2泊と縮められる。まだ仮の章。</p>
+
+    <div class="route-strip" aria-label="行程の概要">
+      <span class="node">自宅</span><span class="seg"></span>
+      <span class="node">浅草蔵前2 4泊</span><span class="seg"></span>
+      <span class="node">自宅</span>
+    </div>
+
+    <div class="cover-stamp" aria-hidden="true">
+      <span class="small">4泊5日</span>
+      <span class="big">検討中</span>
+      <span class="small">仮の予定</span>
+    </div>
+  </header>
+
+  <div class="trip-stats">
+    <div><span class="num">5<span style="font-size:.8rem">日</span></span><span class="lbl">4泊5日(最大)</span></div>
+    <div><span class="num">2<span style="font-size:.8rem">枠</span></span><span class="lbl">削り代(12/26・12/27)</span></div>
+    <div><span class="num">3.65<span style="font-size:.8rem">万</span></span><span class="lbl">浅草蔵前2(4泊・確保済)</span></div>
+  </div>
+
+  <nav class="toc" aria-label="目次">
+    <ol>
+      <li><a href="#t05-d1"><span class="dot" style="background:var(--keihin)"></span>12/26 浅草入り・探索枠</a></li>
+      <li><a href="#t05-d2"><span class="dot" style="background:var(--sobu)"></span>12/27 有馬記念</a></li>
+      <li><a href="#t05-d3"><span class="dot" style="background:#B7791F"></span>12/28 自由枠</a></li>
+      <li><a href="#t05-d4"><span class="dot" style="background:#E5171F"></span>12/29 コミケC109 1日目</a></li>
+      <li><a href="#t05-d5"><span class="dot" style="background:#0089D2"></span>12/30 帰還</a></li>
+      <li><a href="#t05-todo"><span class="dot" style="background:var(--stamp)"></span>TODO</a></li>
+      <li><a href="#t05-budget"><span class="dot" style="background:var(--ink)"></span>予算</a></li>
+      <li><a href="#t05-backup"><span class="dot" style="background:var(--ink)"></span>備え・削り代</a></li>
+      <li><a href="#t05-rejected"><span class="dot" style="background:#8A8F98"></span>却下した案</a></li>
+    </ol>
+  </nav>
+
+  <!-- ═══ 12/26 ═══ -->
+  <section class="day" id="t05-d1" style="--line-color:var(--keihin)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">12.26</span><span class="w">SAT</span></div>
+      <div class="day-title">
+        <h2>浅草入り、探索枠</h2>
+        <p class="theme">土曜日。アニメ・声優系イベントが立つ確率がいちばん高い日。逆に何も見つからなければ、最初に削る日でもある。</p>
+        <span class="line-tag" style="background:var(--keihin)">自宅 → 浅草蔵前</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">午前〜昼</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">自宅 発 → 東京へ</p><p class="how">往路は株主優待券を充てる。トクだ値が廃止されたため早割は使えない。日付は12/26／27／28のどれになるか未確定なので、変更の効く優待券で後決めにする<span class="chip flex">日付・後決め</span></p></div></div>
+      <div class="stop major"><div class="time">15:00〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東横INN浅草蔵前2 チェックイン</p><p class="how">4泊分を確保済み。蔵前駅(浅草線・大江戸線)直上で、以降の動線はすべて浅草線が背骨になる<span class="chip paid">4泊 36,505円</span></p></div></div>
+      <div class="stop"><div class="time">夕方〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">アニメ・声優系イベント(候補・未定)</p><p class="how">8月時点では該当なし。この手の告知は10〜11月に集中するため、10月下旬からイベンターノート等で12/26・12/28を定点観測する<span class="chip flex">10月末に再調査</span></p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>この泊だけ1万円で、他の3泊(8,835円)より高い。</strong>いちばん高い泊が、いちばんイベント確率の高い日でもあるという構図。<strong>土曜枠が埋まらなければ真っ先に削る。</strong></li>
+        <li>年末の大型アニメ催事(ジャンプフェスタ等)は12月中旬までに終わるので、狙えるのは単発の朗読劇・トークイベント・ライブ。会場はステラボール／PLEASURE PLEASURE／豊洲PIT級を想定。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 12/27 ═══ -->
+  <section class="day" id="t05-d2" style="--line-color:var(--sobu)">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">12.27</span><span class="w">SUN</span></div>
+      <div class="day-title">
+        <h2>有馬記念(中山競馬場)</h2>
+        <p class="theme">2026年はJRAの年内最終開催日が12/27。入場券が取れれば本命、外れればこの泊ごと削る。</p>
+        <span class="line-tag" style="background:var(--sobu)">蔵前 → 浅草線 → 青砥 → 京成中山 → 徒歩10分</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">午前</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">蔵前 → 中山競馬場</p><p class="how">浅草線から京成線直通で青砥、京成本線に乗り換えて京成中山。徒歩10分。所要50分前後・乗換1回。<strong>JR船橋法典は当日大混雑するので、京成側から入るほうが空いている</strong><span class="chip flex">当日混雑・早発推奨</span></p></div></div>
+      <div class="stop major"><div class="time">15:40</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">第71回 有馬記念(GI)｜中山 芝2500m</p><p class="how">入場券はネット予約の抽選制。先行抽選が12月中旬、一般販売がその数日後(2025年実績で先行12/12頃・一般12/16頃)<span class="chip flex">抽選待ち</span></p></div></div>
+      <div class="stop"><div class="time">夜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">蔵前へ戻る(2泊目)</p><p class="how">帰りも京成中山から。年末最終開催で人出は多い</p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>2026年は有馬記念と東京大賞典が連チャンにならない。</strong>有馬が12/27(日)、東京大賞典は12/29固定なので中1日空く。2025年が「翌日」だったのは12/28が日曜だった年だけの偶然で、次に並ぶのは2031年頃。</li>
+        <li><strong>落選したらこの泊は削る。</strong>都内のWINSで見るために1泊足す価値はないと判断済み。その場合は12/28発に切り替える。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 12/28 ═══ -->
+  <section class="day" id="t05-d3" style="--line-color:#B7791F">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">12.28</span><span class="w">MON</span></div>
+      <div class="day-title">
+        <h2>自由枠(内容未定)</h2>
+        <p class="theme">月曜・平日。翌日のコミケに備えて体力を残す日でもある。11月に候補が出揃ってから中身を決める。</p>
+        <span class="line-tag" style="background:#B7791F">蔵前 ⇄ 都内各所</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">候補①</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">年末のお笑い興行</p><p class="how">K-PRO・ルミネ・神保町よしもと等の年末ライブ。スケジュールは10〜11月発表<span class="chip flex">未発表</span></p></div></div>
+      <div class="stop"><div class="time">候補②</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">都内のボートレース(平和島・多摩川・江戸川)</p><p class="how">蔵前からは浅草線経由で平和島がいちばん近い(京急直通圏)。年末開催の日程は10〜11月に確定<span class="chip flex">日程未確認</span></p></div></div>
+      <div class="stop"><div class="time">候補③</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">秋葉原・中野で在庫回収</p><p class="how">年末は各店が福袋準備で在庫を動かす時期。何も刺さらなければこれで1日使う</p></div></div>
+      <div class="stop"><div class="time">候補④</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">水族館(すみだ／アクアパーク品川)</p><p class="how">帰省ラッシュ前の平日で空いている。40cmキューブのレイアウト参考として。<strong>生体は冬季輸送のリスクがあるため買わない</strong></p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>競輪のグランプリシリーズは今年は圏外。</strong>12/28ヤンググランプリ・12/29ガールズグランプリ・12/30 KEIRINグランプリはすべて<strong>いわき平競輪場</strong>で開催。例年の京王閣→立川→平塚のローテーションから外れ、2026年は平塚で日本選手権が開かれる関係でいわき平初開催になった。蔵前から特急ひたちで片道2時間半・往復1万円超なので、今回は見送り。</li>
+        <li><strong>この日だけを抜くことはできない。</strong>宿は連泊なので、削るなら12/26→12/27の順で頭から。12/28は12/29とセットで残る。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 12/29 ═══ -->
+  <section class="day" id="t05-d4" style="--line-color:#E5171F">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">12.29</span><span class="w">TUE</span></div>
+      <div class="day-title">
+        <h2>コミックマーケット109 1日目</h2>
+        <p class="theme">この遠征の本命。7年ぶりの3日間開催で、狙いのジャンルは初日に集中している。</p>
+        <span class="line-tag" style="background:#E5171F">蔵前 → 浅草線 → 新橋 → ゆりかもめ → 東京ビッグサイト</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop major"><div class="time">午前〜</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">C109 1日目｜東京ビッグサイト</p><p class="how"><strong>アイドルマスター(ジャンルコード232)は1日目配置。</strong>ラブライブ・TYPE-MOON・ウマ娘・ブルアカも同日で、狙いは初日に集中している。2日目は東方・VTuber・同人ソフト、3日目は創作・評論・男性向<span class="chip cash">サークルは現金のみ</span></p></div></div>
+      <div class="stop"><div class="time">随時</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">企業ブースのステージも確認</p><p class="how">声優のステージ・お渡し会が入ることが多い。<strong>企業ブースパンフレットは12月上旬から配布</strong>されるので、その時点でステージ表を見る</p></div></div>
+      <div class="stop"><div class="time">昼過ぎ</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">戦利品を宅配便で自宅へ送る</p><p class="how">持ち帰らない前提にしておく。年末の宅配カウンターは長蛇なので時間を見込む<span class="chip flex">送料・別枠</span></p></div></div>
+      <div class="stop"><div class="time">15:40<small>オプション</small></div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">▶ 東京大賞典(GI)｜大井競馬場</p><p class="how">ビッグサイトから30分強。前回は事前応募不要で入場できた。<strong>あくまで余力があればの追加</strong>で、予定には数えない<span class="chip flex">体力次第</span></p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>3日間開催は今回限りの見込み。</strong>準備会は改修工事が終わる2027年度に全16ホール運用へ戻る予定で、3日間はこの冬のみの対応としている。希少性はC109が突出。</li>
+        <li><strong>3日目(12/31)の男性向は今回は回収対象外。</strong>大晦日は自宅にいるため初日のみ。</li>
+        <li>サークル配置の確定はWebカタログが出る12月上旬。それまでは「初日」以上の精度では組めない。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 12/30 ═══ -->
+  <section class="day" id="t05-d5" style="--line-color:#0089D2">
+    <div class="day-head">
+      <div class="day-stamp" aria-hidden="true"><span class="d">12.30</span><span class="w">WED</span></div>
+      <div class="day-title">
+        <h2>最終日、帰還</h2>
+        <p class="theme">午前にチェックアウトして帰路へ。大晦日は自宅で過ごす。</p>
+        <span class="line-tag" style="background:#0089D2">蔵前 → 東京駅 → 自宅</span>
+      </div>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="time">午前</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東横INN浅草蔵前2 チェックアウト</p><p class="how">蔵前2は東京駅八重洲方面への無料シャトルバスがある。使えるなら荷物が楽</p></div></div>
+      <div class="stop major"><div class="time">昼〜夕</div><div class="rail"><span class="pin"></span></div><div class="body"><p class="what">東京 → 自宅</p><p class="how"><strong>12/30は最繁忙期(12/28〜1/6)のど真ん中。</strong>指定席は+400円、トクだ値は廃止済みで代替なし。<strong>11/30(月)10:00の発売と同時に確保する</strong>のがこの遠征で最も早く動くべき項目<span class="chip flex">最優先で確保</span></p></div></div>
+    </div>
+    <div class="day-note">
+      <ul>
+        <li><strong>往路は後決めでよいが、復路だけは待てない。</strong>富山→東京は帰省と逆方向なので直前でも取れる公算が高い一方、12/30の東京→北陸は帰省方向で発売日に埋まる。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 出発前TODO ═══ -->
+  <section class="info" id="t05-todo">
+    <h2>出発前TODO</h2>
+    <ul class="check">
+      <li class="urgent"><span class="box"></span><span><strong>11/30(月)10:00 復路12/30の新幹線を発売と同時に確保</strong> 最繁忙期で即日完売する。泊数の判断とは無関係に先に押さえる</span></li>
+      <li class="urgent"><span class="box"></span><span><strong>12月中旬 有馬記念の入場券抽選に申し込む</strong> 落選なら12/27泊をキャンセルして3泊へ縮小</span></li>
+      <li class="urgent"><span class="box"></span><span><strong>10月下旬〜11月 12/26・12/28のイベント探索</strong> イベンターノートで日付固定の定点観測＋推し関連の公式X。声優系・お笑い・都内ボートの3方向</span></li>
+      <li><span class="box"></span><span>JR東日本の株主優待券の在庫を確認する(トクだ値廃止で往復とも優待券頼みになった)</span></li>
+      <li><span class="box"></span><span>12月上旬 C109のWebカタログでサークル配置を確認する／企業ブースパンフでステージ表を見る</span></li>
+      <li><span class="box"></span><span>コミケの戦利品を送る宅配便の手配(伝票を先に書いておくと当日が速い)</span></li>
+      <li><span class="box"></span><span>12/26・12/27のキャンセル判断を12月中旬までに確定する(東横INNは前日まで無料)</span></li>
+      <li><span class="box"></span><span>都内ボート3場の年末開催日程を確認する(10〜11月確定)</span></li>
+    </ul>
+  </section>
+
+  <!-- ═══ 予算 ═══ -->
+  <section class="info" id="t05-budget">
+    <h2>予算まとめ(仮)</h2>
+    <p style="font-size:.85rem;margin:0 0 12px">予算の方針は<strong>「年末はコンパクトに」で上限10万円</strong>。宿を1泊削るごとに約1.4万円が弾代に戻る構造になっている。</p>
+    <table class="kv">
+      <tr><th>宿泊費</th><td>東横INN浅草蔵前2 4泊(確保済み)<br><small style="color:#6B7280">12/26のみ10,000円／12/27・28・29は8,835円</small></td><td class="amount">36,505円</td></tr>
+      <tr><th>交通費</th><td>新高岡⇄東京 往復(最繁忙期・株主優待券で圧縮)</td><td class="amount">約28,000円</td></tr>
+      <tr><th>基礎コスト</th><td>食事・現地交通・雑費(台帳の目安 5,000円/日 × 5日)</td><td class="amount">約25,000円</td></tr>
+      <tr><th>コミケ入場</th><td>リストバンド(前回実績ベース)</td><td class="amount">約1,400円</td></tr>
+      <tr class="total"><td colspan="2">4泊5日での総額目安</td><td class="amount">約9.1万円</td></tr>
+    </table>
+    <h3 style="font-size:.95rem;margin:22px 0 8px">泊数別の比較</h3>
+    <table class="kv">
+      <tr><th>4泊5日<br>12/26〜29</th><td>有馬＋自由枠2日＋コミケ。<strong>弾代が約1万円しか残らない</strong></td><td class="amount">約9.1万円</td></tr>
+      <tr><th>3泊4日<br>12/27〜29</th><td>有馬＋自由枠＋コミケ。<strong>実質的な上限はここ</strong></td><td class="amount">約7.6万円</td></tr>
+      <tr><th>2泊3日<br>12/28〜29</th><td>コミケ中心。弾代が約3.8万円まで戻る</td><td class="amount">約6.2万円</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:#6B7280;margin-top:10px">物販枠(同人誌)と公営競技は台帳の方針どおり別立て。<strong>4泊のままだと物販＋馬券で1万円しか動かせない</strong>ので、12/26に明確なアンカーが立たない限り3泊へ縮めるのが妥当。判断は東横INNの無料キャンセル期限(前日)まで引っ張れる。</p>
+  </section>
+
+  <!-- ═══ 備え・削り代 ═══ -->
+  <section class="info" id="t05-backup">
+    <h2>もしもの備え・削り代</h2>
+    <div class="backup">
+      <h3><span class="flag">▶</span>削り代リスト(削る順)</h3>
+      <p><strong>① 12/26(1万円・最も高い泊)</strong>──土曜枠にアニメ・声優系イベントが立たなければ削る。判断期限は12月中旬。<br><strong>② 12/27(有馬記念)</strong>──入場券が外れたら削って12/28発に切り替える。<br><strong>③ 12/29の東京大賞典</strong>──体力次第のオプション。最初から予定に数えない。<br><strong>コミケ1日目(12/29)は最後まで削らない。</strong>これが遠征の目的そのもの。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>宿は前からしか削れない</h3>
+      <p>連泊予約なので、間の12/28だけを抜くことはできない。<strong>12/29が動かせない最終日である以上、削るなら頭から順(12/26 → 12/27)。</strong>この制約は計画変更のたびに効いてくるので忘れないこと。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>切符が取れなかったら</h3>
+      <p>トクだ値が廃止され、往復とも株主優待券に一本化された。<strong>優待券の在庫が足りない場合は金券ショップの相場を秋のうちに確認しておく。</strong>復路12/30が最繁忙期で最も逼迫するので、ここだけは11/30の発売と同時に動く。万一取れなければ、12/31午前の便に振り替えてでも大晦日中には帰宅する。</p>
+    </div>
+    <div class="backup">
+      <h3><span class="flag">▶</span>コミケ当日の荷物</h3>
+      <p>戦利品は宅配便で自宅へ送る前提。<strong>持ち帰りを前提にすると翌日の移動が重くなる。</strong>遠征03でDQ物販の量に足を取られた反省を踏まえ、買った直後に送ってしまう。</p>
+    </div>
+  </section>
+
+  <!-- ═══ 却下した案 ═══ -->
+  <section class="info" id="t05-rejected">
+    <h2>検討して却下した案</h2>
+    <div class="backup" style="border-color:#8A8F98">
+      <h3><span class="flag" style="color:#8A8F98">×</span>大阪案(住之江クイーンズクライマックス)</h3>
+      <p>PG1クイーンズクライマックスは住之江で12/26〜31開催。日程だけ見れば噛み合うが、<strong>東京と大阪の両取りは新幹線代が往復3〜4万円上乗せになり、「年末はコンパクトに」の方針と正面から衝突する。</strong>浅草の宿泊も一部無駄になるため却下。<strong>グランプリ(SG)は12/15〜20・大村</strong>で、こちらは日程も場所も年末遠征とは別物。</p>
+    </div>
+    <div class="backup" style="border-color:#8A8F98">
+      <h3><span class="flag" style="color:#8A8F98">×</span>青春18きっぷ案</h3>
+      <p>冬季の利用期間は12/11〜1/11、連続3日間用10,000円・5日間用12,050円。ただし<strong>北陸本線が三セク化しているため、高岡から東京へ抜けるJRルートは高山本線経由(富山→猪谷→高山→美濃太田→岐阜→名古屋→東海道線)の1本しかなく、片道12〜13時間。</strong>往復で18,000円ほど浮くが、<strong>年末の猪谷〜高山は雪で止まると代替がなく、「大晦日は自宅」という条件と相性が悪い。</strong>保険の名古屋→敦賀→北陸新幹線を見込むと節約分も半減する。<br>なお<strong>直江津・ほくほく線ルートは18きっぷでは無意味</strong>──あいの風・トキめき・北越急行の三セク3社で片道3,500円前後の実費が乗り、JR区間は六日町以東だけなので、浮くのは実質500円程度。<br><span style="color:var(--stamp);font-weight:700">→ 高山本線の鈍行旅は、雪の心配がない春か夏の18きっぷに回す</span></p>
+    </div>
+  </section>
+
+  <div class="claude-note">
+    <p>大阪案を落としたことで、この章はだいぶ見通しがよくなりました。二股のプランA/Bを併記していた頃は「12/28の夜に決める」という宙ぶらりんな構造でしたが、いまは<strong>コミケ1日目(12/29)という動かない杭が最後に立っていて、そこから手前を削っていくだけ</strong>という形になっています。宿が連泊で前からしか削れないという制約も、迷いを減らす方向に働いています。</p>
+    <p>いちばん厄介なのは12/26です。1万円といちばん高い泊なのに、土曜でイベント確率もいちばん高い。ここが埋まるかどうかで4泊か3泊かが決まりますが、判断材料が揃うのは10月下旬から。<strong>いま急いで決める理由はどこにもなく、東横INNの無料キャンセルが効くうちは選択肢を広く持っておくのが正解</strong>だと思います。逆に復路の新幹線だけは11/30の10時に動かないと詰みます。トクだ値が廃止された今年は特に。</p>
+    <p>有馬記念と東京大賞典が今年は連チャンにならない、というのは調べていていちばん意外だった点でした。去年の並びが例外だったわけですが、おかげで12/28に緩衝日ができています。お盆のDay4で熱中症で早退した経験を思えば、詰め込まずに1日空けておける今回の形は悪くないはずです。固まってきたらまた教えてください。そのとき青を外して正式な章にします。</p>
+    <span class="sign">── CLAUDE / 計画係(検討中に記す)</span>
+  </div>
+
+  <a class="back-to-top" href="#top">↑ 記録帳の表紙に戻る</a>
+  </article>
+  <footer>
+    <span>TRIP RECORD BOOK</span>
+    <span>VOL.2026 ── ENSEI 01–05</span>
+  </footer>
+
+</div>
+</body>
+</html>
